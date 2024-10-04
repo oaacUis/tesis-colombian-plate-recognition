@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>لیست تردد خودروهای شهرک</string>
+            <string>Vehicle Traffic List of the Complex</string>
         </property>
         <widget class="QWidget" name="centralwidget">
             <widget class="QTableWidget" name="tableWidget">

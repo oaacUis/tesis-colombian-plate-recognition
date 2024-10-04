@@ -312,7 +312,7 @@ class Worker1(QThread):
         # if you want to use stream just replace your address in config.ini 
         >>> rtps = rtsp://172.17.0.1:8554/webCamStream
         """
-        self.Capture = cv2.VideoCapture(params.rtps)  # 0 -> use for local webcam
+        self.Capture = cv2.VideoCapture(params.video) # (params.rtps)  # 0 -> use for local webcam
         self.adjust_video_position()
 
     def adjust_video_position(self):

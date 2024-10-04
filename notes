@@ -99,3 +99,14 @@ residentsWindow class in residents_main.py: Manages the residents window.
 dbGetAllResidents, dbRemoveResident in database/db_resident_utils.py: Database functions for managing residents.
 
 db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database functions for managing entries.
+
+# Folders checkin:
+- ai: OK
+- business: OK
+- database: In process. To translate from persian to eng. Otto
+
+# TODO
+- Retrain models for colombian plates recognition (characters recognition and plates segmentation).
+- Erase and readapt scripts that translate and use persian chars.
+- Change chars in db scripts and tables in db.
+- Translate GUI from persian to eng.

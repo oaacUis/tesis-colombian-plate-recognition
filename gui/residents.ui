@@ -17,7 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-            <string>لیست ساکنین شهرک</string>
+            <string>Residents List</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -34,7 +34,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="layoutDirection">
@@ -58,11 +58,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>ثبت ساکن جدید</string>
+                    <string>Add New Resident</string>
                 </property>
             </widget>
             <widget class="QLabel" name="label_9">
@@ -76,11 +76,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>جستجو</string>
+                    <string>Search</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -99,14 +99,14 @@
                     <item>
                         <widget class="QRadioButton" name="radioLName">
                             <property name="text">
-                                <string>نام خانوادگی</string>
+                                <string>Last Name</string>
                             </property>
                         </widget>
                     </item>
                     <item>
                         <widget class="QRadioButton" name="radioPlateNum">
                             <property name="text">
-                                <string>پلاک</string>
+                                <string>Plate Number</string>
                             </property>
                         </widget>
                     </item>
@@ -123,7 +123,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="layoutDirection">

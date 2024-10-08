@@ -91,7 +91,7 @@ class EnteriesWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = EnteriesWindow()
-    window.setWindowTitle('لیست ترددهای شهرک')
+    window.setWindowTitle('Entry List of the Complex')
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

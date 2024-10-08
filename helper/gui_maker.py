@@ -107,11 +107,11 @@ def get_status_text(number):
     - str: The status text.
     """
     if int(number) == 0:
-        return 'غیر مجاز'
+        return 'Not Allowed'
     elif int(number) == 1:
-        return 'مجاز'
+        return 'Allowed'
     elif int(number) == 2:
-        return 'ثبت نشده'
+        return 'Not Registered'
 
 
 def configure_edit_table_widget(self):
@@ -220,7 +220,7 @@ def on_label_double_click(event, source_object=None):
        """
     w = QDialog()
     w.setFixedSize(600, 132)
-    w.setWindowTitle("نمایش پلاک")
+    w.setWindowTitle("Display Plate")
 
     imageLabel = QLabel(w)
     imageLabel.setText("")

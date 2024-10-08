@@ -71,10 +71,10 @@ class residentsWindow(QDialog):
             selectedCellPlate = model.data(index, role)
 
             messageBox = QMessageBox(self)
-            messageBox.setWindowTitle("حذف پلاک ساکن از لیست")
+            messageBox.setWindowTitle("Remove Resident Plate from List")
             messageBox.setIconPixmap(
                 QPixmap("./icons/icons8-high-risk-80.png").scaled(50, 50, QtCore.Qt.KeepAspectRatio))
-            messageBox.setText("آیا از حذف " + selectedCellPlate + " اطمینان دارید؟ ")
+            messageBox.setText("Are you sure you want to remove " + selectedCellPlate + "?")
 
             buttonoptionA = messageBox.addButton("بله حذف شود", QMessageBox.YesRole)
             buttonoptionB = messageBox.addButton("خیر", QMessageBox.NoRole)
@@ -82,7 +82,7 @@ class residentsWindow(QDialog):
             messageBox.exec_()
 
             if messageBox.clickedButton() == buttonoptionA:
-                print(selectedCellPlate + ' حذف شد. ')
+                print(selectedCellPlate + ' has been removed.')
                 dbRemoveResident(
                     join_elements(convert_persian_to_english(split_string_language_specific(selectedCellPlate))))
                 self.tableWidget.removeRow(index.row())
@@ -153,7 +153,7 @@ class residentsWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentsWindow()
-    window.setWindowTitle('لیست ساکنین شهرک')
+    window.setWindowTitle('Residents List')
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

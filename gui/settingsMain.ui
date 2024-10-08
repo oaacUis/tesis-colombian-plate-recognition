@@ -17,7 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-            <string>تنظیمات</string>
+            <string>Settings</string>
         </property>
         <widget class="QWidget" name="centralwidget">
             <widget class="QLabel" name="plateTextIR">
@@ -46,7 +46,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>23</pointsize>
                         <kerning>true</kerning>
                     </font>

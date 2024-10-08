@@ -48,8 +48,8 @@ class residentsAddNewWindow(QDialog):
         self.statusComboBox.addItems(list(params.fieldStatus.values())[:2])
 
         if self.isEditing:
-            self.setWindowTitle('ویرایش ساکن')
-            self.addResidentButton.setText('ثبت تغییرات')
+            self.setWindowTitle('Edit Resident')
+            self.addResidentButton.setText('Save Changes')
 
             self.addResidentButton.setIcon(QPixmap("./icons/icons8-change-user-80.png"))
             self.addResidentButton.setIconSize(QSize(30, 30))
@@ -71,12 +71,12 @@ class residentsAddNewWindow(QDialog):
             plateAlpabet = inv_map[self.editingResident.getPlateNumber(display=False)[2]]
             self.plateAlphabetComboBox.setCurrentText(params.plateAlphabet[plateAlpabet])
             if isInfo:
-                self.setWindowTitle('نمایش اطلاعات ساکن')
+                self.setWindowTitle('Display Resident Information')
                 self.addResidentButton.hide()
                 self.setEnabled(False)
 
         if self.isNew:
-            self.setWindowTitle('ثبت ساکن جدید')
+            self.setWindowTitle('Register New Resident')
             self.newResident = reshape_persian_text(residnetPlate)
             self.plateTextNum_1.setText(self.newResident[:2])
             self.plateTextNum_3.setText(self.newResident[3:6])
@@ -117,7 +117,7 @@ class residentsAddNewWindow(QDialog):
 
             if self.isEditing:
                 insertResident(resident, True, self.residnetPlateEng)
-                self.statusLabel.setText('ویرایش  ساکن انجام شد.')
+                self.statusLabel.setText('Resident edited successfully.')
                 self.statusLabel.setStyleSheet("""background-color: rgb({}, {}, {});""".format(51, 209, 122))  # BLUE
 
                 for item in self.findChildren(plateQLineEdit.plateQLineEdit):
@@ -125,12 +125,12 @@ class residentsAddNewWindow(QDialog):
 
             elif not dbGetPlateExist(plateNumTextBox):
                 insertResident(resident)
-                self.statusLabel.setText('ساکن جدید ثبت شد.')
+                self.statusLabel.setText('New resident registered successfully.')
                 self.statusLabel.setStyleSheet("""background-color: rgb({}, {}, {});""".format(51, 209, 122))  # GREEN
                 for item in self.findChildren(plateQLineEdit.plateQLineEdit):
                     item.setText('')
             else:
-                self.statusLabel.setText('پلاک تکراری است.')
+                self.statusLabel.setText('Duplicate plate number.')
                 self.statusLabel.setStyleSheet("""
                 background-color: rgb({}, {}, {});
                 color: white;
@@ -157,7 +157,7 @@ class residentsAddNewWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentsAddNewWindow()
-    window.setWindowTitle('ثبت ساکن جدید')
+    window.setWindowTitle('Register New Resident')
     window.show()
 
     sys.exit(app.exec_())

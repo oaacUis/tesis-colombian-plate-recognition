@@ -47,7 +47,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>17</pointsize>
                     </font>
                 </property>
@@ -77,7 +77,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>تنظیمات</string>
+                                <string>Settings</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -105,7 +105,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>لیست ساکنین</string>
+                                <string>Residents List</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -133,7 +133,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>لیست تردد</string>
+                                <string>Entries List</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -149,7 +149,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>توقف</string>
+                                <string>Stop</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -165,7 +165,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>شروع</string>
+                                <string>Start</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -197,7 +197,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>18</pointsize>
                     </font>
                 </property>
@@ -243,7 +243,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>18</pointsize>
                     </font>
                 </property>
@@ -314,7 +314,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>29</pointsize>
                         <kerning>true</kerning>
                     </font>
@@ -355,7 +355,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="layoutDirection">
@@ -421,7 +421,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>23</pointsize>
                         <kerning>true</kerning>
                     </font>
@@ -479,7 +479,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>28</pointsize>
                         <kerning>true</kerning>
                     </font>
@@ -522,7 +522,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>17</pointsize>
                     </font>
                 </property>
@@ -547,7 +547,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>17</pointsize>
                     </font>
                 </property>

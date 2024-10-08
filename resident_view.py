@@ -34,7 +34,7 @@ class residentView(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentView()
-    window.setWindowTitle('ثبت ساکن جدید')
+    window.setWindowTitle('Register New Resident')
     window.show()
 
     sys.exit(app.exec_())

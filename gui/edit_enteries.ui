@@ -25,7 +25,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="layoutDirection">
@@ -76,11 +76,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>ثبت تردد جدید</string>
+                    <string>Register New Traffic</string>
                 </property>
             </widget>
         </widget>

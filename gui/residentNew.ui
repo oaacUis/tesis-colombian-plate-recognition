@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>لیست ساکنین شهرک</string>
+            <string>Residents List</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -28,11 +28,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>وضعیت تردد</string>
+                    <string>Traffic Status</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -64,7 +64,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>29</pointsize>
                         <kerning>true</kerning>
                     </font>
@@ -105,11 +105,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>نوع خودرو</string>
+                    <string>Car Type</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -126,11 +126,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>پلاک خودرو</string>
+                    <string>License Plate</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -150,11 +150,11 @@
                         <widget class="QLabel" name="label_4">
                             <property name="font">
                                 <font>
-                                    <family>B Yekan</family>
+                                    <family>Arial</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>نام</string>
+                                <string>Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -165,11 +165,11 @@
                         <widget class="QLabel" name="label_10">
                             <property name="font">
                                 <font>
-                                    <family>B Yekan</family>
+                                    <family>Arial</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>نام خانوادگی</string>
+                                <string>Last Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -180,11 +180,11 @@
                         <widget class="QLabel" name="label_2">
                             <property name="font">
                                 <font>
-                                    <family>B Yekan</family>
+                                    <family>Arial</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>ساختمان</string>
+                                <string>Building</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -195,11 +195,11 @@
                         <widget class="QLabel" name="label_7">
                             <property name="font">
                                 <font>
-                                    <family>B Yekan</family>
+                                    <family>Arial</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>پلاک</string>
+                                <string>Plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -210,11 +210,11 @@
                         <widget class="QLabel" name="label_8">
                             <property name="font">
                                 <font>
-                                    <family>B Yekan</family>
+                                    <family>Arial</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>بلوک</string>
+                                <string>Block</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -234,11 +234,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>ثبت ساکن</string>
+                    <string>Add Resident</string>
                 </property>
             </widget>
             <widget class="plateQLineEdit" name="fNameTextBox">
@@ -258,7 +258,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="cursor">
@@ -298,7 +298,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="cursor">
@@ -338,7 +338,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="cursor">
@@ -378,7 +378,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="cursor">
@@ -418,7 +418,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="cursor">
@@ -458,7 +458,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="cursor">
@@ -498,7 +498,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>12</pointsize>
                     </font>
                 </property>
@@ -542,7 +542,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>14</pointsize>
                     </font>
                 </property>
@@ -586,7 +586,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>14</pointsize>
                     </font>
                 </property>
@@ -630,7 +630,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>11</pointsize>
                     </font>
                 </property>
@@ -655,7 +655,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                         <pointsize>11</pointsize>
                     </font>
                 </property>
@@ -674,7 +674,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>B Yekan</family>
+                        <family>Arial</family>
                     </font>
                 </property>
                 <property name="styleSheet">

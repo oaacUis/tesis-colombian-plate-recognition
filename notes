@@ -109,11 +109,11 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
     - db_entries_utils: OK
     - db_resident_utils: To modify
 - gui: Ok. plateQLineEdit.py script should be erased in the end.
-- hdf5: In process. A new model_char_recognition model is needed for colombian plates.
+- hdf5: Ok. Dummy model ready
 - helper: In process. jalali, persian_typer, text_decorator are deprecated files that perform persian translation.
 - icons: OK. Maybe can be update.
 - iranis yolov8 trainer: OK. Useful as guide. Deprecated.
-- model: In process. Models needs to be updated.
+- model: Ok. Dummy model ready
 - PDF-Research: OK.
 - repo_images: In process. Needs to be update.
 - service: OK. Deprecated.

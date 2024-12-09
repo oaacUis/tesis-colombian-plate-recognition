@@ -112,15 +112,14 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 - hdf5: Ok. Dummy model ready
 - helper: In process. jalali, persian_typer, text_decorator are deprecated files that perform persian translation.
 - icons: OK. Maybe can be update.
-- iranis yolov8 trainer: OK. Useful as guide. Deprecated.
-- model: Ok. Dummy model ready
+- yolov8: OK. Updated
+- model: Ok. Final model v1 ready
 - PDF-Research: OK.
 - repo_images: In process. Needs to be update.
 - service: OK. Deprecated.
-- temp: OK. Deprecated.
-- Templates: In process. Needs to be change by colombian plates templates.
-- workshop: OK. Deprecated.
-- yolov5: In process. Needs to be all reviewed, from this we can prepare a new model using a recent yolo model.
+- temp: OK. Erased
+- Templates: OK.
+- yolov5: OK. Updated
 
 # main files (in main folder)
 - config.ini: OK. Maybe check some parameters.

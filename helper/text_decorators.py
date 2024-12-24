@@ -32,7 +32,7 @@ def join_elements(s):
     return str1
 
 
-def split_string_language_specific(s, english=False):
+def split_string_language_specific(s, english=True):
     """
     Converts a string into a list of characters or words, with special handling for Arabic text.
 
@@ -47,21 +47,21 @@ def split_string_language_specific(s, english=False):
         res = re.split('(\d|\W)', s)
         return list(filter(None, res))
 
-    reshaped_text = arabic_reshaper.reshape(s)
-    f = get_display(reshaped_text)
-    returning_list = []
-    chars_list = ""
-    words = list(f.strip())
-    for word in words:
-        if str(word).isdigit() is True and len(chars_list) == 0:
-            returning_list.append(word)
-        elif str(word).isdigit() is False:
-            chars_list += word
-        elif str(word).isdigit() is True:
-            returning_list.append(chars_list)
-            chars_list = ""
-            returning_list.append(word)
-    return returning_list
+    # reshaped_text = arabic_reshaper.reshape(s)
+    # f = get_display(reshaped_text)
+    # returning_list = []
+    # chars_list = ""
+    # words = list(f.strip())
+    # for word in words:
+    #     if str(word).isdigit() is True and len(chars_list) == 0:
+    #         returning_list.append(word)
+    #     elif str(word).isdigit() is False:
+    #         chars_list += word
+    #     elif str(word).isdigit() is True:
+    #         returning_list.append(chars_list)
+    #         chars_list = ""
+    #         returning_list.append(word)
+    # return returning_list
 
 
 def reshape_persian_text(string):
@@ -133,9 +133,9 @@ def get_license_plate_regex(chosen_item='plateWhole'):
     - str: Regex pattern for the chosen item.
     """
     info_dict = {
-        'plateWhole': r'\d\d([a-zA-z]+)\d\d\d\d\d',
-        'plateNum': r'\d\d([a-zA-z]+)\d\d\d',
-        'plateCode': r'\d\d$',
+        'plateWhole': r'([a-zA-z]+)\d\d\d',
+        'plateNum': r'\d\d\d',
+        'plateCode': r'$\d\d\d',
     }
     return info_dict.get(chosen_item, "No info available")
 
@@ -151,7 +151,7 @@ def clean_license_plate_text(plateArray):
     - str: The cleaned license plate text.
     """
     plateString = join_elements(plateArray)
-    if len(plateArray) == 6:
+    if len(plateArray) == 4:
         plateStrTemp = re.search(get_license_plate_regex('plateNum'), plateString)
     elif len(plateArray) == 2:
         plateStrTemp = re.match(get_license_plate_regex('plateCode'), plateString)

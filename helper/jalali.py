@@ -67,12 +67,15 @@ class Gregorian:
         self.persian_year = jy
         self.persian_month = jm
         self.persian_day = jd
-
-    def persian_tuple(self):
+    def get_date(self):
         return self.persian_year, self.persian_month, self.persian_day
+    def get_date_str(self):
+        return f"{self.persian_year}-{self.persian_month}-{self.persian_day}"
+    #def persian_tuple(self):
+    #   return self.persian_year, self.persian_month, self.persian_day
 
-    def persian_string(self, date_format="{}-{}-{}"):
-        return date_format.format(self.persian_year, self.persian_month, self.persian_day)
+    #def persian_string(self, date_format="{}-{}-{}"):
+    #    return date_format.format(self.persian_year, self.persian_month, self.persian_day)
 
 
 class Persian:

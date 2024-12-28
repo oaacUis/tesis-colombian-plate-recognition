@@ -2,7 +2,7 @@ from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QTableWidgetItem
 
 from helper.gui_maker import get_status_text, get_status_color
-from helper.text_decorators import convert_english_to_persian, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, split_string_language_specific
 
 
 class Resident:
@@ -43,7 +43,7 @@ class Resident:
         return self.carModel
 
     def getPlateNumber(self, display=False):
-        return convert_english_to_persian(split_string_language_specific(self.plateNum), display)
+        return convert_to_local_format(split_string_language_specific(self.plateNum), display)
 
     def getStatus(self, item=True):
         if item:

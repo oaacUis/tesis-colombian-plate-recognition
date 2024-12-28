@@ -84,7 +84,7 @@ class residentsWindow(QDialog):
             if messageBox.clickedButton() == buttonoptionA:
                 print(selectedCellPlate + ' حذف شد. ')
                 dbRemoveResident(
-                    join_elements(convert_persian_to_english(split_string_language_specific(selectedCellPlate))))
+                    join_elements(convert_to_standard_format(split_string_language_specific(selectedCellPlate))))
                 self.tableWidget.removeRow(index.row())
         self.tableWidget.setRowCount(self.tableWidget.rowCount())
 

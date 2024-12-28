@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from helper import jalali
 from helper.gui_maker import get_status_color, get_status_text
-from helper.text_decorators import convert_english_to_persian, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, split_string_language_specific
 
 
 class Entries:
@@ -35,7 +35,7 @@ class Entries:
         return "{}%".format(self.platePercent)
 
     def getPlateNumber(self, display=False):
-        return convert_english_to_persian(split_string_language_specific(self.plateNum), display)
+        return convert_to_local_format(split_string_language_specific(self.plateNum), display)
 
     def getStatus(self, item=True, statusNum='', selfNum=False):
         if item:

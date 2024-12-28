@@ -18,7 +18,7 @@ class residentView(QDialog):
         loadUi('./gui/residentView.ui', self)
         self.setFixedSize(self.size())
         editingResident = dbGetResidentDatasByPlate(
-            join_elements(convert_persian_to_english(split_string_language_specific(residnetPlate))))
+            join_elements(convert_to_standard_format(split_string_language_specific(residnetPlate))))
 
         self.labelFname.setText(editingResident.getFirstName())
         self.labelLname.setText(editingResident.getLastName())

@@ -177,7 +177,7 @@ def populate_main_table_with_data(self, dfReadEnteries):
         self.tableWidget.item(each_row, 0).setBackground(QColor(r, g, b))
 
         self.tableWidget.setItem(each_row, 1,
-                                 QTableWidgetItem(convert_english_to_persian(
+                                 QTableWidgetItem(convert_to_local_format(
                                      (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
         self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
         self.tableWidget.setItem(each_row, 3,

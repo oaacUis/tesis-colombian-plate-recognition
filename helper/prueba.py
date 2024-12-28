@@ -177,7 +177,7 @@ def populate_main_table_with_data(self, dfReadEnteries):
         self.tableWidget.item(each_row, 0).setBackground(QColor(r, g, b))
 
         self.tableWidget.setItem(each_row, 1,
-                                 QTableWidgetItem(convert_english_to_persian(
+                                 QTableWidgetItem(convert_to_local_format(
                                      (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
         self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
         self.tableWidget.setItem(each_row, 3,
@@ -344,7 +344,7 @@ def split_string_language_specific(s, english=False):
     return returning_list
 
 
-def reshape_persian_text(string):
+def reshape_text(string):
     """
     Transforms Persian script for correct display in environments that do not support Arabic text shaping.
 
@@ -358,7 +358,7 @@ def reshape_persian_text(string):
     return get_display(reshaped_text)
 
 
-def convert_english_to_persian(license_plate, display=False):
+def convert_to_local_format(license_plate, display=False):
     """
     Converts English characters in a license plate to Persian equivalents.
 
@@ -379,12 +379,12 @@ def convert_english_to_persian(license_plate, display=False):
         second_license_plate.append(character)
     plateString = join_elements(second_license_plate)
     if display:
-        return reshape_persian_text(plateString)
+        return reshape_text(plateString)
 
     return plateString
 
 
-def convert_persian_to_english(license_plate):
+def convert_to_standard_format(license_plate):
     """
     Converts Persian characters in a license plate to English equivalents.
 
@@ -446,7 +446,7 @@ def clean_license_plate_text(plateArray):
     return plateString
 
 
-def convert_persian_numbers(text):
+def convert_numbers_to_standard(text):
     """
     Converts Persian numbers to their English equivalents in a string.
 
@@ -1185,8 +1185,8 @@ from enteries_window import EnteriesWindow
 from helper.gui_maker import configure_main_table_widget, create_image_label, on_label_double_click, center_widget, \
     get_status_text, get_status_color, \
     create_styled_button
-from helper.text_decorators import convert_english_to_persian, clean_license_plate_text, join_elements, \
-    convert_persian_to_english, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, clean_license_plate_text, join_elements, \
+    convert_to_standard_format, split_string_language_specific
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
@@ -1288,7 +1288,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for index, entry in enumerate(plateNum):
             # Get the plate number in English
             plateNum2 = join_elements(
-                convert_persian_to_english(split_string_language_specific(entry.getPlateNumber(display=True))))
+                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
             # Get the plate status from the database
             statusNum = db_get_plate_status(plateNum2)
             # Set the status of the entry in the table widget
@@ -1386,8 +1386,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.plate_view.setPixmap(QPixmap.fromImage(cropped_plate))
 
             # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
-            plt_text_num = convert_english_to_persian(plate_text[:6], display=True)
-            plt_text_ir = convert_english_to_persian(plate_text[6:], display=True)
+            plt_text_num = convert_to_local_format(plate_text[:6], display=True)
+            plt_text_ir = convert_to_local_format(plate_text[6:], display=True)
             self.plate_text_num.setText(plt_text_num)
             self.plate_text_ir.setText(plt_text_ir)
 

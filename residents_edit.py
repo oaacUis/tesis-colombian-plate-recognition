@@ -27,7 +27,7 @@ class residentsAddNewWindow(QDialog):
         self.isEditing = isEditing
         self.isNew = isNew
         self.isInfo = isInfo
-        self.residnetPlateEng = join_elements(convert_persian_to_english(split_string_language_specific(residnetPlate)))
+        self.residnetPlateEng = join_elements(convert_to_standard_format(split_string_language_specific(residnetPlate)))
 
         loadUi('./gui/residentNew.ui', self)
         self.setFixedSize(self.size())
@@ -77,7 +77,7 @@ class residentsAddNewWindow(QDialog):
 
         if self.isNew:
             self.setWindowTitle('ثبت ساکن جدید')
-            self.newResident = reshape_persian_text(residnetPlate)
+            self.newResident = reshape_text(residnetPlate)
             self.plateTextNum_1.setText(self.newResident[:2])
             self.plateTextNum_3.setText(self.newResident[3:6])
             self.plateTextNum_4.setText(self.newResident[6:8])

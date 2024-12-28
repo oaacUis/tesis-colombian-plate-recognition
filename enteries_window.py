@@ -10,7 +10,7 @@ from database.db_entries_utils import dbGetAllEntries
 from database.db_resident_utils import db_get_plate_status
 from helper.gui_maker import create_image_label, on_label_double_click, create_styled_button, center_widget, \
     configure_edit_table_widget
-from helper.text_decorators import convert_persian_to_english, split_string_language_specific, join_elements
+from helper.text_decorators import convert_to_standard_format, split_string_language_specific, join_elements
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 
@@ -27,7 +27,7 @@ class EnteriesWindow(QDialog):
         configure_edit_table_widget(self)
         if isSearching:
             self.residnetPlateEng = join_elements(
-                convert_persian_to_english(split_string_language_specific(residnetPlate)))
+                convert_to_standard_format(split_string_language_specific(residnetPlate)))
 
             self.refresh_table(self.residnetPlateEng)
         else:
@@ -39,7 +39,7 @@ class EnteriesWindow(QDialog):
         self.tableWidget.setRowCount(len(plateNum))
         for index, entry in enumerate(plateNum):
             plateNum2 = join_elements(
-                convert_persian_to_english(split_string_language_specific(entry.getPlateNumber(display=True))))
+                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
             statusNum = db_get_plate_status(plateNum2)
 
             self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=statusNum)))

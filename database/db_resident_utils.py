@@ -4,7 +4,7 @@ import time
 
 from configParams import Parameters
 from database.classResidents import Resident
-from helper.text_decorators import convert_persian_to_english, join_elements
+from helper.text_decorators import convert_to_standard_format, join_elements
 
 params = Parameters()
 
@@ -18,7 +18,7 @@ def insertResident(resident, update=False, editingPlate=''):
         sqlCursor = sqlConnect.cursor()
 
         if update:
-            pltNum = join_elements(convert_persian_to_english(resident.getPlateNumber()))
+            pltNum = join_elements(convert_to_standard_format(resident.getPlateNumber()))
 
             updateResidentSQL = f"""UPDATE
                                 residents

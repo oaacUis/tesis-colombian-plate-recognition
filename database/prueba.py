@@ -5,7 +5,7 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from helper import jalali
 from helper.gui_maker import get_status_color, get_status_text
-from helper.text_decorators import convert_english_to_persian, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, split_string_language_specific
 
 
 class Entries:
@@ -37,7 +37,7 @@ class Entries:
         return "{}%".format(self.platePercent)
 
     def getPlateNumber(self, display=False):
-        return convert_english_to_persian(split_string_language_specific(self.plateNum), display)
+        return convert_to_local_format(split_string_language_specific(self.plateNum), display)
 
     def getStatus(self, item=True, statusNum='', selfNum=False):
         if item:
@@ -106,7 +106,7 @@ from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QTableWidgetItem
 
 from helper.gui_maker import get_status_text, get_status_color
-from helper.text_decorators import convert_english_to_persian, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, split_string_language_specific
 
 
 class Resident:
@@ -147,7 +147,7 @@ class Resident:
         return self.carModel
 
     def getPlateNumber(self, display=False):
-        return convert_english_to_persian(split_string_language_specific(self.plateNum), display)
+        return convert_to_local_format(split_string_language_specific(self.plateNum), display)
 
     def getStatus(self, item=True):
         if item:
@@ -379,7 +379,7 @@ import time
 
 from configParams import Parameters
 from database.classResidents import Resident
-from helper.text_decorators import convert_persian_to_english, join_elements
+from helper.text_decorators import convert_to_standard_format, join_elements
 
 params = Parameters()
 
@@ -393,7 +393,7 @@ def insertResident(resident, update=False, editingPlate=''):
         sqlCursor = sqlConnect.cursor()
 
         if update:
-            pltNum = join_elements(convert_persian_to_english(resident.getPlateNumber()))
+            pltNum = join_elements(convert_to_standard_format(resident.getPlateNumber()))
 
             updateResidentSQL = f"""UPDATE
                                 residents

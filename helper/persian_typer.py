@@ -1,3 +1,5 @@
+#persian_typer.py
+
 def type_persian(value):
     splitv = value.split(" ")
     i = 0

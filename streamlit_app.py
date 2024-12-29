@@ -10,8 +10,8 @@ from configParams import Parameters
 
 params = Parameters()
 # Load models
-modelPlate = torch.hub.load('yolov5', 'custom', params.modelPlate_path, source='local', force_reload=True)
-modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)
+modelPlate = torch.hub.load('yolov8', 'custom', params.modelPlate_path, source='local', force_reload=True)
+modelCharX = torch.hub.load('yolov8', 'custom', params.modelCharX_path, source='local', force_reload=True)
 
 
 def detect_plate_chars(image):

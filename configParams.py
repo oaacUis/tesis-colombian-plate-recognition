@@ -1,3 +1,5 @@
+
+
 from configparser import ConfigParser
 
 
@@ -41,6 +43,7 @@ class Parameters:
         self.rtps = sourceConfig["rtps"]
         self.webcam = sourceConfig["webcam"]
         self.source = sourceConfig["source"]
+
         # services
         external_service_config = config_object["EXTERNAL-SERVICE"]
         self.external_service_url = external_service_config["url"]

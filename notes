@@ -103,12 +103,14 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 # Folders checkin:
 - ai: OK
 - business: OK
-- database: In process. To translate from persian to eng.
-    - classEntries: To modify
-    - classResidents: To modify
+- database:  To translate from persian to eng. OK
+    - classEntries: Ok
+    - classResidents: Ok
     - db_entries_utils: OK
-    - db_resident_utils: To modify
+    - db_resident_utils: Ok
 - gui: In process. To translate from persian to eng. (All needs to be modified)
+    -plateQLineEdit.py OK
+
 - hdf5: In process. A new model_char_recognition model is needed for colombian plates.
 - helper:  jalali, persian_typer, text_decorator are deprecated files that perform persian translation. OK
 - icons: OK. Maybe can be update.
@@ -124,7 +126,7 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 
 # main files (in main folder)
 - config.ini: OK. Maybe check some parameters.
-- configParams: In process. Have some persian related func that needs to be change and tested.
+- configParams: Have some persian related func that needs to be change and tested. OK
 - enteries_window: In process. Have things to be translate and rebuild from persian functions.
 - home-keras: In process. Needs to be consider how useful is using a keras model for main application.
 - home-yolo: In process. MAIN FILE. Needs to be rebuild considering all the proyect folder.

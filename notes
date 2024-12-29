@@ -127,11 +127,11 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 # main files (in main folder)
 - config.ini: OK. Maybe check some parameters.
 - configParams: Have some persian related func that needs to be change and tested. OK
-- enteries_window: In process. Have things to be translate and rebuild from persian functions.
+- enteries_window: Have things to be translate and rebuild from persian functions. OK
 - home-keras: In process. Needs to be consider how useful is using a keras model for main application.
 - home-yolo: In process. MAIN FILE. Needs to be rebuild considering all the proyect folder.
 - how_many_possibilities: In process. Needs to be readapt to colombian plates patterns.
-- residents_view: In process. Needs a review and readapt.
+- residents_view: In process. Needs a review and readapt. ok for english 
 - residents_edit: In process. Needs a review and readapt.
 - residents_main: In process. Needs a review and readapt.
 - streamlit_app: OK. Deprecated

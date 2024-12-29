@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>لیست ساکنین شهرک</string>
+            <string>List of residents of the town</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -32,7 +32,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>وضعیت تردد</string>
+                    <string>Traffic status</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -109,7 +109,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>نوع خودرو</string>
+                    <string>Vehicle type</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -130,7 +130,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>پلاک خودرو</string>
+                    <string>License plate</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -154,7 +154,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>نام</string>
+                                <string>Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -169,7 +169,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>نام خانوادگی</string>
+                                <string>Last name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -184,7 +184,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>ساختمان</string>
+                                <string>Building</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -199,7 +199,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>پلاک</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -214,7 +214,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>بلوک</string>
+                                <string>Block</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -238,7 +238,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>ثبت ساکن</string>
+                    <string> ­ Resident registration</string>
                 </property>
             </widget>
             <widget class="plateQLineEdit" name="fNameTextBox">

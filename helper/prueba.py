@@ -220,7 +220,7 @@ def on_label_double_click(event, source_object=None):
        """
     w = QDialog()
     w.setFixedSize(600, 132)
-    w.setWindowTitle("نمایش پلاک")
+    w.setWindowTitle("نمایش License plate")
 
     imageLabel = QLabel(w)
     imageLabel.setText("")

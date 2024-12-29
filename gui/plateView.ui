@@ -17,7 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-            <string>تصویر پلاک</string>
+            <string>License plate image</string>
         </property>
         <widget class="QWidget" name="centralwidget">
             <widget class="QLabel" name="plateView">

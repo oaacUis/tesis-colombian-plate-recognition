@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>نمایش اطلاعات ساکن</string>
+            <string>Display resident information</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
@@ -38,7 +38,7 @@
                                 <enum>Qt::RightToLeft</enum>
                             </property>
                             <property name="text">
-                                <string>نام</string>
+                                <string>Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -53,7 +53,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>نام خانوادگی</string>
+                                <string>Last name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -68,7 +68,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>ساختمان</string>
+                                <string>Building</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -86,7 +86,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>بلوک</string>
+                                <string>Block</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -101,7 +101,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>پلاک</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -116,7 +116,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>نوع خودرو</string>
+                                <string>Vehicle type</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -131,7 +131,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>پلاک خودرو</string>
+                                <string>License plate خودرو</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -146,7 +146,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                                <string>وضعیت تردد</string>
+                                <string>Traffic status</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -179,7 +179,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>نام</string>
+                                <string>Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -207,7 +207,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>نام خانوادگی</string>
+                                <string>Last name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -235,7 +235,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>ساختمان</string>
+                                <string>Building</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -263,7 +263,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>بلوک</string>
+                                <string>Block</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -291,7 +291,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>پلاک</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -319,7 +319,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>نوع خودرو</string>
+                                <string>Vehicle type</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -347,7 +347,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>پلاک خودرو</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -375,7 +375,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>وضعیت تردد</string>
+                                <string>Traffic status</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

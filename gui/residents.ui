@@ -17,7 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-            <string>لیست ساکنین شهرک</string>
+            <string>List of residents of the town</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -62,7 +62,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>ثبت ساکن جدید</string>
+                    <string>New resident registration</string>
                 </property>
             </widget>
             <widget class="QLabel" name="label_9">
@@ -80,7 +80,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>جستجو</string>
+                    <string>Search</string>
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -99,14 +99,14 @@
                     <item>
                         <widget class="QRadioButton" name="radioLName">
                             <property name="text">
-                                <string>نام خانوادگی</string>
+                                <string>Last name</string>
                             </property>
                         </widget>
                     </item>
                     <item>
                         <widget class="QRadioButton" name="radioPlateNum">
                             <property name="text">
-                                <string>پلاک</string>
+                                <string>License plate</string>
                             </property>
                         </widget>
                     </item>

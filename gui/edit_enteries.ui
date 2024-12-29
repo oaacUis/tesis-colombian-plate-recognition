@@ -80,7 +80,7 @@
                     </font>
                 </property>
                 <property name="text">
-                    <string>ثبت تردد جدید</string>
+                    <string>Register new traffic</string>
                 </property>
             </widget>
         </widget>

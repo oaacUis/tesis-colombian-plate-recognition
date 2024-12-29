@@ -77,7 +77,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>تنظیمات</string>
+                                <string>Settings</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -105,7 +105,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>لیست ساکنین</string>
+                                <string>List of residents</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -133,7 +133,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>لیست تردد</string>
+                                <string>Traffic list</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -149,7 +149,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>توقف</string>
+                                <string>to stop</string>
                             </property>
                             <property name="text">
                                 <string/>
@@ -165,7 +165,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-                                <string>شروع</string>
+                                <string>Start</string>
                             </property>
                             <property name="text">
                                 <string/>

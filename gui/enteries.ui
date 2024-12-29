@@ -95,11 +95,7 @@
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Register New Entry</string>
-=======
-                                <string>New traffic registration</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                         </widget>
                     </item>

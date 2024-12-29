@@ -80,19 +80,11 @@ def get_status_text(number):
     Converts a status number to its corresponding text.
     """
     if int(number) == 0:
-<<<<<<< HEAD
         return 'Not Allowed'
     elif int(number) == 1:
         return 'Allowed'
     elif int(number) == 2:
         return 'Not Registered'
-=======
-        return 'Unauthorized'
-    elif int(number) == 1:
-        return 'Authorized'
-    elif int(number) == 2:
-        return 'Unregistered'
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
 
 def configure_edit_table_widget(self):
@@ -189,11 +181,7 @@ def on_label_double_click(event, source_object=None):
     """
     w = QDialog()
     w.setFixedSize(600, 132)
-<<<<<<< HEAD
     w.setWindowTitle("Display Plate")
-=======
-    w.setWindowTitle("License Plate View")  # Changed from Persian
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
     imageLabel = QLabel(w)
     imageLabel.setText("")

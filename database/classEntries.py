@@ -7,10 +7,7 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from helper import jalali
 from helper.gui_maker import get_status_color, get_status_text
-<<<<<<< HEAD
-=======
 from helper.text_decorators import convert_to_local_format, split_string_language_specific
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
 
 class Entries:
@@ -54,13 +51,6 @@ class Entries:
         """
         return self.eTime
 
-<<<<<<< HEAD
-    def getDate(self):
-        # if persian:
-        #     return jalali.Gregorian(self.eDate).get_date_str()
-        return jalali.Gregorian(self.eDate).get_date_str()
-        # return self.eDate
-=======
     def getDate(self, persian=True):
         """
         Get the entry date in either Persian or Gregorian format.
@@ -74,7 +64,6 @@ class Entries:
         if persian:
             return jalali.Gregorian(self.eDate).persian_string()
         return self.eDate
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
     def getPlatePic(self):
         """
@@ -103,10 +92,6 @@ class Entries:
         """
         return "{}%".format(self.platePercent)
 
-<<<<<<< HEAD
-    def getPlateNumber(self):
-        return self.plateNum
-=======
     def getPlateNumber(self, display=False):
         """
         Get the license plate number in either standard or display format.
@@ -118,7 +103,6 @@ class Entries:
             str: Formatted license plate number
         """
         return convert_to_local_format(split_string_language_specific(self.plateNum), display)
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
     def getStatus(self, item=True, statusNum='', selfNum=False):
         """

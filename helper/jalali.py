@@ -63,15 +63,6 @@ class Gregorian:
             persian_day = day_of_year_persian - (31 * persian_month)
             persian_month += 1
         else:
-<<<<<<< HEAD
-            jm = int((doy_j - 187) / 30)
-            jd = doy_j - 186 - (jm * 30)
-            jm += 7
-        self.persian_year = jy
-        self.persian_month = jm
-        self.persian_day = jd
-    def get_date(self):
-=======
             persian_month = int((day_of_year_persian - 187) / 30)
             persian_day = day_of_year_persian - 186 - (persian_month * 30)
             persian_month += 7
@@ -80,15 +71,10 @@ class Gregorian:
         self.persian_day = persian_day
 
     def persian_tuple(self):
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
         return self.persian_year, self.persian_month, self.persian_day
-    def get_date_str(self):
-        return f"{self.persian_year}-{self.persian_month}-{self.persian_day}"
-    #def persian_tuple(self):
-    #   return self.persian_year, self.persian_month, self.persian_day
 
-    #def persian_string(self, date_format="{}-{}-{}"):
-    #    return date_format.format(self.persian_year, self.persian_month, self.persian_day)
+    def persian_string(self, date_format="{}-{}-{}"):
+        return date_format.format(self.persian_year, self.persian_month, self.persian_day)
 
 
 class Persian:

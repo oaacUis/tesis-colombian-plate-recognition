@@ -17,11 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-<<<<<<< HEAD
             <string>Plate Image</string>
-=======
-            <string>License plate image</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
         </property>
         <widget class="QWidget" name="centralwidget">
             <widget class="QLabel" name="plateView">

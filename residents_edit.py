@@ -122,48 +122,11 @@ class residentsAddNewWindow(QDialog):
         self.plateTextNum_4.setText(plate_number[6:8])
 
         if self.isEditing:
-<<<<<<< HEAD
-            self.setWindowTitle('Edit Resident')
-            self.addResidentButton.setText('Save Changes')
-
-            self.addResidentButton.setIcon(QPixmap("./icons/icons8-change-user-80.png"))
-            self.addResidentButton.setIconSize(QSize(30, 30))
-            self.editingResident = dbGetResidentDatasByPlate(self.residnetPlateEng)
-
-            self.fNameTextBox.setText(self.editingResident.getFirstName())
-            self.lNameTextBox.setText(self.editingResident.getLastName())
-            self.buildingTextBox.setText(self.editingResident.getBuilding(appendBuilding=False))
-            self.blockTextBox.setText(self.editingResident.getBlock())
-            self.numTextBox.setText(self.editingResident.getNum())
-            self.carModelTextBox.setText(self.editingResident.getCarModel())
-            self.statusComboBox.setCurrentIndex(int(self.editingResident.getStatus(item=False)))
-
-            self.plateTextNum_1.setText(self.editingResident.getPlateNumber(display=False)[:2])
-            self.plateTextNum_3.setText(self.editingResident.getPlateNumber(display=False)[3:6])
-            self.plateTextNum_4.setText(self.editingResident.getPlateNumber(display=False)[6:8])
-
-            inv_map = {v: k for k, v in params.plateAlphabet.items()}
-            plateAlpabet = inv_map[self.editingResident.getPlateNumber(display=False)[2]]
-            self.plateAlphabetComboBox.setCurrentText(params.plateAlphabet[plateAlpabet])
-            if isInfo:
-                self.setWindowTitle('Display Resident Information')
-                self.addResidentButton.hide()
-                self.setEnabled(False)
-
-        if self.isNew:
-            self.setWindowTitle('Register New Resident')
-            self.newResident = reshape_persian_text(residnetPlate)
-            self.plateTextNum_1.setText(self.newResident[:2])
-            self.plateTextNum_3.setText(self.newResident[3:6])
-            self.plateTextNum_4.setText(self.newResident[6:8])
-            self.plateAlphabetComboBox.setCurrentText(unicodedata.normalize('NFKC', self.newResident[2]))
-=======
             inv_map = {v: k for k, v in params.plateAlphabet.items()}
             plate_alphabet = inv_map[plate_number[2]]
             self.plateAlphabetComboBox.setCurrentText(params.plateAlphabet[plate_alphabet])
         else:
             self.plateAlphabetComboBox.setCurrentText(plate_number[2])
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
     def addUser(self):
         """Handle adding or updating resident information."""
@@ -226,39 +189,6 @@ class residentsAddNewWindow(QDialog):
         else:
             self.show_status_message("License plate already exists", "error")
 
-<<<<<<< HEAD
-        if fNameTextBox and lNameTextBox and buildingTextBox and blockTextBox and numTextBox and carModelTextBox and plateNumTextBox:
-
-            resident = Resident(
-                fNameTextBox,
-                lNameTextBox,
-                convert_fa_numbers(buildingTextBox),
-                convert_fa_numbers(blockTextBox),
-                convert_fa_numbers(numTextBox),
-                carModelTextBox,
-                plateNumTextBox,
-                statusIndex,
-            )
-
-            if self.isEditing:
-                insertResident(resident, True, self.residnetPlateEng)
-                self.statusLabel.setText('Resident edited successfully.')
-                self.statusLabel.setStyleSheet("""background-color: rgb({}, {}, {});""".format(51, 209, 122))  # BLUE
-
-                for item in self.findChildren(plateQLineEdit.plateQLineEdit):
-                    item.setText('')
-
-            elif not dbGetPlateExist(plateNumTextBox):
-                insertResident(resident)
-                self.statusLabel.setText('New resident registered successfully.')
-                self.statusLabel.setStyleSheet("""background-color: rgb({}, {}, {});""".format(51, 209, 122))  # GREEN
-                for item in self.findChildren(plateQLineEdit.plateQLineEdit):
-                    item.setText('')
-            else:
-                self.statusLabel.setText('Duplicate plate number.')
-                self.statusLabel.setStyleSheet("""
-                background-color: rgb({}, {}, {});
-=======
     def show_status_message(self, message, status):
         """Display status message with appropriate styling."""
         self.statusLabel.setText(message)
@@ -267,7 +197,6 @@ class residentsAddNewWindow(QDialog):
         elif status == "error":
             self.statusLabel.setStyleSheet("""
                 background-color: rgb(224, 27, 36);
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 color: white;
                 font-weight: bold;
                 padding: 0 2px;
@@ -303,10 +232,6 @@ class residentsAddNewWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentsAddNewWindow()
-<<<<<<< HEAD
-    window.setWindowTitle('Register New Resident')
-=======
     window.setWindowTitle('Add New Resident')  # Changed from Persian to English
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
     window.show()
     sys.exit(app.exec_())

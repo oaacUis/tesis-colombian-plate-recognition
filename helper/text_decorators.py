@@ -31,7 +31,7 @@ def join_elements(s):
     return str1
 
 
-def split_string_language_specific(s, english=True):
+def split_string_language_specific(s, english=False):
     """
     Converts a string into a list of characters or words, with special handling for text directionality.
 
@@ -46,23 +46,6 @@ def split_string_language_specific(s, english=True):
         res = re.split('(\d|\W)', s)
         return list(filter(None, res))
 
-<<<<<<< HEAD
-    # reshaped_text = arabic_reshaper.reshape(s)
-    # f = get_display(reshaped_text)
-    # returning_list = []
-    # chars_list = ""
-    # words = list(f.strip())
-    # for word in words:
-    #     if str(word).isdigit() is True and len(chars_list) == 0:
-    #         returning_list.append(word)
-    #     elif str(word).isdigit() is False:
-    #         chars_list += word
-    #     elif str(word).isdigit() is True:
-    #         returning_list.append(chars_list)
-    #         chars_list = ""
-    #         returning_list.append(word)
-    # return returning_list
-=======
     reshaped_text = arabic_reshaper.reshape(s)
     f = get_display(reshaped_text)
     returning_list = []
@@ -78,7 +61,6 @@ def split_string_language_specific(s, english=True):
             chars_list = ""
             returning_list.append(word)
     return returning_list
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
 
 
 def reshape_text(string):
@@ -146,17 +128,10 @@ def get_license_plate_regex(chosen_item='plateWhole'):
     Returns:
     - str: Regex pattern for the chosen item.
     """
-<<<<<<< HEAD
-    info_dict = {
-        'plateWhole': r'([a-zA-z]+)\d\d\d',
-        'plateNum': r'\d\d\d',
-        'plateCode': r'$\d\d\d',
-=======
     patterns = {
         'plateWhole': r'\d\d([a-zA-z]+)\d\d\d\d\d',
         'plateNum': r'\d\d([a-zA-z]+)\d\d\d',
         'plateCode': r'\d\d$',
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
     }
     return patterns.get(chosen_item, "No info available")
 
@@ -171,19 +146,11 @@ def clean_license_plate_text(plate_array):
     Returns:
     - str: The cleaned license plate text.
     """
-<<<<<<< HEAD
-    plateString = join_elements(plateArray)
-    if len(plateArray) == 4:
-        plateStrTemp = re.search(get_license_plate_regex('plateNum'), plateString)
-    elif len(plateArray) == 2:
-        plateStrTemp = re.match(get_license_plate_regex('plateCode'), plateString)
-=======
     plate_string = join_elements(plate_array)
     if len(plate_array) == 6:
         plate_temp = re.search(get_license_plate_regex('plateNum'), plate_string)
     elif len(plate_array) == 2:
         plate_temp = re.match(get_license_plate_regex('plateCode'), plate_string)
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
     else:
         plate_temp = re.match(get_license_plate_regex('plateWhole'), plate_string)
 
@@ -227,109 +194,3 @@ def check_similarity_threshold(a, b):
 
 
 # ... Rest of the utility functions remain unchanged as they already use English ...
-
-
-def find_longest_common_substring(s1, s2):
-    """
-    Finds the longest common substring between two strings.
-
-    Parameters:
-    - s1 (str): The first string.
-    - s2 (str): The second string.
-
-    Returns:
-    - str: The longest common substring found.
-    """
-    m = [[0] * (1 + len(s2)) for i in range(1 + len(s1))]
-    longest, x_longest = 0, 0
-    for x in range(1, 1 + len(s1)):
-        for y in range(1, 1 + len(s2)):
-            if s1[x - 1] == s2[y - 1]:
-                m[x][y] = m[x - 1][y - 1] + 1
-                if m[x][y] > longest:
-                    longest = m[x][y]
-                    x_longest = x
-            else:
-                m[x][y] = 0
-    return s1[x_longest - longest: x_longest]
-
-
-def calculate_similarity_percentage(s1, s2):
-    """
-    Computes the similarity percentage between two strings based on the longest common substring.
-
-    Parameters:
-    - s1 (str): The first string.
-    - s2 (str): The second string.
-
-    Returns:
-    - float: The similarity percentage between the two strings.
-    """
-    return 2. * len(find_longest_common_substring(s1, s2)) / (len(s1) + len(s2)) * 100
-
-
-import jellyfish
-import difflib
-
-a = '46L21299'
-b = '46L21399'
-
-c = '73T13877'
-d = '72T13877'
-
-e = '86T46637'
-f = '86T46627'
-
-g = '65Sad92124'
-h = '65Sin92124'
-
-dif = difflib.Differ()
-
-
-def print_string_similarity_measures(aa, bb):
-    """
-    Prints various similarity measures and edit distances between two strings.
-
-    Parameters:
-    - aa (str): The first string.
-    - bb (str): The second string.
-    """
-    diff = dif.compare(aa, bb)
-    print(1, math.ceil(calculate_similarity_percentage(aa, bb)))
-    print(2, math.ceil(check_similarity_threshold(aa, bb) * 100))
-    print(3, jellyfish.damerau_levenshtein_distance(aa, bb))
-    print(4, list(diff))
-
-
-def convert_string_to_ascii(s):
-    """
-    Converts a string to its equivalent ASCII value representation.
-
-    Parameters:
-    - s (str): The string to convert.
-
-    Returns:
-    - int: The ASCII value of the input string.
-    """
-
-    x = 0
-    for i in range(len(s)):
-        x += ord(s[i]) * 2 ** (8 * (len(s) - i - 1))
-    return x
-
-
-sss = ['4', '4', 'PuV', '1', '5', '4', '2', '5']
-vvv = '۹۲۱۲۴الف۶۵'
-ttt = '77PuV88899'
-lll = '۲۴۳۵۲ﺁ۳۴'
-eee = '۵۵پو۷۷۷۱۱'
-ccc = 'ﻒﻟﺍ'
-
-res = [''.join(g) for _, g in groupby(lll, str.isalpha)]
-
-resE = ''.join(r'\u{:04X}'.format(ord(chr)) for chr in lll)
-
-res = re.split('(\d|\W)', ttt)
-results = list(filter(None, res))
-
-time_infos = [x for x in re.split('(\d|\W)', vvv) if x]

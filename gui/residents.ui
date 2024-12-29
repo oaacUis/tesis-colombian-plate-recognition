@@ -17,11 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-<<<<<<< HEAD
             <string>Residents List</string>
-=======
-            <string>List of residents of the town</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -66,11 +62,7 @@
                     </font>
                 </property>
                 <property name="text">
-<<<<<<< HEAD
                     <string>Add New Resident</string>
-=======
-                    <string>New resident registration</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 </property>
             </widget>
             <widget class="QLabel" name="label_9">
@@ -107,22 +99,14 @@
                     <item>
                         <widget class="QRadioButton" name="radioLName">
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Last Name</string>
-=======
-                                <string>Last name</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                         </widget>
                     </item>
                     <item>
                         <widget class="QRadioButton" name="radioPlateNum">
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Plate Number</string>
-=======
-                                <string>License plate</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                         </widget>
                     </item>

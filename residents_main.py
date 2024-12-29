@@ -101,25 +101,6 @@ class residentsWindow(QDialog):
         model = self.tableWidget.model()
         
         for index in indexes:
-<<<<<<< HEAD
-            selectedCellPlate = model.data(index, role)
-
-            messageBox = QMessageBox(self)
-            messageBox.setWindowTitle("Remove Resident Plate from List")
-            messageBox.setIconPixmap(
-                QPixmap("./icons/icons8-high-risk-80.png").scaled(50, 50, QtCore.Qt.KeepAspectRatio))
-            messageBox.setText("Are you sure you want to remove " + selectedCellPlate + "?")
-
-            buttonoptionA = messageBox.addButton("بله حذف شود", QMessageBox.YesRole)
-            buttonoptionB = messageBox.addButton("خیر", QMessageBox.NoRole)
-            messageBox.setDefaultButton(buttonoptionA)
-            messageBox.exec_()
-
-            if messageBox.clickedButton() == buttonoptionA:
-                print(selectedCellPlate + ' has been removed.')
-                dbRemoveResident(
-                    join_elements(convert_persian_to_english(split_string_language_specific(selectedCellPlate))))
-=======
             selected_plate = model.data(index, Qt.DisplayRole)
             
             if self.confirm_deletion(selected_plate):
@@ -129,7 +110,6 @@ class residentsWindow(QDialog):
                     )
                 )
                 dbRemoveResident(formatted_plate)
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 self.tableWidget.removeRow(index.row())
         
         self.tableWidget.setRowCount(self.tableWidget.rowCount())
@@ -230,11 +210,7 @@ class residentsWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentsWindow()
-<<<<<<< HEAD
-    window.setWindowTitle('Residents List')
-=======
     window.setWindowTitle('Community Residents List')  # Changed from Persian to English
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

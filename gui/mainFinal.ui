@@ -105,11 +105,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-<<<<<<< HEAD
                                 <string>Residents List</string>
-=======
-                                <string>List of residents</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="text">
                                 <string/>
@@ -137,11 +133,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-<<<<<<< HEAD
                                 <string>Entries List</string>
-=======
-                                <string>Traffic list</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="text">
                                 <string/>
@@ -157,11 +149,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="toolTip">
-<<<<<<< HEAD
                                 <string>Stop</string>
-=======
-                                <string>to stop</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="text">
                                 <string/>

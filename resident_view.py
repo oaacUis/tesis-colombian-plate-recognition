@@ -75,10 +75,6 @@ class residentView(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentView()
-<<<<<<< HEAD
     window.setWindowTitle('Register New Resident')
-=======
-    window.setWindowTitle('New Resident Registration')  # Changed from Persian to English
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
     window.show()
     sys.exit(app.exec_())

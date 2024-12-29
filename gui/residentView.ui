@@ -11,11 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-<<<<<<< HEAD
             <string>Resident Information Display</string>
-=======
-            <string>Display resident information</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
         </property>
         <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
@@ -42,11 +38,7 @@
                                 <enum>Qt::RightToLeft</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>First Name</string>
-=======
-                                <string>Name</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -61,11 +53,7 @@
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Last Name</string>
-=======
-                                <string>Last name</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -113,11 +101,7 @@
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Plate Number</string>
-=======
-                                <string>License plate</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -132,11 +116,7 @@
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Car Model</string>
-=======
-                                <string>Vehicle type</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -151,11 +131,7 @@
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Car Plate</string>
-=======
-                                <string>License plate خودرو</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -170,11 +146,7 @@
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Traffic Status</string>
-=======
-                                <string>Traffic status</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -207,11 +179,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>First Name</string>
-=======
-                                <string>Name</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -239,11 +207,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Last Name</string>
-=======
-                                <string>Last name</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -327,11 +291,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Plate</string>
-=======
-                                <string>License plate</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -359,11 +319,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Car Type</string>
-=======
-                                <string>Vehicle type</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -391,11 +347,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Car Plate</string>
-=======
-                                <string>License plate</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -423,11 +375,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
                                 <string>Traffic Status</string>
-=======
-                                <string>Traffic status</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

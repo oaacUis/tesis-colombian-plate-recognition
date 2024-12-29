@@ -11,7 +11,11 @@
             </rect>
         </property>
         <property name="windowTitle">
+<<<<<<< HEAD
             <string>Residents List</string>
+=======
+            <string>List of residents of the town</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -32,7 +36,11 @@
                     </font>
                 </property>
                 <property name="text">
+<<<<<<< HEAD
                     <string>Traffic Status</string>
+=======
+                    <string>Traffic status</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -109,7 +117,11 @@
                     </font>
                 </property>
                 <property name="text">
+<<<<<<< HEAD
                     <string>Car Type</string>
+=======
+                    <string>Vehicle type</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -130,7 +142,11 @@
                     </font>
                 </property>
                 <property name="text">
+<<<<<<< HEAD
                     <string>License Plate</string>
+=======
+                    <string>License plate</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 </property>
                 <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -169,7 +185,11 @@
                                 </font>
                             </property>
                             <property name="text">
+<<<<<<< HEAD
                                 <string>Last Name</string>
+=======
+                                <string>Last name</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -199,7 +219,11 @@
                                 </font>
                             </property>
                             <property name="text">
+<<<<<<< HEAD
                                 <string>Plate</string>
+=======
+                                <string>License plate</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -238,7 +262,11 @@
                     </font>
                 </property>
                 <property name="text">
+<<<<<<< HEAD
                     <string>Add Resident</string>
+=======
+                    <string> ­ Resident registration</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                 </property>
             </widget>
             <widget class="plateQLineEdit" name="fNameTextBox">

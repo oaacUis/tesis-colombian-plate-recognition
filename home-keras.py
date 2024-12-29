@@ -108,8 +108,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 # setTableWidgetData(self, dbRefreshTable())
 
-                pltTextNum = convert_english_to_persian(plateText[:6])
-                pltTextIR = convert_english_to_persian(plateText[6:])
+                pltTextNum = convert_to_local_format(plateText[:6])
+                pltTextIR = convert_to_local_format(plateText[6:])
 
                 self.plateTextNum.setText(pltTextNum)
                 self.plateTextIR.setText(pltTextIR)

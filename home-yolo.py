@@ -308,6 +308,7 @@ class Worker1(QThread):
     def prepare_capture(self):
         self.prev_frame_time = 0
         self.ThreadActive = True
+        
         """
         # you can change 0 in >>>cv2.VideoCapture(0)<<< (which is webcam) to params.video
         # and it will read the config.ini >>> video = anpr_video.mp4

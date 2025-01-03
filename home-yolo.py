@@ -29,6 +29,10 @@ from qtpy.uic import loadUi
 import ai.img_model as imgModel
 from ai.img_model import *
 from configParams import Parameters
+<<<<<<< HEAD
+=======
+from database.classEntries import *
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 from database.db_entries_utils import db_entries_time, dbGetAllEntries
 from database.db_resident_utils import db_get_plate_status, db_get_plate_owner_name
 from enteries_window import EnteriesWindow
@@ -63,13 +67,21 @@ try:
     modelPlate = torch.hub.load('yolov8', 'custom', params.modelPlate_path, source='local', force_reload=True)
     # modelPlate = modelPlate.to(device())
 
+<<<<<<< HEAD
     modelCharX = torch.hub.load('yolov8', 'custom', params.modelCharX_path, source='local', force_reload=True)
+=======
+    modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 except Exception as e:
     print("Error loading the model")
     print("Error description: ", e)
 
 
+<<<<<<< HEAD
 # modelCharX = modelCharX.to(device())
+=======
+# modelCharX = modelCharX.to(device()
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
 class MainWindow(QtWidgets.QMainWindow):
     """
@@ -307,6 +319,10 @@ class Worker1(QThread):
     def prepare_capture(self):
         self.prev_frame_time = 0
         self.ThreadActive = True
+<<<<<<< HEAD
+=======
+        
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
         """
         # you can change 0 in >>>cv2.VideoCapture(0)<<< (which is webcam) to params.video
         # and it will read the config.ini >>> video = anpr_video.mp4

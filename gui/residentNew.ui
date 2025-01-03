@@ -238,7 +238,15 @@
                     </font>
                 </property>
                 <property name="text">
+<<<<<<< HEAD
                     <string>Add Resident</string>
+=======
+<<<<<<< HEAD
+                    <string>Add Resident</string>
+=======
+                    <string> ­ Resident registration</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
                 </property>
             </widget>
             <widget class="plateQLineEdit" name="fNameTextBox">

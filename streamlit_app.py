@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+# Description: Streamlit app for license plate detection using YOLOv5 models.
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 import streamlit as st
 import pandas as pd
 from PIL import Image
@@ -9,8 +13,13 @@ from configParams import Parameters
 
 params = Parameters()
 # Load models
+<<<<<<< HEAD
 modelPlate = torch.hub.load('yolov5', 'custom', params.modelPlate_path, source='local', force_reload=True)
 modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)
+=======
+modelPlate = torch.hub.load('yolov8', 'custom', params.modelPlate_path, source='local', force_reload=True)
+modelCharX = torch.hub.load('yolov8', 'custom', params.modelCharX_path, source='local', force_reload=True)
+>>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
 
 def detect_plate_chars(image):

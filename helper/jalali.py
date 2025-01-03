@@ -63,12 +63,21 @@ class Gregorian:
             persian_day = day_of_year_persian - (31 * persian_month)
             persian_month += 1
         else:
+<<<<<<< HEAD
             persian_month = int((day_of_year_persian - 187) / 30)
             persian_day = day_of_year_persian - 186 - (persian_month * 30)
             persian_month += 7
         self.persian_year = persian_year
         self.persian_month = persian_month
         self.persian_day = persian_day
+=======
+            jm = int((doy_j - 187) / 30)
+            jd = doy_j - 186 - (jm * 30)
+            jm += 7
+        self.persian_year = jy
+        self.persian_month = jm
+        self.persian_day = jd
+>>>>>>> parent of 057b3b1 (initial persian to colombian config)
 
     def persian_tuple(self):
         return self.persian_year, self.persian_month, self.persian_day

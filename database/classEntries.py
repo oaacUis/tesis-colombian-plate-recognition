@@ -7,7 +7,11 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from helper import jalali
 from helper.gui_maker import get_status_color, get_status_text
+<<<<<<< HEAD
 from helper.text_decorators import convert_to_local_format, split_string_language_specific
+=======
+from helper.text_decorators import convert_english_to_persian, split_string_language_specific
+>>>>>>> parent of 057b3b1 (initial persian to colombian config)
 
 
 class Entries:
@@ -52,6 +56,7 @@ class Entries:
         return self.eTime
 
     def getDate(self, persian=True):
+<<<<<<< HEAD
         """
         Get the entry date in either Persian or Gregorian format.
 
@@ -61,6 +66,8 @@ class Entries:
         Returns:
             str: The formatted date string
         """
+=======
+>>>>>>> parent of 057b3b1 (initial persian to colombian config)
         if persian:
             return jalali.Gregorian(self.eDate).persian_string()
         return self.eDate
@@ -93,6 +100,7 @@ class Entries:
         return "{}%".format(self.platePercent)
 
     def getPlateNumber(self, display=False):
+<<<<<<< HEAD
         """
         Get the license plate number in either standard or display format.
 
@@ -103,6 +111,9 @@ class Entries:
             str: Formatted license plate number
         """
         return convert_to_local_format(split_string_language_specific(self.plateNum), display)
+=======
+        return convert_english_to_persian(split_string_language_specific(self.plateNum), display)
+>>>>>>> parent of 057b3b1 (initial persian to colombian config)
 
     def getStatus(self, item=True, statusNum='', selfNum=False):
         """

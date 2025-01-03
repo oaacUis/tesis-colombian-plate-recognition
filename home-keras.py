@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-#home-keras.py
-
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 import gc
 import statistics
 import sys
@@ -25,11 +20,7 @@ from helper.gui_maker import *
 warnings.filterwarnings("ignore", category=UserWarning)
 
 params = Parameters()
-<<<<<<< HEAD
 videoSource = r"./anpr_video.mp4"  # input video path
-=======
-videoSource = r"./anpr_video.mp4"  # input video path 
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
 
 def device():
@@ -117,13 +108,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 # setTableWidgetData(self, dbRefreshTable())
 
-<<<<<<< HEAD
                 pltTextNum = convert_english_to_persian(plateText[:6])
                 pltTextIR = convert_english_to_persian(plateText[6:])
-=======
-                pltTextNum = convert_to_local_format(plateText[:6])
-                pltTextIR = convert_to_local_format(plateText[6:])
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
                 self.plateTextNum.setText(pltTextNum)
                 self.plateTextIR.setText(pltTextIR)

@@ -1,9 +1,5 @@
 # gui_maker.py
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 import functools
 
 from PySide6 import QtWidgets, QtCore, QtGui
@@ -21,10 +17,6 @@ class CenterAlignDelegate(QtWidgets.QStyledItemDelegate):
     """
     Custom delegate for aligning table items to the center.
     """
-<<<<<<< HEAD
-
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     def initStyleOption(self, option, index):
         super(CenterAlignDelegate, self).initStyleOption(option, index)
         option.displayAlignment = QtCore.Qt.AlignCenter
@@ -34,10 +26,6 @@ class ReadOnlyDelegate(QtWidgets.QStyledItemDelegate):
     """
     Custom delegate to make table cells read-only.
     """
-<<<<<<< HEAD
-
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     def createEditor(self, *args, **kwargs):
         return
 
@@ -96,7 +84,6 @@ def create_styled_button(type):
 def get_status_color(number):
     """
     Returns RGB color based on a status number.
-<<<<<<< HEAD
 
     Parameters:
     - number (int): The status number.
@@ -110,15 +97,6 @@ def get_status_color(number):
         return 51, 209, 122
     elif number == 2:
         return 246, 211, 45
-=======
-    """
-    if number == 0:
-        return 224, 27, 36  # Red
-    elif number == 1:
-        return 51, 209, 122  # Green
-    elif number == 2:
-        return 246, 211, 45  # Yellow
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
 
 def get_status_text(number):
@@ -147,21 +125,13 @@ def configure_edit_table_widget(self):
     Configures table widget for editing mode.
     """
     fieldsList = ['status', 'plateNum', 'time', 'date', 'platePic', 'charPercent', 'platePercent', 'moreInfo', 'addNew']
-<<<<<<< HEAD
-
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     fieldsList = getFieldNames(fieldsList)
 
     self.tableWidget.setColumnCount(len(fieldsList))
     self.tableWidget.setRowCount(20)
     self.tableWidget.setHorizontalHeaderLabels(fieldsList)
     self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-<<<<<<< HEAD
     self.tableWidget.setLayoutDirection(Qt.RightToLeft)
-=======
-    self.tableWidget.setLayoutDirection(Qt.LeftToRight)  # Changed from RightToLeft
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     self.tableWidget.setSortingEnabled(True)
 
     delegate = CenterAlignDelegate(self.tableWidget)
@@ -173,27 +143,17 @@ def configure_edit_table_widget(self):
 
 def configure_main_table_widget(self):
     """
-<<<<<<< HEAD
        Configures the main table widget.
        """
     fieldsList = ['status', 'plateNum', 'time', 'date', 'platePic', 'moreInfo', 'addNew']
 
-=======
-    Configures the main table widget.
-    """
-    fieldsList = ['status', 'plateNum', 'time', 'date', 'platePic', 'moreInfo', 'addNew']
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     fieldsList = getFieldNames(fieldsList)
 
     self.tableWidget.setColumnCount(len(fieldsList))
     self.tableWidget.setRowCount(20)
     self.tableWidget.setHorizontalHeaderLabels(fieldsList)
     self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-<<<<<<< HEAD
     self.tableWidget.setLayoutDirection(Qt.RightToLeft)
-=======
-    self.tableWidget.setLayoutDirection(Qt.LeftToRight)  # Changed from RightToLeft
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     self.tableWidget.setSortingEnabled(True)
 
     delegate = CenterAlignDelegate(self.tableWidget)
@@ -205,16 +165,11 @@ def configure_main_table_widget(self):
 
 def populate_main_table_with_data(self, dfReadEnteries):
     """
-<<<<<<< HEAD
       Populates the main table widget with data.
 
       Parameters:
       - dfReadEnteries (DataFrame): The DataFrame containing table data.
       """
-=======
-    Populates the main table widget with data.
-    """
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     delegate = CenterAlignDelegate(self.tableWidget)
     self.tableWidget.setItemDelegate(delegate)
     for each_row in range(len(dfReadEnteries)):
@@ -227,19 +182,11 @@ def populate_main_table_with_data(self, dfReadEnteries):
         self.tableWidget.item(each_row, 0).setBackground(QColor(r, g, b))
 
         self.tableWidget.setItem(each_row, 1,
-<<<<<<< HEAD
                                  QTableWidgetItem(convert_english_to_persian(
                                      (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
         self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
         self.tableWidget.setItem(each_row, 3,
                                  QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3]).persian_string()))
-=======
-                               QTableWidgetItem(convert_to_local_format(
-                                   (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
-        self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
-        self.tableWidget.setItem(each_row, 3,
-                               QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3]).persian_string()))
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
         Image = QImage()
         Image.load(dfReadEnteries.iloc[each_row][4])
@@ -257,16 +204,11 @@ def populate_main_table_with_data(self, dfReadEnteries):
 
 def center_widget(wid):
     """
-<<<<<<< HEAD
        Centers a widget on the screen.
 
        Parameters:
        - wid (QWidget): The widget to be centered.
        """
-=======
-    Centers a widget on the screen.
-    """
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     center = QScreen.availableGeometry(QApplication.primaryScreen()).center()
     geo = wid.frameGeometry()
     geo.moveCenter(center)
@@ -275,17 +217,12 @@ def center_widget(wid):
 
 def on_label_double_click(event, source_object=None):
     """
-<<<<<<< HEAD
        Handles double-click event on label to show image in a dialog.
 
        Parameters:
        - event: The mouse event.
        - source_object: The source label object containing the pixmap.
        """
-=======
-    Handles double-click event on label to show image in a dialog.
-    """
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     w = QDialog()
     w.setFixedSize(600, 132)
     w.setWindowTitle("Display Plate")
@@ -303,17 +240,12 @@ def on_label_double_click(event, source_object=None):
 
 def on_item_double_click(tableWidget, item):
     """
-<<<<<<< HEAD
        Handles item double-click event in the table widget.
 
        Parameters:
        - tableWidget (QTableWidget): The table widget.
        - item (QTableWidgetItem): The table item that was double-clicked.
        """
-=======
-    Handles item double-click event in the table widget.
-    """
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     row = item.row()
     column = item.column()
     text = tableWidget.item(row, column).text()
@@ -321,14 +253,9 @@ def on_item_double_click(tableWidget, item):
 
 class ProxyStyle(QtWidgets.QProxyStyle):
     """
-<<<<<<< HEAD
            Custom drawing of control elements, especially buttons with icons.
            """
 
-=======
-    Custom drawing of control elements, especially buttons with icons.
-    """
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     def drawControl(self, element, option, painter, widget=None):
         if element == QtWidgets.QStyle.CE_PushButtonLabel:
             icon = QtGui.QIcon(option.icon)
@@ -357,11 +284,7 @@ class ProxyStyle(QtWidgets.QProxyStyle):
                 iconRect = QtCore.QRect(
                     QtCore.QPoint(), QtCore.QSize(pixmapWidth, pixmapHeight)
                 )
-<<<<<<< HEAD
                 iconRect.moveCenter(option.rect.center_widget())
-=======
-                iconRect.moveCenter(option.rect.center())
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
                 iconRect.moveLeft(option.rect.left() + iconSpacing)
                 iconRect = self.visualRect(option.direction, option.rect, iconRect)
                 iconRect.translate(
@@ -372,8 +295,4 @@ class ProxyStyle(QtWidgets.QProxyStyle):
                         QtWidgets.QStyle.PM_ButtonShiftVertical, option, widget
                     ),
                 )
-<<<<<<< HEAD
                 painter.drawPixmap(iconRect, pixmap)
-=======
-                painter.drawPixmap(iconRect, pixmap)
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388

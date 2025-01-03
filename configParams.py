@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 from configparser import ConfigParser
 
 
@@ -46,10 +41,6 @@ class Parameters:
         self.rtps = sourceConfig["rtps"]
         self.webcam = sourceConfig["webcam"]
         self.source = sourceConfig["source"]
-<<<<<<< HEAD
-=======
-
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
         # services
         external_service_config = config_object["EXTERNAL-SERVICE"]
         self.external_service_url = external_service_config["url"]
@@ -58,7 +49,6 @@ class Parameters:
         self.cpu_or_cuda = "cpu"  # choose device; "cpu" or "cuda"(if cuda is available)
 
         self.label_map = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'D', 'Gh', 'H', 'J', 'L', 'M',
-<<<<<<< HEAD
                           'N',
                           'P',
                           'PuV', 'PwD', 'Sad', 'Sin', 'T', 'Taxi', 'V', 'Y']
@@ -136,52 +126,6 @@ class Parameters:
             "V": "و",
             "Y": "ی",
         }
-=======
-                         'N', 'P', 'PuV', 'PwD', 'Sad', 'Sin', 'T', 'Taxi', 'V', 'Y']
-
-        self.char_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8',
-                         '9': '9', 'A': '10', 'B': '11', 'P': '12', 'Taxi': '13', 'A': '14', 'J': '15', 'Ch': '16',
-                         'H': '17', 'Kh': '18', 'D': '19', 'Th': '20', 'R': '21', 'Z': '22', 'Zh': '23', 'Sin': '24',
-                         'Sh': '25', 'Sad': '26', 'Dh': '27', 'T': '28', 'Tz': '29', 'PuV': '30', 'Gh': '31',
-                         'F': '32', 'Gh': '33', 'K': '34', 'G': '35', 'L': '36', 'M': '37', 'N': '38', 'H': '39',
-                         'V': '40', 'Y': '41', 'PwD': '42'}
-
-        self.char_id_dict = {v: k for k, v in self.char_dict.items()}
-
-        # English representation of numbers and letters
-        self.alphabetP = {
-            "ZERO": "0",
-            "ONE": "1",
-            "TWO": "2",
-            "THREE": "3",
-            "FOUR": "4",
-            "FIVE": "5",
-            "SIX": "6",
-            "SEVEN": "7",
-            "EIGHT": "8",
-            "NINE": "9",
-            "A": "A",
-            "B": "B",
-            "D": "D",
-            "Gh": "Gh",
-            "H": "H",
-            "J": "J",
-            "L": "L",
-            "M": "M",
-            "N": "N",
-            "P": "P",
-            "PuV": "PuV",
-            "PwD": "PwD",
-            "Sad": "Sad",
-            "Sin": "Sin",
-            "T": "T",
-            "Taxi": "Taxi",
-            "V": "V",
-            "Y": "Y",
-        }
-
-        self.alphabetP2 = self.alphabetP.copy()
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
         self.alphabetE = {
             "ZERO": "0",
@@ -215,7 +159,6 @@ class Parameters:
         }
 
         self.plateAlphabet = {
-<<<<<<< HEAD
             "A": "آ",
             "B": "ب",
             "D": "د",
@@ -268,60 +211,6 @@ class Parameters:
             '0': 'سیستمی',
             '1': 'دستی',
             '2': 'ویرایش شده'
-=======
-            "A": "A",
-            "B": "B",
-            "D": "D",
-            "Gh": "Gh",
-            "H": "H",
-            "J": "J",
-            "L": "L",
-            "M": "M",
-            "N": "N",
-            "P": "P",
-            "PuV": "PuV",
-            "PwD": "PwD",
-            "Sad": "Sad",
-            "Sin": "Sin",
-            "T": "T",
-            "Taxi": "Taxi",
-            "V": "V",
-            "Y": "Y",
-        }
-
-        self.fieldNames = {
-            'fName': 'First Name',
-            'lName': 'Last Name',
-            'building': 'Building',
-            'block': 'Block',
-            'num': 'Number',
-            'carModel': 'Car Model',
-            'plateNum': 'License Plate',
-            'status': 'Permission',
-            'time': 'Time',
-            'date': 'Date',
-            'platePic': 'Plate Picture',
-            'charPercent': 'Character Percentage',
-            'platePercent': 'Plate Percentage',
-            'editBtn': 'Edit',
-            'deleteBtn': 'Delete',
-            'searchBtn': 'Search',
-            'findEntriesBtn': 'Entries',
-            'moreInfo': 'Show Information',
-            'addNew': 'Register Plate',
-        }
-
-        self.fieldStatus = {
-            '0': 'Unauthorized',
-            '1': 'Authorized',
-            '2': 'Unregistered'
-        }
-
-        self.fieldRecordType = {
-            '0': 'System',
-            '1': 'Manual',
-            '2': 'Edited'
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
         }
 
 
@@ -330,8 +219,4 @@ def getFieldNames(fieldsList):
     fieldNamesOutput = []
     for value in fieldsList:
         fieldNamesOutput.append(params.fieldNames[value])
-<<<<<<< HEAD
     return fieldNamesOutput
-=======
-    return fieldNamesOutput
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388

@@ -24,10 +24,6 @@ def join_elements(s):
     Returns:
     - str: A single string result of concatenating all list elements.
     """
-<<<<<<< HEAD
-
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     str1 = ""
     for ele in s:
         if ele is not None:
@@ -35,15 +31,9 @@ def join_elements(s):
     return str1
 
 
-<<<<<<< HEAD
 def split_string_language_specific(s, english=True):
     """
     Converts a string into a list of characters or words, with special handling for Arabic text.
-=======
-def split_string_language_specific(s, english=False):
-    """
-    Converts a string into a list of characters or words, with special handling for text directionality.
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
     Parameters:
     - s (str): The input string to convert.
@@ -56,7 +46,6 @@ def split_string_language_specific(s, english=False):
         res = re.split('(\d|\W)', s)
         return list(filter(None, res))
 
-<<<<<<< HEAD
     # reshaped_text = arabic_reshaper.reshape(s)
     # f = get_display(reshaped_text)
     # returning_list = []
@@ -91,49 +80,12 @@ def reshape_persian_text(string):
 def convert_english_to_persian(license_plate, display=False):
     """
     Converts English characters in a license plate to Persian equivalents.
-=======
-    reshaped_text = arabic_reshaper.reshape(s)
-    f = get_display(reshaped_text)
-    returning_list = []
-    chars_list = ""
-    words = list(f.strip())
-    for word in words:
-        if str(word).isdigit() and len(chars_list) == 0:
-            returning_list.append(word)
-        elif not str(word).isdigit():
-            chars_list += word
-        elif str(word).isdigit():
-            returning_list.append(chars_list)
-            chars_list = ""
-            returning_list.append(word)
-    return returning_list
-
-
-def reshape_text(string):
-    """
-    Transforms text for correct display in environments that do not support bidirectional text shaping.
-
-    Parameters:
-    - string (str): The text to be reshaped and displayed correctly.
-
-    Returns:
-    - str: The reshaped text.
-    """
-    reshaped_text = arabic_reshaper.reshape(string)
-    return get_display(reshaped_text)
-
-
-def convert_to_local_format(license_plate, display=False):
-    """
-    Converts standard characters in a license plate to local format.
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
     Parameters:
     - license_plate (str): The license plate text to convert.
     - display (bool, optional): Whether to return the result as a display-ready string. Default is False.
 
     Returns:
-<<<<<<< HEAD
     - str: The converted license plate with Persian characters.
     """
     second_license_plate = []
@@ -154,31 +106,11 @@ def convert_to_local_format(license_plate, display=False):
 def convert_persian_to_english(license_plate):
     """
     Converts Persian characters in a license plate to English equivalents.
-=======
-    - str: The converted license plate in local format.
-    """
-    converted_plate = []
-    for character in license_plate:
-        if character.isdigit():
-            character = unicodedata.name(character)[6:]
-        character = params.alphabetP.get(character)
-        converted_plate.append(character)
-    plate_string = join_elements(converted_plate)
-    if display:
-        return reshape_text(plate_string)
-    return plate_string
-
-
-def convert_to_standard_format(license_plate):
-    """
-    Converts local format characters in a license plate to standard format.
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
     Parameters:
     - license_plate (str): The license plate text to convert.
 
     Returns:
-<<<<<<< HEAD
     - list: A list of English characters equivalent to the Persian input.
     """
     second_license_plate = []
@@ -187,16 +119,6 @@ def convert_to_standard_format(license_plate):
         character = inv_map.get(unicodedata.normalize('NFKC', character))
         second_license_plate.append(character)
     return second_license_plate
-=======
-    - list: A list of standard format characters.
-    """
-    converted_plate = []
-    format_map = {v: k for k, v in params.alphabetP2.items()}
-    for character in license_plate:
-        character = format_map.get(unicodedata.normalize('NFKC', character))
-        converted_plate.append(character)
-    return converted_plate
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
 
 def get_license_plate_regex(chosen_item='plateWhole'):
@@ -209,7 +131,6 @@ def get_license_plate_regex(chosen_item='plateWhole'):
     Returns:
     - str: Regex pattern for the chosen item.
     """
-<<<<<<< HEAD
     info_dict = {
         'plateWhole': r'([a-zA-z]+)\d\d\d',
         'plateNum': r'\d\d\d',
@@ -219,31 +140,15 @@ def get_license_plate_regex(chosen_item='plateWhole'):
 
 
 def clean_license_plate_text(plateArray):
-=======
-    patterns = {
-        'plateWhole': r'\d\d([a-zA-z]+)\d\d\d\d\d',
-        'plateNum': r'\d\d([a-zA-z]+)\d\d\d',
-        'plateCode': r'\d\d$',
-    }
-    return patterns.get(chosen_item, "No info available")
-
-
-def clean_license_plate_text(plate_array):
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     Cleans and extracts valid license plate text from an input array.
 
     Parameters:
-<<<<<<< HEAD
     - plateArray (list): The list representing parts of a license plate.
-=======
-    - plate_array (list): The list representing parts of a license plate.
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
     Returns:
     - str: The cleaned license plate text.
     """
-<<<<<<< HEAD
     plateString = join_elements(plateArray)
     if len(plateArray) == 4:
         plateStrTemp = re.search(get_license_plate_regex('plateNum'), plateString)
@@ -288,38 +193,6 @@ def convert_persian_numbers(text):
         persiannumber = persiannumber.replace(i, j)
 
     return persiannumber
-=======
-    plate_string = join_elements(plate_array)
-    if len(plate_array) == 6:
-        plate_temp = re.search(get_license_plate_regex('plateNum'), plate_string)
-    elif len(plate_array) == 2:
-        plate_temp = re.match(get_license_plate_regex('plateCode'), plate_string)
-    else:
-        plate_temp = re.match(get_license_plate_regex('plateWhole'), plate_string)
-
-    if plate_temp is not None and plate_temp.group(0):
-        return plate_temp.group(0)
-    return ''
-
-
-def convert_numbers_to_standard(text):
-    """
-    Converts local format numbers to standard format in a string.
-
-    Parameters:
-    - text (str): The string containing local format numbers.
-
-    Returns:
-    - str: The converted string with standard numbers.
-    """
-    number_map = {
-        '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4',
-        '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9'
-    }
-    for local, standard in number_map.items():
-        text = text.replace(local, standard)
-    return text
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
 
 
 def check_similarity_threshold(a, b):
@@ -333,7 +206,6 @@ def check_similarity_threshold(a, b):
     Returns:
     - bool: True if the strings are similar by at least 80%, otherwise False.
     """
-<<<<<<< HEAD
     s = SequenceMatcher(None, a, b).ratio()
     s = math.ceil(s * 100)
     if s >= 80:
@@ -446,10 +318,3 @@ res = re.split('(\d|\W)', ttt)
 results = list(filter(None, res))
 
 time_infos = [x for x in re.split('(\d|\W)', vvv) if x]
-=======
-    similarity = SequenceMatcher(None, a, b).ratio()
-    return math.ceil(similarity * 100) >= 80
-
-
-# ... Rest of the utility functions remain unchanged as they already use English ...
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388

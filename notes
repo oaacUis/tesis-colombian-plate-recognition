@@ -103,9 +103,9 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 # Folders checkin:
 - ai: OK
 - business: OK
-- database: In process. To translate from persian to eng.
-    - classEntries: To modify
-    - classResidents: To modify
+- database:  To translate from persian to eng. OK
+    - classEntries: Ok
+    - classResidents: Ok
     - db_entries_utils: OK
     - db_resident_utils: To modify
 - gui: Ok. plateQLineEdit.py script should be erased in the end.
@@ -123,14 +123,14 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 
 # main files (in main folder)
 - config.ini: OK. Maybe check some parameters.
-- configParams: In process. Have some persian related func that needs to be change and tested.
-- enteries_window: In process. Have things to be translate and rebuild from persian functions.
+- configParams: Have some persian related func that needs to be change and tested. OK
+- enteries_window: Have things to be translate and rebuild from persian functions. OK
 - home-keras: In process. Needs to be consider how useful is using a keras model for main application.
 - home-yolo: In process. MAIN FILE. Needs to be rebuild considering all the proyect folder.
 - how_many_possibilities: In process. Needs to be readapt to colombian plates patterns.
-- residents_view: In process. Needs a review and readapt.
-- residents_edit: In process. Needs a review and readapt.
-- residents_main: In process. Needs a review and readapt.
+- residents_view: In process. Needs a review and readapt. ok for english 
+- residents_edit: In process. Needs a review and readapt. ok for english 
+- residents_main: In process. Needs a review and readapt. ok for english
 - streamlit_app: OK. Deprecated
 
 # TODO

@@ -188,7 +188,11 @@
                                 </font>
                             </property>
                             <property name="text">
+<<<<<<< HEAD
                                 <string>License Plate</string>
+=======
+                                <string>License plate</string>
+>>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
                             </property>
                             <property name="scaledContents">
                                 <bool>false</bool>

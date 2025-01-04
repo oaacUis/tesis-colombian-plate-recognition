@@ -1,3 +1,5 @@
+#entries_window.py
+
 import functools
 import sys
 

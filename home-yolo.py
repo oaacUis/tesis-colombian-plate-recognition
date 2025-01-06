@@ -35,7 +35,8 @@ from enteries_window import EnteriesWindow
 from helper.gui_maker import configure_main_table_widget, create_image_label, on_label_double_click, center_widget, \
     get_status_text, get_status_color, \
     create_styled_button
-from helper.text_decorators import clean_license_plate_text, join_elements, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, clean_license_plate_text, join_elements, \
+    convert_to_standard_format, split_string_language_specific
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
@@ -44,7 +45,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 params = Parameters()
 import sys
 
-sys.path.append('yolov8')
+sys.path.append('yolov5')
 
 
 def get_device():
@@ -59,14 +60,11 @@ def get_device():
     else:
         return torch.device("cpu")
 
-try:
-    modelPlate = torch.hub.load('yolov8', 'custom', params.modelPlate_path, source='local', force_reload=True)
-    # modelPlate = modelPlate.to(device())
 
-    modelCharX = torch.hub.load('yolov8', 'custom', params.modelCharX_path, source='local', force_reload=True)
-except Exception as e:
-    print("Error loading the model")
-    print("Error description: ", e)
+modelPlate = torch.hub.load('yolov5', 'custom', params.modelPlate_path, source='local', force_reload=True)
+# modelPlate = modelPlate.to(device())
+
+modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)
 
 
 # modelCharX = modelCharX.to(device())
@@ -140,7 +138,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for index, entry in enumerate(plateNum):
             # Get the plate number in English
             plateNum2 = join_elements(
-                split_string_language_specific(entry.getPlateNumber(display=True)))
+                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
             # Get the plate status from the database
             statusNum = db_get_plate_status(plateNum2)
             # Set the status of the entry in the table widget
@@ -231,15 +229,15 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_plate_data_update(self, cropped_plate: QImage, plate_text: str, char_conf_avg: float,
                              plate_conf_avg: float) -> None:
 
-        # Check if the plate text is 6 characters long and the character confidence is above 70
-        if len(plate_text) == 6 and char_conf_avg >= 70:
+        # Check if the plate text is 8 characters long and the character confidence is above 70
+        if len(plate_text) == 8 and char_conf_avg >= 70:
             # Set the plate view to display the cropped plate
             self.plate_view.setScaledContents(True)
             self.plate_view.setPixmap(QPixmap.fromImage(cropped_plate))
 
-            # Get the plate text and numbers
-            plt_text_num = plate_text[3:]
-            plt_text_ir = plate_text[:3]
+            # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
+            plt_text_num = convert_to_local_format(plate_text[:6], display=True)
+            plt_text_ir = convert_to_local_format(plate_text[6:], display=True)
             self.plate_text_num.setText(plt_text_num)
             self.plate_text_ir.setText(plt_text_ir)
 
@@ -253,7 +251,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Create data for send into services
             external_service_data = {
-                'plate_number': plt_text_ir + '-' + plt_text_num,
+                'plate_number': plt_text_num + '-' + plt_text_ir,
                 'image': cropped_plate
             }
             # Add the plate text, character confidence, plate confidence, cropped plate, and status to the database
@@ -307,6 +305,7 @@ class Worker1(QThread):
     def prepare_capture(self):
         self.prev_frame_time = 0
         self.ThreadActive = True
+        
         """
         # you can change 0 in >>>cv2.VideoCapture(0)<<< (which is webcam) to params.video
         # and it will read the config.ini >>> video = anpr_video.mp4

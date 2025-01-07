@@ -52,19 +52,11 @@ def split_string_language_specific(s, english=False):
     chars_list = ""
     words = list(f.strip())
     for word in words:
-<<<<<<< HEAD
         if str(word).isdigit() and len(chars_list) == 0:
             returning_list.append(word)
         elif not str(word).isdigit():
             chars_list += word
         elif str(word).isdigit():
-=======
-        if str(word).isdigit() is True and len(chars_list) == 0:
-            returning_list.append(word)
-        elif str(word).isdigit() is False:
-            chars_list += word
-        elif str(word).isdigit() is True:
->>>>>>> parent of 057b3b1 (initial persian to colombian config)
             returning_list.append(chars_list)
             chars_list = ""
             returning_list.append(word)
@@ -136,11 +128,7 @@ def get_license_plate_regex(chosen_item='plateWhole'):
     Returns:
     - str: Regex pattern for the chosen item.
     """
-<<<<<<< HEAD
     patterns = {
-=======
-    info_dict = {
->>>>>>> parent of 057b3b1 (initial persian to colombian config)
         'plateWhole': r'\d\d([a-zA-z]+)\d\d\d\d\d',
         'plateNum': r'\d\d([a-zA-z]+)\d\d\d',
         'plateCode': r'\d\d$',
@@ -158,19 +146,11 @@ def clean_license_plate_text(plate_array):
     Returns:
     - str: The cleaned license plate text.
     """
-<<<<<<< HEAD
     plate_string = join_elements(plate_array)
     if len(plate_array) == 6:
         plate_temp = re.search(get_license_plate_regex('plateNum'), plate_string)
     elif len(plate_array) == 2:
         plate_temp = re.match(get_license_plate_regex('plateCode'), plate_string)
-=======
-    plateString = join_elements(plateArray)
-    if len(plateArray) == 6:
-        plateStrTemp = re.search(get_license_plate_regex('plateNum'), plateString)
-    elif len(plateArray) == 2:
-        plateStrTemp = re.match(get_license_plate_regex('plateCode'), plateString)
->>>>>>> parent of 057b3b1 (initial persian to colombian config)
     else:
         plate_temp = re.match(get_license_plate_regex('plateWhole'), plate_string)
 

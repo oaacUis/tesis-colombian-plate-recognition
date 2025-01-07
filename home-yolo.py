@@ -35,13 +35,8 @@ from enteries_window import EnteriesWindow
 from helper.gui_maker import configure_main_table_widget, create_image_label, on_label_double_click, center_widget, \
     get_status_text, get_status_color, \
     create_styled_button
-<<<<<<< HEAD
 from helper.text_decorators import convert_to_local_format, clean_license_plate_text, join_elements, \
     convert_to_standard_format, split_string_language_specific
-=======
-from helper.text_decorators import convert_english_to_persian, clean_license_plate_text, join_elements, \
-    convert_persian_to_english, split_string_language_specific
->>>>>>> parent of 057b3b1 (initial persian to colombian config)
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
@@ -143,11 +138,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for index, entry in enumerate(plateNum):
             # Get the plate number in English
             plateNum2 = join_elements(
-<<<<<<< HEAD
                 convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
-=======
-                convert_persian_to_english(split_string_language_specific(entry.getPlateNumber(display=True))))
->>>>>>> parent of 057b3b1 (initial persian to colombian config)
             # Get the plate status from the database
             statusNum = db_get_plate_status(plateNum2)
             # Set the status of the entry in the table widget
@@ -245,13 +236,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.plate_view.setPixmap(QPixmap.fromImage(cropped_plate))
 
             # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
-<<<<<<< HEAD
             plt_text_num = convert_to_local_format(plate_text[:6], display=True)
             plt_text_ir = convert_to_local_format(plate_text[6:], display=True)
-=======
-            plt_text_num = convert_english_to_persian(plate_text[:6], display=True)
-            plt_text_ir = convert_english_to_persian(plate_text[6:], display=True)
->>>>>>> parent of 057b3b1 (initial persian to colombian config)
             self.plate_text_num.setText(plt_text_num)
             self.plate_text_ir.setText(plt_text_ir)
 

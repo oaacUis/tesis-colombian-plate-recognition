@@ -484,22 +484,22 @@
             <widget class="plateQLineEdit" name="plateTextNum_4">
                 <property name="geometry">
                     <rect>
-                        <x>780</x>
-                        <y>180</y>
-                        <width>41</width>
-                        <height>31</height>
+                        <x>700</x>
+                        <y>170</y>
+                        <width>51</width>
+                        <height>41</height>
                     </rect>
                 </property>
                 <property name="baseSize">
                     <size>
-                        <width>200</width>
+                        <width>400</width>
                         <height>50</height>
                     </size>
                 </property>
                 <property name="font">
                     <font>
                         <family>B Yekan</family>
-                        <pointsize>12</pointsize>
+                        <pointsize>14</pointsize>
                     </font>
                 </property>
                 <property name="cursor">
@@ -519,13 +519,13 @@
                     <string/>
                 </property>
                 <property name="maxLength">
-                    <number>2</number>
+                    <number>3</number>
                 </property>
                 <property name="frame">
                     <bool>false</bool>
                 </property>
             </widget>
-            <widget class="plateQLineEdit" name="plateTextNum_3">
+            <!-- <widget class="plateQLineEdit" name="plateTextNum_3">
                 <property name="geometry">
                     <rect>
                         <x>700</x>
@@ -568,11 +568,11 @@
                 <property name="frame">
                     <bool>false</bool>
                 </property>
-            </widget>
+            </widget> -->
             <widget class="plateQLineEdit" name="plateTextNum_1">
                 <property name="geometry">
                     <rect>
-                        <x>580</x>
+                        <x>600</x>
                         <y>170</y>
                         <width>51</width>
                         <height>41</height>
@@ -580,7 +580,7 @@
                 </property>
                 <property name="baseSize">
                     <size>
-                        <width>200</width>
+                        <width>400</width>
                         <height>50</height>
                     </size>
                 </property>
@@ -607,13 +607,13 @@
                     <string/>
                 </property>
                 <property name="maxLength">
-                    <number>2</number>
+                    <number>3</number>
                 </property>
                 <property name="frame">
                     <bool>false</bool>
                 </property>
             </widget>
-            <widget class="QComboBox" name="plateAlphabetComboBox">
+             <!-- <widget class="QComboBox" name="plateAlphabetComboBox">
                 <property name="geometry">
                     <rect>
                         <x>640</x>
@@ -637,7 +637,7 @@
                 <property name="styleSheet">
                     <string notr="true"/>
                 </property>
-            </widget>
+            </widget>  -->
             <widget class="QComboBox" name="statusComboBox">
                 <property name="geometry">
                     <rect>
@@ -700,9 +700,9 @@
             <zorder>numTextBox</zorder>
             <zorder>carModelTextBox</zorder>
             <zorder>plateTextNum_4</zorder>
-            <zorder>plateTextNum_3</zorder>
+            <!-- <zorder>plateTextNum_3</zorder> -->
             <zorder>plateTextNum_1</zorder>
-            <zorder>plateAlphabetComboBox</zorder>
+            <!-- <zorder>plateAlphabetComboBox</zorder> -->
             <zorder>statusComboBox</zorder>
             <zorder>statusLabel</zorder>
         </widget>

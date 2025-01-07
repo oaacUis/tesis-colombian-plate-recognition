@@ -129,62 +129,83 @@ class MainWindow(QtWidgets.QMainWindow):
         gc.collect()
 
     def refresh_table(self, plateNum=''):
+        # print("\n=== INICIO DE REFRESH_TABLE ===")
+        # print(f"Parámetro plateNum recibido: {plateNum}")
 
-        # Get all entries from the database with a limit of 10 and where the plate number is like the given plate number
+        # Get all entries from the database
         plateNum = dbGetAllEntries(limit=10, whereLike=plateNum)
-        # Set the number of rows in the table widget to the length of the plate number list
+        # print(f"Número de registros obtenidos de la base de datos: {len(plateNum)}")
+
+        # Set the number of rows
         self.tableWidget.setRowCount(len(plateNum))
-        # Iterate through the plate number list
+        # print(f"Tabla configurada con {len(plateNum)} filas")
+
+        # Iterate through entries
         for index, entry in enumerate(plateNum):
-            # Get the plate number in English
+            # print(f"\n--- Procesando entrada {index + 1} ---")
+            
+            # Get plate number in English
+            original_plate = entry.getPlateNumber(display=True)
+            # print(f"Número de placa original: {original_plate}")
+            
             plateNum2 = join_elements(
-                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
-            # Get the plate status from the database
+                convert_to_standard_format(split_string_language_specific(original_plate)))
+            # print(f"Número de placa convertido: {plateNum2}")
+            
+            # Get status
             statusNum = db_get_plate_status(plateNum2)
-            # Set the status of the entry in the table widget
+            # print(f"Estado de la placa: {statusNum}")
+
+            # Set table items
+            print("\nActualizando campos de la tabla:")
+            print(f"Estado: {entry.getStatus(statusNum=statusNum)}")
+            print(f"Placa: {entry.getPlateNumber(display=True)}")
+            print(f"Hora: {entry.getTime()}")
+            print(f"Fecha: {entry.getDate()}")
+            
             self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=statusNum)))
-            # Set the plate number of the entry in the table widget
             self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber(display=True)))
-            # Set the time of the entry in the table widget
             self.tableWidget.setItem(index, 2, QTableWidgetItem(entry.getTime()))
-            # Set the date of the entry in the table widget
             self.tableWidget.setItem(index, 3, QTableWidgetItem(entry.getDate()))
 
-            # Load the plate picture
+            # Load plate picture
+            # print("\nCargando imagen de la placa...")
+            plate_pic_path = entry.getPlatePic()
+            # print(f"Ruta de la imagen: {plate_pic_path}")
+            
             Image = QImage()
-            Image.load(entry.getPlatePic())
-            # Create a QcroppedPlate from the Image
+            image_loaded = Image.load(entry.getPlatePic())
+            # print(f"Estado de carga de imagen: {'Exitoso' if image_loaded else 'Fallido'}")
+            
             QcroppedPlate = QPixmap.fromImage(Image)
+            # print(f"Dimensiones de la imagen: {QcroppedPlate.width()}x{QcroppedPlate.height()}")
 
-            # Create an image label from the QcroppedPlate
+            # Create and set image label
             item = create_image_label(QcroppedPlate)
-            # Set a mouse press event to on_label_double_click
             item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
-            # Set the cell widget of the table widget to the image label
             self.tableWidget.setCellWidget(index, 4, item)
-            # Set the row height of the table widget to 44
             self.tableWidget.setRowHeight(index, 44)
 
-            # Create an info button
+            # Create buttons
+            # print("\nCreando botones...")
             infoBtnItem = create_styled_button('info')
-            # Set a mouse press event to on_info_button_clicked
             infoBtnItem.mousePressEvent = functools.partial(self.on_info_button_clicked, source_object=infoBtnItem)
-            # Set the cell widget of the table widget to the info button
             self.tableWidget.setCellWidget(index, 5, infoBtnItem)
 
-            # Create an add button
             addBtnItem = create_styled_button('add')
-            # Set a mouse press event to on_add_button_clicked
             addBtnItem.mousePressEvent = functools.partial(self.on_add_button_clicked, source_object=addBtnItem)
-            # Set the cell widget of the table widget to the add button
             self.tableWidget.setCellWidget(index, 6, addBtnItem)
-            # Disable the add button
             addBtnItem.setEnabled(False)
 
-            # If the status is 2, enable the add button and disable the info button
+            # Handle button states
             if statusNum == 2:
+                # print("Estado 2 detectado: Habilitando botón de agregar y deshabilitando botón de info")
                 addBtnItem.setEnabled(True)
                 infoBtnItem.setEnabled(False)
+
+        # print("\n=== FIN DE REFRESH_TABLE ===")
+
+
 
     def on_info_button_clicked(self, event, source_object=None):
         r = self.tableWidget.currentRow()

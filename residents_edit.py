@@ -2,6 +2,7 @@
 """
 Module for managing resident information in a community system.
 Provides functionality for adding, editing, and viewing resident details.
+
 """
 
 import sys
@@ -76,8 +77,8 @@ class residentsAddNewWindow(QDialog):
         # Setup comboboxes
         fieldsList = ['fName', 'lName', 'building', 'block', 'num', 'carModel', 'plateNum', 'status']
         fieldsList = getFieldNames(fieldsList)
-        self.plateAlphabetComboBox.addItems(params.plateAlphabet.values())
-        self.statusComboBox.addItems(list(params.fieldStatus.values())[:2])
+        #self.plateAlphabetComboBox.addItems(params.plateAlphabet.values())
+        self.statusComboBox.addItems(list(params.fieldStatus.values())[:3])
 
     def configure_edit_mode(self):
         """Configure window for editing existing resident."""
@@ -117,16 +118,16 @@ class residentsAddNewWindow(QDialog):
         if plate_number is None:
             plate_number = self.newResident
             
-        self.plateTextNum_1.setText(plate_number[:2])
-        self.plateTextNum_3.setText(plate_number[3:6])
-        self.plateTextNum_4.setText(plate_number[6:8])
+        self.plateTextNum_1.setText(plate_number[:3])
+        #self.plateTextNum_3.setText(plate_number[3:6])
+        self.plateTextNum_4.setText(plate_number[3:7])
 
-        if self.isEditing:
-            inv_map = {v: k for k, v in params.plateAlphabet.items()}
-            plate_alphabet = inv_map[plate_number[2]]
-            self.plateAlphabetComboBox.setCurrentText(params.plateAlphabet[plate_alphabet])
-        else:
-            self.plateAlphabetComboBox.setCurrentText(plate_number[2])
+        # if self.isEditing:
+        #     inv_map = {v: k for k, v in params.plateAlphabet.items()}
+        #     plate_alphabet = inv_map[plate_number[2]]
+        #     self.plateAlphabetComboBox.setCurrentText(params.plateAlphabet[plate_alphabet])
+        # else:
+        #     self.plateAlphabetComboBox.setCurrentText(plate_number[2])
 
     def addUser(self):
         """Handle adding or updating resident information."""
@@ -158,10 +159,10 @@ class residentsAddNewWindow(QDialog):
 
     def collect_form_data(self):
         """Collect and return form field data."""
-        inv_map = {v: k for k, v in params.plateAlphabet.items()}
-        plate_alphabet = inv_map[self.plateAlphabetComboBox.currentText()]
+        #inv_map = {v: k for k, v in params.plateAlphabet.items()}
+        #plate_alphabet = inv_map[self.plateAlphabetComboBox.currentText()]
         
-        plate_number = f"{self.plateTextNum_1.getText()}{plate_alphabet}{self.plateTextNum_3.getText()}{self.plateTextNum_4.getText()}"
+        plate_number = f"{self.plateTextNum_1.getText()}{self.plateTextNum_4.getText()}"
         
         return {
             'first_name': self.fNameTextBox.getText(),

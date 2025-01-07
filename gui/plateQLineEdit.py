@@ -71,7 +71,7 @@ class plateQLineEdit(QLineEdit):
             return QRegularExpression(f'^[{STANDARD_NUM_CODEPOINTS}]*$')
 
         # License plate number fields
-        if regExType in ['plateTextNum_1', 'plateTextNum_3', 'plateTextNum_4']:
+        if regExType in ['plateTextNum_1', 'plateTextNum_4']:
             return QRegularExpression(f'^[{STANDARD_NUM_CODEPOINTS}]*$')
 
         # Mixed content field (car model)

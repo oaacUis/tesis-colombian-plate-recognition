@@ -51,18 +51,15 @@ class Entries:
         """
         return self.eTime
 
-    def getDate(self, persian=True):
-        """
-        Get the entry date in either Persian or Gregorian format.
-
-        Args:
-            persian (bool): If True, returns date in Persian format, otherwise Gregorian
-
-        Returns:
-            str: The formatted date string
-        """
+    def getDate(self, persian=False):
+        # Debug prints
+        print(f"eDate value: {self.eDate}")
+        print(f"eDate type: {type(self.eDate)}")
         if persian:
-            return jalali.Gregorian(self.eDate).persian_string()
+            print(f"Está entrando como persa")
+            mesaje = "Está entrando como persa"
+            return mesaje
+
         return self.eDate
 
     def getPlatePic(self):

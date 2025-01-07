@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from helper.gui_maker import get_status_color, get_status_text
 
+from datetime import datetime
 
 
 
@@ -58,5 +59,16 @@ class Entries:
         return self.status
     
 
+# Create test instance
+entry = Entries(
+    platePercent=95,
+    charPercent=90,
+    eDate=datetime.now(),
+    eTime="10:30:00",
+    plateNum="ABC123",
+    status=1
+)
 
+# Test getDate
+print(entry.getDate())
 

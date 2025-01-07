@@ -10,6 +10,7 @@ Requirements:
 - PyTorch for deep learning inference
 - Pillow for image processing
 - OpenCV for video and image manipulation
+- NumPy for numerical operations
 """
 
 import functools
@@ -40,6 +41,9 @@ from helper.text_decorators import convert_to_local_format, clean_license_plate_
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
+
+#Archivos de prueba: 
+from pruebas_funciones.refresh_table import refresh_table
 
 warnings.filterwarnings("ignore", category=UserWarning)
 params = Parameters()
@@ -118,6 +122,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Worker1.mainViewUpdate.connect(self.on_main_view_update)
 
         self.Worker2 = Worker2()
+        # Agregar el método refresh_table a la clase usando decorador
+        @refresh_table
+        def refresh_table(self, plateNum=''):
+            pass
         self.Worker2.mainTableUpdate.connect(self.refresh_table)
         self.Worker2.start()
 
@@ -128,63 +136,63 @@ class MainWindow(QtWidgets.QMainWindow):
         torch.cuda.empty_cache()
         gc.collect()
 
-    def refresh_table(self, plateNum=''):
+    # def refresh_table(self, plateNum=''):
 
-        # Get all entries from the database with a limit of 10 and where the plate number is like the given plate number
-        plateNum = dbGetAllEntries(limit=10, whereLike=plateNum)
-        # Set the number of rows in the table widget to the length of the plate number list
-        self.tableWidget.setRowCount(len(plateNum))
-        # Iterate through the plate number list
-        for index, entry in enumerate(plateNum):
-            # Get the plate number in English
-            plateNum2 = join_elements(
-                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
-            # Get the plate status from the database
-            statusNum = db_get_plate_status(plateNum2)
-            # Set the status of the entry in the table widget
-            self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=statusNum)))
-            # Set the plate number of the entry in the table widget
-            self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber(display=True)))
-            # Set the time of the entry in the table widget
-            self.tableWidget.setItem(index, 2, QTableWidgetItem(entry.getTime()))
-            # Set the date of the entry in the table widget
-            self.tableWidget.setItem(index, 3, QTableWidgetItem(entry.getDate()))
+    #     # Get all entries from the database with a limit of 10 and where the plate number is like the given plate number
+    #     plateNum = dbGetAllEntries(limit=10, whereLike=plateNum)
+    #     # Set the number of rows in the table widget to the length of the plate number list
+    #     self.tableWidget.setRowCount(len(plateNum))
+    #     # Iterate through the plate number list
+    #     for index, entry in enumerate(plateNum):
+    #         # Get the plate number in English
+    #         plateNum2 = join_elements(
+    #             convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True))))
+    #         # Get the plate status from the database
+    #         statusNum = db_get_plate_status(plateNum2)
+    #         # Set the status of the entry in the table widget
+    #         self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=statusNum)))
+    #         # Set the plate number of the entry in the table widget
+    #         self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber(display=True)))
+    #         # Set the time of the entry in the table widget
+    #         self.tableWidget.setItem(index, 2, QTableWidgetItem(entry.getTime()))
+    #         # Set the date of the entry in the table widget
+    #         self.tableWidget.setItem(index, 3, QTableWidgetItem(entry.getDate()))
 
-            # Load the plate picture
-            Image = QImage()
-            Image.load(entry.getPlatePic())
-            # Create a QcroppedPlate from the Image
-            QcroppedPlate = QPixmap.fromImage(Image)
+    #         # Load the plate picture
+    #         Image = QImage()
+    #         Image.load(entry.getPlatePic())
+    #         # Create a QcroppedPlate from the Image
+    #         QcroppedPlate = QPixmap.fromImage(Image)
 
-            # Create an image label from the QcroppedPlate
-            item = create_image_label(QcroppedPlate)
-            # Set a mouse press event to on_label_double_click
-            item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
-            # Set the cell widget of the table widget to the image label
-            self.tableWidget.setCellWidget(index, 4, item)
-            # Set the row height of the table widget to 44
-            self.tableWidget.setRowHeight(index, 44)
+    #         # Create an image label from the QcroppedPlate
+    #         item = create_image_label(QcroppedPlate)
+    #         # Set a mouse press event to on_label_double_click
+    #         item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
+    #         # Set the cell widget of the table widget to the image label
+    #         self.tableWidget.setCellWidget(index, 4, item)
+    #         # Set the row height of the table widget to 44
+    #         self.tableWidget.setRowHeight(index, 44)
 
-            # Create an info button
-            infoBtnItem = create_styled_button('info')
-            # Set a mouse press event to on_info_button_clicked
-            infoBtnItem.mousePressEvent = functools.partial(self.on_info_button_clicked, source_object=infoBtnItem)
-            # Set the cell widget of the table widget to the info button
-            self.tableWidget.setCellWidget(index, 5, infoBtnItem)
+    #         # Create an info button
+    #         infoBtnItem = create_styled_button('info')
+    #         # Set a mouse press event to on_info_button_clicked
+    #         infoBtnItem.mousePressEvent = functools.partial(self.on_info_button_clicked, source_object=infoBtnItem)
+    #         # Set the cell widget of the table widget to the info button
+    #         self.tableWidget.setCellWidget(index, 5, infoBtnItem)
 
-            # Create an add button
-            addBtnItem = create_styled_button('add')
-            # Set a mouse press event to on_add_button_clicked
-            addBtnItem.mousePressEvent = functools.partial(self.on_add_button_clicked, source_object=addBtnItem)
-            # Set the cell widget of the table widget to the add button
-            self.tableWidget.setCellWidget(index, 6, addBtnItem)
-            # Disable the add button
-            addBtnItem.setEnabled(False)
+    #         # Create an add button
+    #         addBtnItem = create_styled_button('add')
+    #         # Set a mouse press event to on_add_button_clicked
+    #         addBtnItem.mousePressEvent = functools.partial(self.on_add_button_clicked, source_object=addBtnItem)
+    #         # Set the cell widget of the table widget to the add button
+    #         self.tableWidget.setCellWidget(index, 6, addBtnItem)
+    #         # Disable the add button
+    #         addBtnItem.setEnabled(False)
 
-            # If the status is 2, enable the add button and disable the info button
-            if statusNum == 2:
-                addBtnItem.setEnabled(True)
-                infoBtnItem.setEnabled(False)
+    #         # If the status is 2, enable the add button and disable the info button
+    #         if statusNum == 2:
+    #             addBtnItem.setEnabled(True)
+    #             infoBtnItem.setEnabled(False)
 
     def on_info_button_clicked(self, event, source_object=None):
         r = self.tableWidget.currentRow()

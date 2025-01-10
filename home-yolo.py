@@ -35,7 +35,8 @@ from enteries_window import EnteriesWindow
 from helper.gui_maker import configure_main_table_widget, create_image_label, on_label_double_click, center_widget, \
     get_status_text, get_status_color, \
     create_styled_button
-from helper.text_decorators import clean_license_plate_text, join_elements, split_string_language_specific
+from helper.text_decorators import convert_to_local_format, clean_license_plate_text, join_elements, \
+    convert_to_standard_format, split_string_language_specific
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
@@ -44,7 +45,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 params = Parameters()
 import sys
 
-sys.path.append('yolov8')
+sys.path.append('yolov5')
 
 
 def get_device():
@@ -68,8 +69,6 @@ except Exception as e:
     print("Error loading the model")
     print("Error description: ", e)
 
-
-# modelCharX = modelCharX.to(device())
 
 class MainWindow(QtWidgets.QMainWindow):
     """
@@ -131,62 +130,83 @@ class MainWindow(QtWidgets.QMainWindow):
         gc.collect()
 
     def refresh_table(self, plateNum=''):
+        # print("\n=== INICIO DE REFRESH_TABLE ===")
+        # print(f"Parámetro plateNum recibido: {plateNum}")
 
-        # Get all entries from the database with a limit of 10 and where the plate number is like the given plate number
+        # Get all entries from the database
         plateNum = dbGetAllEntries(limit=10, whereLike=plateNum)
-        # Set the number of rows in the table widget to the length of the plate number list
+        # print(f"Número de registros obtenidos de la base de datos: {len(plateNum)}")
+
+        # Set the number of rows
         self.tableWidget.setRowCount(len(plateNum))
-        # Iterate through the plate number list
+        # print(f"Tabla configurada con {len(plateNum)} filas")
+
+        # Iterate through entries
         for index, entry in enumerate(plateNum):
-            # Get the plate number in English
+            # print(f"\n--- Procesando entrada {index + 1} ---")
+            
+            # Get plate number in English
+            original_plate = entry.getPlateNumber(display=True)
+            # print(f"Número de placa original: {original_plate}")
+            
             plateNum2 = join_elements(
-                split_string_language_specific(entry.getPlateNumber(display=True)))
-            # Get the plate status from the database
+                convert_to_standard_format(split_string_language_specific(original_plate)))
+            # print(f"Número de placa convertido: {plateNum2}")
+            
+            # Get status
             statusNum = db_get_plate_status(plateNum2)
-            # Set the status of the entry in the table widget
+            # print(f"Estado de la placa: {statusNum}")
+
+            # Set table items
+            # print("\nActualizando campos de la tabla:")
+            # print(f"Estado: {entry.getStatus(statusNum=statusNum)}")
+            # print(f"Placa: {entry.getPlateNumber(display=True)}")
+            # print(f"Hora: {entry.getTime()}")
+            # print(f"Fecha: {entry.getDate()}")
+            
             self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=statusNum)))
-            # Set the plate number of the entry in the table widget
             self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber(display=True)))
-            # Set the time of the entry in the table widget
             self.tableWidget.setItem(index, 2, QTableWidgetItem(entry.getTime()))
-            # Set the date of the entry in the table widget
             self.tableWidget.setItem(index, 3, QTableWidgetItem(entry.getDate()))
 
-            # Load the plate picture
+            # Load plate picture
+            # print("\nCargando imagen de la placa...")
+            plate_pic_path = entry.getPlatePic()
+            # print(f"Ruta de la imagen: {plate_pic_path}")
+            
             Image = QImage()
-            Image.load(entry.getPlatePic())
-            # Create a QcroppedPlate from the Image
+            image_loaded = Image.load(entry.getPlatePic())
+            # print(f"Estado de carga de imagen: {'Exitoso' if image_loaded else 'Fallido'}")
+            
             QcroppedPlate = QPixmap.fromImage(Image)
+            # print(f"Dimensiones de la imagen: {QcroppedPlate.width()}x{QcroppedPlate.height()}")
 
-            # Create an image label from the QcroppedPlate
+            # Create and set image label
             item = create_image_label(QcroppedPlate)
-            # Set a mouse press event to on_label_double_click
             item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
-            # Set the cell widget of the table widget to the image label
             self.tableWidget.setCellWidget(index, 4, item)
-            # Set the row height of the table widget to 44
             self.tableWidget.setRowHeight(index, 44)
 
-            # Create an info button
+            # Create buttons
+            # print("\nCreando botones...")
             infoBtnItem = create_styled_button('info')
-            # Set a mouse press event to on_info_button_clicked
             infoBtnItem.mousePressEvent = functools.partial(self.on_info_button_clicked, source_object=infoBtnItem)
-            # Set the cell widget of the table widget to the info button
             self.tableWidget.setCellWidget(index, 5, infoBtnItem)
 
-            # Create an add button
             addBtnItem = create_styled_button('add')
-            # Set a mouse press event to on_add_button_clicked
             addBtnItem.mousePressEvent = functools.partial(self.on_add_button_clicked, source_object=addBtnItem)
-            # Set the cell widget of the table widget to the add button
             self.tableWidget.setCellWidget(index, 6, addBtnItem)
-            # Disable the add button
             addBtnItem.setEnabled(False)
 
-            # If the status is 2, enable the add button and disable the info button
+            # Handle button states
             if statusNum == 2:
+                # print("Estado 2 detectado: Habilitando botón de agregar y deshabilitando botón de info")
                 addBtnItem.setEnabled(True)
                 infoBtnItem.setEnabled(False)
+
+        # print("\n=== FIN DE REFRESH_TABLE ===")
+
+
 
     def on_info_button_clicked(self, event, source_object=None):
         r = self.tableWidget.currentRow()
@@ -196,6 +216,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_add_button_clicked(self, event, source_object=None):
         r = self.tableWidget.currentRow()
         field1 = self.tableWidget.item(r, 1)
+        #print(f"Placa seleccionada: {field1.text()}")
         residentAddWindow = residentsAddNewWindow(self, isNew=True,
                                                   residnetPlate=field1.text())
         residentAddWindow.exec()
@@ -231,15 +252,15 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_plate_data_update(self, cropped_plate: QImage, plate_text: str, char_conf_avg: float,
                              plate_conf_avg: float) -> None:
 
-        # Check if the plate text is 6 characters long and the character confidence is above 70
-        if len(plate_text) == 6 and char_conf_avg >= 70:
+        # Check if the plate text is 8 characters long and the character confidence is above 70
+        if len(plate_text) == 8 and char_conf_avg >= 70:
             # Set the plate view to display the cropped plate
             self.plate_view.setScaledContents(True)
             self.plate_view.setPixmap(QPixmap.fromImage(cropped_plate))
 
-            # Get the plate text and numbers
-            plt_text_num = plate_text[3:]
-            plt_text_ir = plate_text[:3]
+            # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
+            plt_text_num = convert_to_local_format(plate_text[:6], display=True)
+            plt_text_ir = convert_to_local_format(plate_text[6:], display=True)
             self.plate_text_num.setText(plt_text_num)
             self.plate_text_ir.setText(plt_text_ir)
 
@@ -253,7 +274,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Create data for send into services
             external_service_data = {
-                'plate_number': plt_text_ir + '-' + plt_text_num,
+                'plate_number': plt_text_num + '-' + plt_text_ir,
                 'image': cropped_plate
             }
             # Add the plate text, character confidence, plate confidence, cropped plate, and status to the database
@@ -307,6 +328,7 @@ class Worker1(QThread):
     def prepare_capture(self):
         self.prev_frame_time = 0
         self.ThreadActive = True
+        
         """
         # you can change 0 in >>>cv2.VideoCapture(0)<<< (which is webcam) to params.video
         # and it will read the config.ini >>> video = anpr_video.mp4

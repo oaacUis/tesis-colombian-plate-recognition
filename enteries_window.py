@@ -71,13 +71,13 @@ class EnteriesWindow(QDialog):
         for index, entry in enumerate(entries):
             # Process plate number
             formatted_plate = join_elements(
-                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber(display=True)))
+                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber()))
             )
             status_num = db_get_plate_status(formatted_plate)
 
             # Populate table row
             self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=status_num)))
-            self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber(display=True)))
+            self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber()))
             self.tableWidget.setItem(index, 2, QTableWidgetItem(entry.getTime()))
             self.tableWidget.setItem(index, 3, QTableWidgetItem(entry.getDate()))
 

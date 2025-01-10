@@ -8,7 +8,7 @@ from PySide6.QtGui import QRegularExpressionValidator
 from PySide6.QtWidgets import QLineEdit
 
 # Unicode ranges for various character sets
-SPACE_CODEPOINTS = '\u0020\u2000-\u200F\u2028-\u202F'
+SPACE_CODEPOINTS = '\u0020\u2000-\u200F\u2028-\u202F\u002D\u2500'
 STANDARD_ALPHA_CODEPOINTS = 'A-Za-z'  # Standard Latin alphabet
 STANDARD_NUM_CODEPOINTS = '0-9'  # Standard digits
 

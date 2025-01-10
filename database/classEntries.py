@@ -53,8 +53,8 @@ class Entries:
 
     def getDate(self, persian=False):
         # Debug prints
-        print(f"eDate value: {self.eDate}")
-        print(f"eDate type: {type(self.eDate)}")
+        # print(f"eDate value: {self.eDate}")
+        # print(f"eDate type: {type(self.eDate)}")
         if persian:
             print(f"Está entrando como persa")
             mesaje = "Está entrando como persa"

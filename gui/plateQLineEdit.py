@@ -8,7 +8,7 @@ from PySide6.QtGui import QRegularExpressionValidator
 from PySide6.QtWidgets import QLineEdit
 
 # Unicode ranges for various character sets
-SPACE_CODEPOINTS = '\u0020\u2000-\u200F\u2028-\u202F'
+SPACE_CODEPOINTS = '\u0020\u2000-\u200F\u2028-\u202F\u002D\u2500'
 STANDARD_ALPHA_CODEPOINTS = 'A-Za-z'  # Standard Latin alphabet
 STANDARD_NUM_CODEPOINTS = '0-9'  # Standard digits
 
@@ -67,7 +67,7 @@ class plateQLineEdit(QLineEdit):
             return QRegularExpression(f'^[{STANDARD_ALPHA_CODEPOINTS}{SPACE_CODEPOINTS}]*$')
 
         # Numeric-only fields
-        if regExType in ['buildingTextBox', 'numTextBox', 'blockTextBox']:
+        if regExType in ['buildingTextBox', 'blockTextBox']:
             return QRegularExpression(f'^[{STANDARD_NUM_CODEPOINTS}]*$')
 
         # License plate number fields
@@ -75,7 +75,7 @@ class plateQLineEdit(QLineEdit):
             return QRegularExpression(f'^[{STANDARD_NUM_CODEPOINTS}]*$')
 
         # Mixed content field (car model)
-        if regExType == 'carModelTextBox':
+        if regExType in ['carModelTextBox', 'numTextBox']:
             return QRegularExpression(
                 f'^[{STANDARD_ALPHA_CODEPOINTS}{SPACE_CODEPOINTS}{STANDARD_NUM_CODEPOINTS}]*$')
 

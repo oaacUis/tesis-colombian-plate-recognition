@@ -49,6 +49,8 @@ class EnteriesWindow(QDialog):
         loadUi('./gui/edit_enteries.ui', self)
         self.setFixedSize(self.size())
         configure_edit_table_widget(self)
+        residentPlate = residnetPlate
+        print(f"residentPlateeeeeeeeee: {residentPlate}")
 
         if isSearching:
             self.residnetPlateEng = join_elements(

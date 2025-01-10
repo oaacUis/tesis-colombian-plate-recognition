@@ -157,11 +157,11 @@ class MainWindow(QtWidgets.QMainWindow):
             # print(f"Estado de la placa: {statusNum}")
 
             # Set table items
-            print("\nActualizando campos de la tabla:")
-            print(f"Estado: {entry.getStatus(statusNum=statusNum)}")
-            print(f"Placa: {entry.getPlateNumber(display=True)}")
-            print(f"Hora: {entry.getTime()}")
-            print(f"Fecha: {entry.getDate()}")
+            # print("\nActualizando campos de la tabla:")
+            # print(f"Estado: {entry.getStatus(statusNum=statusNum)}")
+            # print(f"Placa: {entry.getPlateNumber(display=True)}")
+            # print(f"Hora: {entry.getTime()}")
+            # print(f"Fecha: {entry.getDate()}")
             
             self.tableWidget.setItem(index, 0, QTableWidgetItem(entry.getStatus(statusNum=statusNum)))
             self.tableWidget.setItem(index, 1, QTableWidgetItem(entry.getPlateNumber(display=True)))
@@ -215,6 +215,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_add_button_clicked(self, event, source_object=None):
         r = self.tableWidget.currentRow()
         field1 = self.tableWidget.item(r, 1)
+        #print(f"Placa seleccionada: {field1.text()}")
         residentAddWindow = residentsAddNewWindow(self, isNew=True,
                                                   residnetPlate=field1.text())
         residentAddWindow.exec()

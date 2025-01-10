@@ -49,6 +49,7 @@ class residentsAddNewWindow(QDialog):
         self.isEditing = isEditing
         self.isNew = isNew
         self.isInfo = isInfo
+        self.residnetPlate = residnetPlate
         self.residnetPlateEng = join_elements(
             convert_to_standard_format(split_string_language_specific(residnetPlate))
         )
@@ -78,6 +79,9 @@ class residentsAddNewWindow(QDialog):
         fieldsList = ['fName', 'lName', 'building', 'block', 'num', 'carModel', 'plateNum', 'status']
         fieldsList = getFieldNames(fieldsList)
         #self.plateAlphabetComboBox.addItems(params.plateAlphabet.values())
+        # Configurar el statusComboBox
+        
+        self.statusComboBox.setFrame(True)
         self.statusComboBox.addItems(list(params.fieldStatus.values())[:3])
 
     def configure_edit_mode(self):
@@ -87,7 +91,7 @@ class residentsAddNewWindow(QDialog):
         self.addResidentButton.setIcon(QPixmap("./icons/icons8-change-user-80.png"))
         self.addResidentButton.setIconSize(QSize(30, 30))
 
-        self.editingResident = dbGetResidentDatasByPlate(self.residnetPlateEng)
+        self.editingResident = dbGetResidentDatasByPlate(self.residnetPlate)
         self.populate_resident_data()
 
         if self.isInfo:
@@ -110,24 +114,36 @@ class residentsAddNewWindow(QDialog):
         self.numTextBox.setText(self.editingResident.getNum())
         self.carModelTextBox.setText(self.editingResident.getCarModel())
         self.statusComboBox.setCurrentIndex(int(self.editingResident.getStatus(item=False)))
+        self.populate_plate_data(self.residnetPlate)
+        print(f"Status: {self.editingResident.getStatus(item=False)}")
         
-        self.populate_plate_data(self.editingResident.getPlateNumber(display=False))
+        # # Get plate directly from database
+        # entries = dbGetAllEntries(limit=10, whereLike='')
+        # if entries and len(entries) > 0:
+        #     plate_number = entries[0].getPlateNumber(display=True)
+        #     print(f"Plate from db: {plate_number}")
+        #     self.populate_plate_data(plate_number)
 
     def populate_plate_data(self, plate_number=None):
-        """Populate license plate fields."""
+        """
+        Populate license plate fields with plate number.
+        Args:
+            plate_number (str): License plate number in display format
+        """
         if plate_number is None:
-            plate_number = self.newResident
+            # print(f"Plate number is None")
+            # print(f"residnetPlate: {self.residnetPlate}")
+            plate_number = self.residnetPlate
+            self.plateTextNum_1.setText(plate_number[:3])
+            self.plateTextNum_4.setText(plate_number[-3:])
             
-        self.plateTextNum_1.setText(plate_number[:3])
-        #self.plateTextNum_3.setText(plate_number[3:6])
-        self.plateTextNum_4.setText(plate_number[3:7])
 
-        # if self.isEditing:
-        #     inv_map = {v: k for k, v in params.plateAlphabet.items()}
-        #     plate_alphabet = inv_map[plate_number[2]]
-        #     self.plateAlphabetComboBox.setCurrentText(params.plateAlphabet[plate_alphabet])
-        # else:
-        #     self.plateAlphabetComboBox.setCurrentText(plate_number[2])
+        
+        if plate_number:
+            print(f"Si hay plate number: {plate_number}")
+            self.plateTextNum_1.setText(plate_number[:3])
+            self.plateTextNum_4.setText(plate_number[-3:])
+
 
     def addUser(self):
         """Handle adding or updating resident information."""
@@ -163,6 +179,7 @@ class residentsAddNewWindow(QDialog):
         #plate_alphabet = inv_map[self.plateAlphabetComboBox.currentText()]
         
         plate_number = f"{self.plateTextNum_1.getText()}{self.plateTextNum_4.getText()}"
+        print(f"plate_number en collect_form_data: {plate_number}")
         
         return {
             'first_name': self.fNameTextBox.getText(),

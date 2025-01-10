@@ -33,15 +33,6 @@ class ReadOnlyDelegate(QtWidgets.QStyledItemDelegate):
 def create_image_label(image):
     """
     Creates a QLabel with a given image.
-<<<<<<< HEAD
-
-    Parameters:
-    - image (QPixmap): Image to display on the label.
-
-    Returns:
-    - QLabel: A label widget displaying the given image.
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     imageLabel = QLabel()
     imageLabel.setText("")
@@ -54,15 +45,6 @@ def create_image_label(image):
 def create_styled_button(type):
     """
     Generates a styled QPushButton based on the specified type.
-<<<<<<< HEAD
-
-    Parameters:
-    - type (str): The type of button, e.g., 'edit', 'delete'.
-
-    Returns:
-    - QPushButton: The styled button.
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     button = QtWidgets.QPushButton()
     button.setFlat(True)
@@ -102,15 +84,6 @@ def get_status_color(number):
 def get_status_text(number):
     """
     Converts a status number to its corresponding text.
-<<<<<<< HEAD
-
-    Parameters:
-    - number (int): The status number.
-
-    Returns:
-    - str: The status text.
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     if int(number) == 0:
         return 'Not Allowed'

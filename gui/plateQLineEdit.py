@@ -67,15 +67,15 @@ class plateQLineEdit(QLineEdit):
             return QRegularExpression(f'^[{STANDARD_ALPHA_CODEPOINTS}{SPACE_CODEPOINTS}]*$')
 
         # Numeric-only fields
-        if regExType in ['buildingTextBox', 'blockTextBox']:
+        if regExType in ['buildingTextBox', 'numTextBox', 'blockTextBox']:
             return QRegularExpression(f'^[{STANDARD_NUM_CODEPOINTS}]*$')
 
         # License plate number fields
-        if regExType in ['plateTextNum_1', 'plateTextNum_4']:
+        if regExType in ['plateTextNum_1', 'plateTextNum_3', 'plateTextNum_4']:
             return QRegularExpression(f'^[{STANDARD_NUM_CODEPOINTS}]*$')
 
         # Mixed content field (car model)
-        if regExType in ['carModelTextBox', 'numTextBox']:
+        if regExType == 'carModelTextBox':
             return QRegularExpression(
                 f'^[{STANDARD_ALPHA_CODEPOINTS}{SPACE_CODEPOINTS}{STANDARD_NUM_CODEPOINTS}]*$')
 

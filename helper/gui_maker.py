@@ -33,15 +33,6 @@ class ReadOnlyDelegate(QtWidgets.QStyledItemDelegate):
 def create_image_label(image):
     """
     Creates a QLabel with a given image.
-<<<<<<< HEAD
-
-    Parameters:
-    - image (QPixmap): Image to display on the label.
-
-    Returns:
-    - QLabel: A label widget displaying the given image.
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     imageLabel = QLabel()
     imageLabel.setText("")
@@ -54,15 +45,6 @@ def create_image_label(image):
 def create_styled_button(type):
     """
     Generates a styled QPushButton based on the specified type.
-<<<<<<< HEAD
-
-    Parameters:
-    - type (str): The type of button, e.g., 'edit', 'delete'.
-
-    Returns:
-    - QPushButton: The styled button.
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     button = QtWidgets.QPushButton()
     button.setFlat(True)
@@ -84,40 +66,25 @@ def create_styled_button(type):
 def get_status_color(number):
     """
     Returns RGB color based on a status number.
-
-    Parameters:
-    - number (int): The status number.
-
-    Returns:
-    - tuple: (R, G, B) color values.
     """
     if number == 0:
-        return 224, 27, 36
+        return 224, 27, 36  # Red
     elif number == 1:
-        return 51, 209, 122
+        return 51, 209, 122  # Green
     elif number == 2:
-        return 246, 211, 45
+        return 246, 211, 45  # Yellow
 
 
 def get_status_text(number):
     """
     Converts a status number to its corresponding text.
-<<<<<<< HEAD
-
-    Parameters:
-    - number (int): The status number.
-
-    Returns:
-    - str: The status text.
-=======
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
     """
     if int(number) == 0:
-        return 'Not Allowed'
+        return 'Unauthorized'
     elif int(number) == 1:
-        return 'Allowed'
+        return 'Authorized'
     elif int(number) == 2:
-        return 'Not Registered'
+        return 'Unregistered'
 
 
 def configure_edit_table_widget(self):
@@ -131,7 +98,7 @@ def configure_edit_table_widget(self):
     self.tableWidget.setRowCount(20)
     self.tableWidget.setHorizontalHeaderLabels(fieldsList)
     self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-    self.tableWidget.setLayoutDirection(Qt.RightToLeft)
+    self.tableWidget.setLayoutDirection(Qt.LeftToRight)  # Changed from RightToLeft
     self.tableWidget.setSortingEnabled(True)
 
     delegate = CenterAlignDelegate(self.tableWidget)
@@ -143,17 +110,16 @@ def configure_edit_table_widget(self):
 
 def configure_main_table_widget(self):
     """
-       Configures the main table widget.
-       """
+    Configures the main table widget.
+    """
     fieldsList = ['status', 'plateNum', 'time', 'date', 'platePic', 'moreInfo', 'addNew']
-
     fieldsList = getFieldNames(fieldsList)
 
     self.tableWidget.setColumnCount(len(fieldsList))
     self.tableWidget.setRowCount(20)
     self.tableWidget.setHorizontalHeaderLabels(fieldsList)
     self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-    self.tableWidget.setLayoutDirection(Qt.RightToLeft)
+    self.tableWidget.setLayoutDirection(Qt.LeftToRight)  # Changed from RightToLeft
     self.tableWidget.setSortingEnabled(True)
 
     delegate = CenterAlignDelegate(self.tableWidget)
@@ -165,11 +131,8 @@ def configure_main_table_widget(self):
 
 def populate_main_table_with_data(self, dfReadEnteries):
     """
-      Populates the main table widget with data.
-
-      Parameters:
-      - dfReadEnteries (DataFrame): The DataFrame containing table data.
-      """
+    Populates the main table widget with data.
+    """
     delegate = CenterAlignDelegate(self.tableWidget)
     self.tableWidget.setItemDelegate(delegate)
     for each_row in range(len(dfReadEnteries)):
@@ -182,11 +145,11 @@ def populate_main_table_with_data(self, dfReadEnteries):
         self.tableWidget.item(each_row, 0).setBackground(QColor(r, g, b))
 
         self.tableWidget.setItem(each_row, 1,
-                                 QTableWidgetItem(convert_english_to_persian(
-                                     (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
+                               QTableWidgetItem(convert_to_local_format(
+                                   (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
         self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
         self.tableWidget.setItem(each_row, 3,
-                                 QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3]).persian_string()))
+                               QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3]).persian_string()))
 
         Image = QImage()
         Image.load(dfReadEnteries.iloc[each_row][4])
@@ -204,11 +167,8 @@ def populate_main_table_with_data(self, dfReadEnteries):
 
 def center_widget(wid):
     """
-       Centers a widget on the screen.
-
-       Parameters:
-       - wid (QWidget): The widget to be centered.
-       """
+    Centers a widget on the screen.
+    """
     center = QScreen.availableGeometry(QApplication.primaryScreen()).center()
     geo = wid.frameGeometry()
     geo.moveCenter(center)
@@ -217,15 +177,11 @@ def center_widget(wid):
 
 def on_label_double_click(event, source_object=None):
     """
-       Handles double-click event on label to show image in a dialog.
-
-       Parameters:
-       - event: The mouse event.
-       - source_object: The source label object containing the pixmap.
-       """
+    Handles double-click event on label to show image in a dialog.
+    """
     w = QDialog()
     w.setFixedSize(600, 132)
-    w.setWindowTitle("Display Plate")
+    w.setWindowTitle("License Plate View")  # Changed from Persian
 
     imageLabel = QLabel(w)
     imageLabel.setText("")
@@ -240,12 +196,8 @@ def on_label_double_click(event, source_object=None):
 
 def on_item_double_click(tableWidget, item):
     """
-       Handles item double-click event in the table widget.
-
-       Parameters:
-       - tableWidget (QTableWidget): The table widget.
-       - item (QTableWidgetItem): The table item that was double-clicked.
-       """
+    Handles item double-click event in the table widget.
+    """
     row = item.row()
     column = item.column()
     text = tableWidget.item(row, column).text()
@@ -253,9 +205,8 @@ def on_item_double_click(tableWidget, item):
 
 class ProxyStyle(QtWidgets.QProxyStyle):
     """
-           Custom drawing of control elements, especially buttons with icons.
-           """
-
+    Custom drawing of control elements, especially buttons with icons.
+    """
     def drawControl(self, element, option, painter, widget=None):
         if element == QtWidgets.QStyle.CE_PushButtonLabel:
             icon = QtGui.QIcon(option.icon)
@@ -284,7 +235,7 @@ class ProxyStyle(QtWidgets.QProxyStyle):
                 iconRect = QtCore.QRect(
                     QtCore.QPoint(), QtCore.QSize(pixmapWidth, pixmapHeight)
                 )
-                iconRect.moveCenter(option.rect.center_widget())
+                iconRect.moveCenter(option.rect.center())
                 iconRect.moveLeft(option.rect.left() + iconSpacing)
                 iconRect = self.visualRect(option.direction, option.rect, iconRect)
                 iconRect.translate(

@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-#classEntries.py
-=======
 # classEntries.py
 # This class manages database entry data for display in the main window table.
 # It provides methods to format and retrieve data in specific formats.
->>>>>>> 081630fe203a2e8acbd98cfc1cc25edcd62f6dd3
 
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QTableWidgetItem
@@ -56,14 +52,6 @@ class Entries:
         """
         return self.eTime
 
-<<<<<<< HEAD
-    def getDate(self):
-        # Debug prints
-        print(f"eDate value: {self.eDate}")
-        print(f"eDate type: {type(self.eDate)}")
-        print(f"eDate format: {self.eDate.strftime('%c')}")  # Full date format   
-        return self.eDate.strftime("%d/%m/%Y")
-=======
     def getDate(self, persian=False):
         # Debug prints
         # print(f"eDate value: {self.eDate}")
@@ -74,7 +62,6 @@ class Entries:
             return mesaje
 
         return self.eDate
->>>>>>> 081630fe203a2e8acbd98cfc1cc25edcd62f6dd3
 
     def getPlatePic(self):
         """
@@ -134,12 +121,4 @@ class Entries:
             statusItem = QTableWidgetItem(statusText)
             statusItem.setBackground(QColor(r, g, b))
             return statusItem
-<<<<<<< HEAD
         return self.status
-    
-
-
-
-=======
-        return self.status
->>>>>>> 081630fe203a2e8acbd98cfc1cc25edcd62f6dd3

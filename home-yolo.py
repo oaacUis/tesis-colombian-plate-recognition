@@ -10,6 +10,7 @@ Requirements:
 - PyTorch for deep learning inference
 - Pillow for image processing
 - OpenCV for video and image manipulation
+- NumPy for numerical operations
 """
 
 import functools

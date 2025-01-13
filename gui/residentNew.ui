@@ -130,7 +130,6 @@
                     </font>
                 </property>
                 <property name="text">
-                <!-- aqui es donde se pone la placa cuando uno hace clic en agregar  -->
                     <string>License plate</string>
                 </property>
                 <property name="alignment">
@@ -200,8 +199,7 @@
                                 </font>
                             </property>
                             <property name="text">
-                            <!-- Aqui es donde aparece el texto para agregar el numero telefonico  -->
-                                <string>Phone number</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -437,7 +435,7 @@
                     <string/>
                 </property>
                 <property name="maxLength">
-                    <number>10</number>
+                    <number>7</number>
                 </property>
                 <property name="frame">
                     <bool>false</bool>

@@ -176,7 +176,7 @@ class Ui_UsersWindow(object):
 "                        border-width: 1px;\n"
 "                        border-style: solid;\n"
 "                    ")
-        self.numTextBox.setMaxLength(7)
+        self.numTextBox.setMaxLength(10)
         self.numTextBox.setFrame(False)
         self.carModelTextBox = plateQLineEdit(self.centralwidget)
         self.carModelTextBox.setObjectName(u"carModelTextBox")
@@ -270,7 +270,7 @@ class Ui_UsersWindow(object):
         self.label_4.setText(QCoreApplication.translate("UsersWindow", u"Name", None))
         self.label_10.setText(QCoreApplication.translate("UsersWindow", u"Last name", None))
         self.label_2.setText(QCoreApplication.translate("UsersWindow", u"Building", None))
-        self.label_7.setText(QCoreApplication.translate("UsersWindow", u"License plate", None))
+        self.label_7.setText(QCoreApplication.translate("UsersWindow", u"Phone number", None))
         self.label_8.setText(QCoreApplication.translate("UsersWindow", u"Block", None))
         self.addResidentButton.setText(QCoreApplication.translate("UsersWindow", u" \u00ad Resident registration", None))
         self.fNameTextBox.setText("")

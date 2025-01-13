@@ -25,7 +25,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="layoutDirection">
@@ -76,11 +76,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>Register New Traffic</string>
+                    <string>Register new traffic</string>
                 </property>
             </widget>
         </widget>

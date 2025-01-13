@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>Resident Information Display</string>
+            <string>Display resident information</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
@@ -31,14 +31,14 @@
                         <widget class="QLabel" name="labelFname">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="layoutDirection">
                                 <enum>Qt::RightToLeft</enum>
                             </property>
                             <property name="text">
-                                <string>First Name</string>
+                                <string>Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -49,11 +49,11 @@
                         <widget class="QLabel" name="labelLname">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Last Name</string>
+                                <string>Last name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -64,7 +64,7 @@
                         <widget class="QLabel" name="labelBuilding">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
@@ -79,7 +79,7 @@
                         <widget class="QLabel" name="labelBlock">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="layoutDirection">
@@ -97,11 +97,11 @@
                         <widget class="QLabel" name="labelNum">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Plate Number</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -112,11 +112,11 @@
                         <widget class="QLabel" name="labelCarModel">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Car Model</string>
+                                <string>Vehicle type</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -127,11 +127,11 @@
                         <widget class="QLabel" name="labelPlateNum">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Car Plate</string>
+                                <string>License plate خودرو</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -142,11 +142,11 @@
                         <widget class="QLabel" name="labelStatus">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Traffic Status</string>
+                                <string>Traffic status</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -169,7 +169,7 @@
                         <widget class="QLabel" name="label_4">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -179,7 +179,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>First Name</string>
+                                <string>Name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -197,7 +197,7 @@
                         <widget class="QLabel" name="label_10">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -207,7 +207,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>Last Name</string>
+                                <string>Last name</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -225,7 +225,7 @@
                         <widget class="QLabel" name="label_2">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -253,7 +253,7 @@
                         <widget class="QLabel" name="label_8">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -281,7 +281,7 @@
                         <widget class="QLabel" name="label_7">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -291,7 +291,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>Plate</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -309,7 +309,7 @@
                         <widget class="QLabel" name="label_6">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -319,7 +319,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>Car Type</string>
+                                <string>Vehicle type</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -337,7 +337,7 @@
                         <widget class="QLabel" name="label_5">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -347,7 +347,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>Car Plate</string>
+                                <string>License plate</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -365,7 +365,7 @@
                         <widget class="QLabel" name="label_3">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                     <pointsize>12</pointsize>
                                     <weight>75</weight>
                                     <bold>true</bold>
@@ -375,7 +375,7 @@
                                 <enum>Qt::LeftToRight</enum>
                             </property>
                             <property name="text">
-                                <string>Traffic Status</string>
+                                <string>Traffic status</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

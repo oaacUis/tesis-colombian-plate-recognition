@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         self.plateTextView.setSizePolicy(sizePolicy1)
         self.plateTextView.setMaximumSize(QSize(300, 62))
         font = QFont()
-        font.setFamilies([u"Arial"])
+        font.setFamilies([u"B Yekan"])
         font.setPointSize(29)
         font.setKerning(True)
         self.plateTextView.setFont(font)
@@ -78,7 +78,7 @@ class Ui_MainWindow(object):
         self.plateTextIR.setSizePolicy(sizePolicy1)
         self.plateTextIR.setMaximumSize(QSize(300, 62))
         font1 = QFont()
-        font1.setFamilies([u"Arial"])
+        font1.setFamilies([u"B Yekan"])
         font1.setPointSize(23)
         font1.setKerning(True)
         self.plateTextIR.setFont(font1)
@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
         self.plateTextNum.setSizePolicy(sizePolicy1)
         self.plateTextNum.setMaximumSize(QSize(300, 62))
         font2 = QFont()
-        font2.setFamilies([u"Arial"])
+        font2.setFamilies([u"B Yekan"])
         font2.setPointSize(28)
         font2.setKerning(True)
         self.plateTextNum.setFont(font2)
@@ -120,7 +120,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Plate Image", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"License plate image", None))
         self.plateView.setText("")
         self.plateTextView.setText("")
         self.plateTextIR.setText("")

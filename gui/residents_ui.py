@@ -36,7 +36,7 @@ class Ui_UsersWindow(object):
         self.searchTextBox.setObjectName(u"searchTextBox")
         self.searchTextBox.setGeometry(QRect(580, 480, 381, 41))
         font = QFont()
-        font.setFamilies([u"Arial"])
+        font.setFamilies([u"B Yekan"])
         self.searchTextBox.setFont(font)
         self.searchTextBox.setLayoutDirection(Qt.RightToLeft)
         self.searchTextBox.setInputMethodHints(Qt.ImhNone)
@@ -87,11 +87,11 @@ class Ui_UsersWindow(object):
     # setupUi
 
     def retranslateUi(self, UsersWindow):
-        UsersWindow.setWindowTitle(QCoreApplication.translate("UsersWindow", u"Residents List", None))
+        UsersWindow.setWindowTitle(QCoreApplication.translate("UsersWindow", u"List of residents of the town", None))
         self.searchTextBox.setPlaceholderText("")
-        self.addResidentButton.setText(QCoreApplication.translate("UsersWindow", u"Add New Resident", None))
+        self.addResidentButton.setText(QCoreApplication.translate("UsersWindow", u"New resident registration", None))
         self.label_9.setText(QCoreApplication.translate("UsersWindow", u"Search", None))
-        self.radioLName.setText(QCoreApplication.translate("UsersWindow", u"Last Name", None))
-        self.radioPlateNum.setText(QCoreApplication.translate("UsersWindow", u"Plate Number", None))
+        self.radioLName.setText(QCoreApplication.translate("UsersWindow", u"Last name", None))
+        self.radioPlateNum.setText(QCoreApplication.translate("UsersWindow", u"License plate", None))
     # retranslateUi
 

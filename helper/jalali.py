@@ -36,11 +36,13 @@ class Gregorian:
         self.gregorian_year = year
         self.gregorian_month = month
         self.gregorian_day = day
+        
+        # Convert Gregorian to Persian date
         d_4 = year % 4
-        g_a = [0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
-        doy_g = g_a[month] + day
+        gregorian_days = [0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
+        day_of_year_gregorian = gregorian_days[month] + day
         if d_4 == 0 and month > 2:
-            doy_g += 1
+            day_of_year_gregorian += 1
         d_33 = int(((year - 16) % 132) * .0305)
         a = 286 if (d_33 == 3 or d_33 < (d_4 - 1) or d_4 == 0) else 287
         if (d_33 == 1 or d_33 == 2) and (d_33 == d_4 or d_4 == 1):
@@ -50,32 +52,29 @@ class Gregorian:
         if int((year - 10) / 63) == 30:
             a -= 1
             b += 1
-        if doy_g > b:
-            jy = year - 621
-            doy_j = doy_g - b
+        if day_of_year_gregorian > b:
+            persian_year = year - 621
+            day_of_year_persian = day_of_year_gregorian - b
         else:
-            jy = year - 622
-            doy_j = doy_g + a
-        if doy_j < 187:
-            jm = int((doy_j - 1) / 31)
-            jd = doy_j - (31 * jm)
-            jm += 1
+            persian_year = year - 622
+            day_of_year_persian = day_of_year_gregorian + a
+        if day_of_year_persian < 187:
+            persian_month = int((day_of_year_persian - 1) / 31)
+            persian_day = day_of_year_persian - (31 * persian_month)
+            persian_month += 1
         else:
-            jm = int((doy_j - 187) / 30)
-            jd = doy_j - 186 - (jm * 30)
-            jm += 7
-        self.persian_year = jy
-        self.persian_month = jm
-        self.persian_day = jd
-    def get_date(self):
-        return self.persian_year, self.persian_month, self.persian_day
-    def get_date_str(self):
-        return f"{self.persian_year}-{self.persian_month}-{self.persian_day}"
-    #def persian_tuple(self):
-    #   return self.persian_year, self.persian_month, self.persian_day
+            persian_month = int((day_of_year_persian - 187) / 30)
+            persian_day = day_of_year_persian - 186 - (persian_month * 30)
+            persian_month += 7
+        self.persian_year = persian_year
+        self.persian_month = persian_month
+        self.persian_day = persian_day
 
-    #def persian_string(self, date_format="{}-{}-{}"):
-    #    return date_format.format(self.persian_year, self.persian_month, self.persian_day)
+    def persian_tuple(self):
+        return self.persian_year, self.persian_month, self.persian_day
+
+    def persian_string(self, date_format="{}-{}-{}"):
+        return date_format.format(self.persian_year, self.persian_month, self.persian_day)
 
 
 class Persian:
@@ -108,11 +107,13 @@ class Persian:
         self.persian_year = year
         self.persian_month = month
         self.persian_day = day
+        
+        # Convert Persian to Gregorian date
         d_4 = (year + 1) % 4
         if month < 7:
-            doy_j = ((month - 1) * 31) + day
+            day_of_year_persian = ((month - 1) * 31) + day
         else:
-            doy_j = ((month - 7) * 30) + day + 186
+            day_of_year_persian = ((month - 7) * 30) + day + 186
         d_33 = int(((year - 55) % 132) * .0305)
         a = 287 if (d_33 != 3 and d_4 <= d_33) else 286
         if (d_33 == 1 or d_33 == 2) and (d_33 == d_4 or d_4 == 1):
@@ -122,20 +123,20 @@ class Persian:
         if int((year - 19) / 63) == 20:
             a -= 1
             b += 1
-        if doy_j <= a:
-            gy = year + 621
-            gd = doy_j + b
+        if day_of_year_persian <= a:
+            gregorian_year = year + 621
+            gregorian_day = day_of_year_persian + b
         else:
-            gy = year + 622
-            gd = doy_j - a
-        for gm, v in enumerate([0, 31, 29 if (gy % 4 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]):
-            if gd <= v:
+            gregorian_year = year + 622
+            gregorian_day = day_of_year_persian - a
+        for gregorian_month, v in enumerate([0, 31, 29 if (gregorian_year % 4 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]):
+            if gregorian_day <= v:
                 break
-            gd -= v
+            gregorian_day -= v
 
-        self.gregorian_year = gy
-        self.gregorian_month = gm
-        self.gregorian_day = gd
+        self.gregorian_year = gregorian_year
+        self.gregorian_month = gregorian_month
+        self.gregorian_day = gregorian_day
 
     def gregorian_tuple(self):
         return self.gregorian_year, self.gregorian_month, self.gregorian_day

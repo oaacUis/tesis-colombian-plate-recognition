@@ -5,6 +5,7 @@
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QTableWidgetItem
 
+from helper import jalali
 from helper.gui_maker import get_status_color, get_status_text
 from helper.text_decorators import convert_to_local_format, split_string_language_specific
 

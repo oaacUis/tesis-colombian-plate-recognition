@@ -60,15 +60,14 @@ def get_device():
     else:
         return torch.device("cpu")
 
-try:
-    modelPlate = torch.hub.load('yolov8', 'custom', params.modelPlate_path, source='local', force_reload=True)
-    # modelPlate = modelPlate.to(device())
 
-    modelCharX = torch.hub.load('yolov8', 'custom', params.modelCharX_path, source='local', force_reload=True)
-except Exception as e:
-    print("Error loading the model")
-    print("Error description: ", e)
+modelPlate = torch.hub.load('yolov5', 'custom', params.modelPlate_path, source='local', force_reload=True)
+# modelPlate = modelPlate.to(device())
 
+modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)
+
+
+# modelCharX = modelCharX.to(device())
 
 class MainWindow(QtWidgets.QMainWindow):
     """

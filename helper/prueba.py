@@ -1211,7 +1211,7 @@ def get_device():
         return torch.device("cpu")
 
 
-modelPlate = torch.hub.load('yolov8', 'custom', params.modelPlate_path, source='local', force_reload=True)
+modelPlate = torch.hub.load('yolov5', 'custom', params.modelPlate_path, source='local', force_reload=True)
 # modelPlate = modelPlate.to(device())
 
 modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)

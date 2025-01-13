@@ -17,7 +17,7 @@
             </sizepolicy>
         </property>
         <property name="windowTitle">
-            <string>Residents List</string>
+            <string>List of residents of the town</string>
         </property>
         <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -34,7 +34,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="layoutDirection">
@@ -58,11 +58,11 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="text">
-                    <string>Add New Resident</string>
+                    <string>New resident registration</string>
                 </property>
             </widget>
             <widget class="QLabel" name="label_9">
@@ -76,7 +76,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="text">
@@ -99,14 +99,14 @@
                     <item>
                         <widget class="QRadioButton" name="radioLName">
                             <property name="text">
-                                <string>Last Name</string>
+                                <string>Last name</string>
                             </property>
                         </widget>
                     </item>
                     <item>
                         <widget class="QRadioButton" name="radioPlateNum">
                             <property name="text">
-                                <string>Plate Number</string>
+                                <string>License plate</string>
                             </property>
                         </widget>
                     </item>
@@ -123,7 +123,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="layoutDirection">

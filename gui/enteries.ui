@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>Vehicle Entry List of the Town</string>
+            <string>لیست تردد خودروهای شهرک</string>
         </property>
         <widget class="QWidget" name="centralwidget">
             <widget class="QTableWidget" name="tableWidget">
@@ -25,7 +25,7 @@
                 </property>
                 <property name="font">
                     <font>
-                        <family>Arial</family>
+                        <family>B Yekan</family>
                     </font>
                 </property>
                 <property name="layoutDirection">
@@ -79,11 +79,11 @@
                         <widget class="QPushButton" name="pushButton_2">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Delete Entry</string>
+                                <string>حذف تردد</string>
                             </property>
                         </widget>
                     </item>
@@ -91,11 +91,11 @@
                         <widget class="QPushButton" name="pushButton">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Register New Entry</string>
+                                <string>New traffic registration</string>
                             </property>
                         </widget>
                     </item>
@@ -115,7 +115,7 @@
                         <widget class="QTextEdit" name="textEdit_3">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                         </widget>
@@ -124,7 +124,7 @@
                         <widget class="QTextEdit" name="textEdit_2">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                         </widget>
@@ -133,7 +133,7 @@
                         <widget class="QTextEdit" name="textEdit">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                         </widget>
@@ -154,11 +154,11 @@
                         <widget class="QLabel" name="label_3">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Date</string>
+                                <string>تاریخ</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -169,11 +169,11 @@
                         <widget class="QLabel" name="label">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Time</string>
+                                <string>ساعت</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignCenter</set>
@@ -184,19 +184,11 @@
                         <widget class="QLabel" name="label_2">
                             <property name="font">
                                 <font>
-                                    <family>Arial</family>
+                                    <family>B Yekan</family>
                                 </font>
                             </property>
                             <property name="text">
-<<<<<<< HEAD
-                                <string>License Plate</string>
-=======
-<<<<<<< HEAD
-                                <string>License Plate</string>
-=======
                                 <string>License plate</string>
->>>>>>> e9ef449c1c2c11323532d65843d3a6e2a4b976d6
->>>>>>> ced2859ed93f5909c9251f160af885b41bca2388
                             </property>
                             <property name="scaledContents">
                                 <bool>false</bool>

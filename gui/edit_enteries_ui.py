@@ -33,7 +33,7 @@ class Ui_EnteriesWindow(object):
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.setGeometry(QRect(10, 10, 1051, 411))
         font = QFont()
-        font.setFamilies([u"Arial"])
+        font.setFamilies([u"B Yekan"])
         self.tableWidget.setFont(font)
         self.tableWidget.setLayoutDirection(Qt.RightToLeft)
         self.tableWidget.setAlternatingRowColors(False)
@@ -54,6 +54,6 @@ class Ui_EnteriesWindow(object):
 
     def retranslateUi(self, EnteriesWindow):
         EnteriesWindow.setWindowTitle(QCoreApplication.translate("EnteriesWindow", u"Vehicle Traffic List of the Complex", None))
-        self.pushButton.setText(QCoreApplication.translate("EnteriesWindow", u"Register New Traffic", None))
+        self.pushButton.setText(QCoreApplication.translate("EnteriesWindow", u"Register new traffic", None))
     # retranslateUi
 

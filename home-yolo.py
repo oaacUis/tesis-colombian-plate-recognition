@@ -160,7 +160,7 @@ class MainWindow(QtWidgets.QMainWindow):
             
             # Get plate number in English
             original_plate = entry.getPlateNumber(display=True)
-            # print(f"Número de placa original: {original_plate}")
+            #print(f"Número de placa original: {original_plate}")
             
             plateNum2 = join_elements(
                 convert_to_standard_format(split_string_language_specific(original_plate)))
@@ -281,6 +281,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Clean the plate text and get the status from the database
             plate_text_clean = clean_license_plate_text(plate_text)
+            print("Plate text clean: ", plate_text_clean)
             status = db_get_plate_status(plate_text_clean)
 
             # Update the plate owner and permission

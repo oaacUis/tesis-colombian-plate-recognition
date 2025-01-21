@@ -12,7 +12,8 @@ Requirements:
 - OpenCV for video and image manipulation
 - NumPy for numerical operations
 """
-
+from ultralytics import YOLO
+import pandas as pd
 import functools
 import gc
 import statistics
@@ -21,7 +22,7 @@ import warnings
 from pathlib import Path
 import torch
 from PIL import ImageOps
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtCore
 from PySide6.QtCore import QThread, Signal, QSize
 from PySide6.QtGui import QImage, QIcon, QAction, QPainter
 from PySide6.QtWidgets import QTableWidgetItem, QGraphicsScene
@@ -49,7 +50,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 params = Parameters()
 import sys
 
-sys.path.append('yolov5')
+sys.path.append('model')
 
 
 def get_device():
@@ -64,11 +65,18 @@ def get_device():
     else:
         return torch.device("cpu")
 
+try:
+    # modelPlate = torch.hub.load('model', 'custom', params.modelPlate_path, source='local', force_reload=True)
+    modelPlate = YOLO(params.modelPlate_path)
+    # modelPlate = modelPlate.to(device())
 
-modelPlate = torch.hub.load('yolov5', 'custom', params.modelPlate_path, source='local', force_reload=True)
-# modelPlate = modelPlate.to(device())
+    # modelCharX = torch.hub.load('model', 'custom', params.modelCharX_path, source='local', force_reload=True)
+    modelCharX = YOLO(params.modelCharX_path)
+    print("Models loaded successfully")
 
-modelCharX = torch.hub.load('yolov5', 'custom', params.modelCharX_path, source='local', force_reload=True)
+except Exception as e:
+    print("Error loading the model")
+    print("Error description: ", e)
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -353,11 +361,21 @@ class Worker1(QThread):
     def process_frame(self, frame):
         self.TotalFramePass += 1
         resize = self.prepareImage(frame)
+        resize = cv2.cvtColor(resize, cv2.COLOR_BGR2RGB)
+        platesResult = modelPlate(resize)[0]
+        resize = cv2.cvtColor(resize, cv2.COLOR_BGR2RGB)
 
-        platesResult = modelPlate(resize).pandas().xyxy[0]
-        for _, plate in platesResult.iterrows():
+        xyxy = platesResult.boxes.xyxy.cpu().numpy()  # Coords [xmin, ymin, xmax, ymax]
+        confidence = platesResult.boxes.conf.cpu().numpy()  # Confidence score
+
+        platesResult_df = pd.DataFrame(xyxy, columns=['xmin', 'ymin', 'xmax', 'ymax'])
+        platesResult_df['confidence'] = confidence
+
+        plate_th = 50
+        for _, plate in platesResult_df.iterrows():
             plateConf = int(plate['confidence'] * 100)
-            if plateConf >= 90:
+            print("Confidence in prediction: ", plateConf, "%")
+            if plateConf >= plate_th:
                 self.highlightPlate(resize, plate)
                 croppedPlate = self.cropPlate(resize, plate)
                 plateText, char_detected, charConfAvg = self.detectPlateChars(croppedPlate)
@@ -398,17 +416,26 @@ class Worker1(QThread):
 
     def detectPlateChars(self, croppedPlate):
         chars, confidences, char_detected = [], [], []
-        results = modelCharX(croppedPlate)
-        detections = results.pred[0]
-        detections = sorted(detections, key=lambda x: x[0])  # sort by x coordinate
-        for det in detections:
-            conf = det[4]
-            if conf > 0.5:
-                cls = det[5].item()
-                char = params.char_id_dict.get(str(int(cls)), '')
+        results = modelCharX(croppedPlate, save=False)[0]
+        char_id_dict1 = results.names
+
+        boxes = results.boxes.xyxy.numpy()  # Convertir a NumPy
+        predictions = results.boxes.cls.numpy()  # Clases predichas
+        confidence = results.boxes.conf.numpy()  # Confianza de las predicciones
+
+        detections = [(box, pred, conf) for box, pred, conf in zip(boxes, predictions, confidence)]
+        detections_sorted = sorted(detections, key=lambda x: x[0][0])
+        chars_th = 0.5
+
+        for det in detections_sorted:
+            conf = det[2]
+            if conf > chars_th:
+                cls = det[1]
+                char = char_id_dict1.get(int(cls))
                 chars.append(char)
-                confidences.append(conf.item())
-                char_detected.append(det.tolist())
+                confidences.append(conf)
+                char_detected.append(list(det)) # Char position
+        print("Plate detected: ", ''.join(chars))
         charConfAvg = round(statistics.mean(confidences) * 100) if confidences else 0
         return ''.join(chars), char_detected, charConfAvg
 
@@ -449,8 +476,9 @@ def get_platform():
     return platforms[sys.platform]
 
 
+
 if __name__ == "__main__":
-    # QApplication.setAttribute(Qt.AA_UseSoftwareOpenGL) # OpenGL issue, Use before creating the QCoreApplication.
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
     app = QtWidgets.QApplication(sys.argv)
 
     app.setStyle('Windows')

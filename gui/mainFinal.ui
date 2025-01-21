@@ -344,6 +344,13 @@
                     <set>Qt::AlignCenter</set>
                 </property>
             </widget>
+
+
+
+
+
+
+
             <widget class="QTableWidget" name="tableWidget">
                 <property name="geometry">
                     <rect>

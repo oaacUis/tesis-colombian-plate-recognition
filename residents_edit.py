@@ -115,7 +115,7 @@ class residentsAddNewWindow(QDialog):
         self.carModelTextBox.setText(self.editingResident.getCarModel())
         self.statusComboBox.setCurrentIndex(int(self.editingResident.getStatus(item=False)))
         self.populate_plate_data(self.residnetPlate)
-        print(f"Status: {self.editingResident.getStatus(item=False)}")
+        #print(f"Status: {self.editingResident.getStatus(item=False)}")
         
         # # Get plate directly from database
         # entries = dbGetAllEntries(limit=10, whereLike='')

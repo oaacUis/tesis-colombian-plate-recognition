@@ -64,11 +64,11 @@ def get_device():
 
 try:
     # modelPlate = torch.hub.load('model', 'custom', params.modelPlate_path, source='local', force_reload=True)
-    modelPlate = YOLO(params.modelPlate_path)
+    modelPlate = YOLO(params.modelPlate_path, verbose=False)
     # modelPlate = modelPlate.to(device())
 
     # modelCharX = torch.hub.load('model', 'custom', params.modelCharX_path, source='local', force_reload=True)
-    modelCharX = YOLO(params.modelCharX_path)
+    modelCharX = YOLO(params.modelCharX_path, verbose=False)
     print("Models loaded successfully")
 
 except Exception as e:
@@ -98,6 +98,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.stopButton.clicked.connect(self.stop_webcam)
         self.usersListButton.clicked.connect(self.show_residents_list)
         self.enteriesListButton.clicked.connect(self.show_entries_list)
+        
+        # Configure plate_view
+        self.plate_view.setFixedSize(300, 66)
+        self.plate_view.setFrameShape(QtWidgets.QFrame.Box)
+        self.plate_view.setAlignment(QtCore.Qt.AlignCenter)
+        self.plate_view.setScaledContents(True)
 
         exitAct = QAction("Exit", self)
         exitAct.setShortcut("Ctrl+Q")
@@ -116,10 +122,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.settingsButton.setIcon(QPixmap("./icons/icons8-tools-80.png"))
         self.settingsButton.setIconSize(QSize(40, 40))
-
-        self.plateTextView.setStyleSheet(
-            f"""border-image: url("{Path().absolute()}/Templates/template-base.png") 0 0 0 0 stretch stretch;""")
-
+        
+        # Fix template path and stylesheet
+        template_path = Path().absolute() / 'Templates' / 'template-base.png'
+        self.plateTextView.setStyleSheet(f"""
+            QWidget {{
+                border-image: url("{template_path}") 0 0 0 0 stretch stretch;
+                background-repeat: no-repeat;
+                background-position: center;
+            }}
+        """)
+        
         self.Worker1 = Worker1()
         self.Worker1.plateDataUpdate.connect(self.on_plate_data_update)
         self.Worker1.mainViewUpdate.connect(self.on_main_view_update)
@@ -135,6 +148,7 @@ class MainWindow(QtWidgets.QMainWindow):
         torch.cuda.empty_cache()
         gc.collect()
 
+    
     def refresh_table(self, plateNum=''):
         # print("\n=== INICIO DE REFRESH_TABLE ===")
         # print(f"Parámetro plateNum recibido: {plateNum}")
@@ -259,10 +273,14 @@ class MainWindow(QtWidgets.QMainWindow):
                              plate_conf_avg: float) -> None:
 
         # Check if the plate text is 8 characters long and the character confidence is above 70
-        if len(plate_text) == 8 and char_conf_avg >= 70:
+        if len(plate_text) >= 6 and char_conf_avg >= 60:
+            
             # Set the plate view to display the cropped plate
-            self.plate_view.setScaledContents(True)
-            self.plate_view.setPixmap(QPixmap.fromImage(cropped_plate))
+            scaled_plate = cropped_plate.scaled(300, 66, 
+                                          QtCore.Qt.KeepAspectRatio,
+                                          QtCore.Qt.SmoothTransformation)
+            # Set the plate view
+            self.plate_view.setPixmap(QPixmap.fromImage(scaled_plate))
 
             # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
             plt_text_num = convert_to_local_format(plate_text[:6], display=True)
@@ -355,7 +373,7 @@ class Worker1(QThread):
         self.TotalFramePass += 1
         resize = self.prepareImage(frame)
         resize = cv2.cvtColor(resize, cv2.COLOR_BGR2RGB)
-        platesResult = modelPlate(resize)[0]
+        platesResult = modelPlate(resize, verbose = False)[0]
         resize = cv2.cvtColor(resize, cv2.COLOR_BGR2RGB)
 
         xyxy = platesResult.boxes.xyxy.cpu().numpy()  # Coords [xmin, ymin, xmax, ymax]
@@ -367,7 +385,7 @@ class Worker1(QThread):
         plate_th = 50
         for _, plate in platesResult_df.iterrows():
             plateConf = int(plate['confidence'] * 100)
-            print("Confidence in prediction: ", plateConf, "%")
+            #print("Confidence in prediction: ", plateConf, "%")
             if plateConf >= plate_th:
                 self.highlightPlate(resize, plate)
                 croppedPlate = self.cropPlate(resize, plate)
@@ -428,7 +446,7 @@ class Worker1(QThread):
                 chars.append(char)
                 confidences.append(conf)
                 char_detected.append(list(det)) # Char position
-        print("Plate detected: ", ''.join(chars))
+        #print("Plate detected: ", ''.join(chars))
         charConfAvg = round(statistics.mean(confidences) * 100) if confidences else 0
         return ''.join(chars), char_detected, charConfAvg
 

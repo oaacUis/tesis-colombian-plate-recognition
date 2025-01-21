@@ -43,9 +43,6 @@ from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
 
-#Archivos de prueba: 
-from pruebas_funciones.refresh_table import refresh_table
-
 warnings.filterwarnings("ignore", category=UserWarning)
 params = Parameters()
 import sys

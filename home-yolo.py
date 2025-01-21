@@ -99,11 +99,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.usersListButton.clicked.connect(self.show_residents_list)
         self.enteriesListButton.clicked.connect(self.show_entries_list)
         
-        # Configure plate_view
-        self.plate_view.setFixedSize(300, 66)
-        self.plate_view.setFrameShape(QtWidgets.QFrame.Box)
-        self.plate_view.setAlignment(QtCore.Qt.AlignCenter)
-        self.plate_view.setScaledContents(True)
 
         exitAct = QAction("Exit", self)
         exitAct.setShortcut("Ctrl+Q")
@@ -123,15 +118,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.settingsButton.setIcon(QPixmap("./icons/icons8-tools-80.png"))
         self.settingsButton.setIconSize(QSize(40, 40))
         
-        # Fix template path and stylesheet
+        # Configure plateTextView
         template_path = Path().absolute() / 'Templates' / 'template-base.png'
-        self.plateTextView.setStyleSheet(f"""
-            QWidget {{
-                border-image: url("{template_path}") 0 0 0 0 stretch stretch;
-                background-repeat: no-repeat;
-                background-position: center;
-            }}
-        """)
+        if template_path.exists():
+            print("Template path exists")
+            pixmap = QPixmap(str(template_path))
+            self.plateTextView.setPixmap(pixmap)
+            self.plateTextView.setScaledContents(True)
         
         self.Worker1 = Worker1()
         self.Worker1.plateDataUpdate.connect(self.on_plate_data_update)
@@ -283,10 +276,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.plate_view.setPixmap(QPixmap.fromImage(scaled_plate))
 
             # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
-            plt_text_num = convert_to_local_format(plate_text[:6], display=True)
-            plt_text_ir = convert_to_local_format(plate_text[6:], display=True)
+            plt_text_num = convert_to_local_format(plate_text[:], display=True)
             self.plate_text_num.setText(plt_text_num)
-            self.plate_text_ir.setText(plt_text_ir)
 
             # Clean the plate text and get the status from the database
             plate_text_clean = clean_license_plate_text(plate_text)
@@ -298,7 +289,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Create data for send into services
             external_service_data = {
-                'plate_number': plt_text_num + '-' + plt_text_ir,
+                'plate_number': plt_text_num,
                 'image': cropped_plate
             }
             # Add the plate text, character confidence, plate confidence, cropped plate, and status to the database
@@ -310,7 +301,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if name:
             self.plate_owner_name_view.setText(name)
         else:
-            self.plate_owner_name_view.setText('')
+            self.plate_owner_name_view.setText('No owner registered')
 
     def update_plate_permission(self, status):
         r, g, b = get_status_color(status)
@@ -373,7 +364,7 @@ class Worker1(QThread):
         self.TotalFramePass += 1
         resize = self.prepareImage(frame)
         resize = cv2.cvtColor(resize, cv2.COLOR_BGR2RGB)
-        platesResult = modelPlate(resize, verbose = False)[0]
+        platesResult = modelPlate(resize, verbose=False, show=False,)[0]
         resize = cv2.cvtColor(resize, cv2.COLOR_BGR2RGB)
 
         xyxy = platesResult.boxes.xyxy.cpu().numpy()  # Coords [xmin, ymin, xmax, ymax]
@@ -427,7 +418,7 @@ class Worker1(QThread):
 
     def detectPlateChars(self, croppedPlate):
         chars, confidences, char_detected = [], [], []
-        results = modelCharX(croppedPlate, save=False)[0]
+        results = modelCharX(croppedPlate, verbose=False, show=False, save=False)[0]
         char_id_dict1 = results.names
 
         boxes = results.boxes.xyxy.numpy()  # Convertir a NumPy

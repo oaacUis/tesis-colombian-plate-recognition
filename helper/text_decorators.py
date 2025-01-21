@@ -79,15 +79,27 @@ def reshape_text(string):
 
 def convert_to_local_format(license_plate, display=False):
     """
-    Converts standard characters in a license plate to local format.
+    Converts standard characters in a license plate to a simple string format.
 
     Parameters:
-    - license_plate (str): The license plate text to convert.
+    - license_plate (list or str): The license plate text to convert. Can be a list of characters or a string.
     - display (bool, optional): Whether to return the result as a display-ready string. Default is False.
 
     Returns:
-    - str: The converted license plate in local format.
+    - str: The converted license plate as a string.
+
+    Example:
+        >>> convert_to_local_format(['8', 'X', 'O', '9', '8', '8'])
+        '8XO988'
     """
+    # Si la entrada es una lista, convertir directamente a string
+    if isinstance(license_plate, list):
+        plate_string = ''.join(str(char) for char in license_plate)
+        if display:
+            return reshape_text(plate_string)
+        return plate_string
+    
+    # Mantener la funcionalidad original para entradas que no son listas
     converted_plate = []
     for character in license_plate:
         if character.isdigit():

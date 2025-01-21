@@ -335,7 +335,7 @@
                     <string/>
                 </property>
                 <property name="textFormat">
-                    <enum>Qt::PlainText</enum>
+                    <string>Qt::PlainText</string>
                 </property>
                 <property name="scaledContents">
                     <bool>false</bool>

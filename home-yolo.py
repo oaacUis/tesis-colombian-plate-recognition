@@ -128,10 +128,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Worker1.mainViewUpdate.connect(self.on_main_view_update)
 
         self.Worker2 = Worker2()
-        # Agregar el método refresh_table a la clase usando decorador
-        @refresh_table
-        def refresh_table(self, plateNum=''):
-            pass
         self.Worker2.mainTableUpdate.connect(self.refresh_table)
         self.Worker2.start()
 

@@ -1,6 +1,7 @@
 import datetime
 import sqlite3
 import time
+import os
 
 from services.send import send_data_to_external_service
 from configParams import Parameters
@@ -80,6 +81,8 @@ similarityTemp = ''
 
 def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, external_service_data: dict = None):
     global similarityTemp
+    # print(f"[DEBUG] Recibida imagen para la placa: {number}")
+    # print(f"[DEBUG] Tipo de objeto: {type(croppedPlate)}")
     isSimilar = check_similarity_threshold(similarityTemp, number)
     if not isSimilar:
         similarityTemp = number
@@ -94,9 +97,20 @@ def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, ext
                     display_time = timeNow.strftime("%H:%M:%S")
                     display_date = timeNow.strftime("%Y-%m-%d")
 
-                    plateImgName = 'temp/{}_{}.jpg'.format(number,
-                                                           datetime.now().strftime("%H:%M:%S_%Y-%m-%d"))
-                    croppedPlate.save(plateImgName, format='jpg')
+                    os.makedirs("temp", exist_ok=True)
+                    plateImgName = os.path.join(
+                        "temp",
+                        f"{number}_{datetime.now().strftime('%H-%M-%S_%Y-%m-%d')}.jpg"
+                    )
+                    saved = croppedPlate.save(plateImgName, "JPEG")
+                    if saved:
+                        print(f"[DEBUG] Imagen guardada correctamente en {plateImgName}")
+                        if os.path.exists(plateImgName):
+                            print(f"[DEBUG] El archivo existe: {plateImgName}")
+                        else:
+                            print(f"[DEBUG] El archivo no se encuentra en la ruta esperada: {plateImgName}")
+                    else:
+                        print(f"[ERROR] No se pudo guardar la imagen en {plateImgName}")
 
                     entries = Entries(plateConfAvg, charConfAvg, display_date, display_time, number, status)
 
@@ -109,8 +123,21 @@ def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, ext
                     display_time = time.strftime("%H:%M:%S")
                     display_date = time.strftime("%Y-%m-%d")
 
-                    plateImgName = 'temp/{}_{}.jpg'.format(number, datetime.now().strftime("%H:%M:%S_%Y-%m-%d"))
-                    croppedPlate.save(plateImgName, format='jpg')
+                    os.makedirs("temp", exist_ok=True)
+                    plateImgName = os.path.join(
+                        "temp",
+                        f"{number}_{datetime.now().strftime('%H-%M-%S_%Y-%m-%d')}.jpg"
+                    )
+
+                    saved = croppedPlate.save(plateImgName, "JPEG")
+                    if saved:
+                        print(f"[DEBUG] Imagen guardada correctamente en {plateImgName}")
+                        if os.path.exists(plateImgName):
+                            print(f"[DEBUG] El archivo existe: {plateImgName}")
+                        else:
+                            print(f"[DEBUG] El archivo no se encuentra en la ruta esperada: {plateImgName}")
+                    else:
+                        print(f"[ERROR] No se pudo guardar la imagen en {plateImgName}")
 
                     entries = Entries(plateConfAvg, charConfAvg, display_date, display_time, number, status)
 

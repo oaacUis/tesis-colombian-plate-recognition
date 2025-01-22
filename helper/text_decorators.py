@@ -148,29 +148,6 @@ def get_license_plate_regex(chosen_item='plateWhole'):
     return patterns.get(chosen_item, "No info available")
 
 
-def clean_license_plate_text(plate_array):
-    """
-    Cleans and extracts valid license plate text from an input array.
-
-    Parameters:
-    - plate_array (list): The list representing parts of a license plate.
-
-    Returns:
-    - str: The cleaned license plate text.
-    """
-    plate_string = join_elements(plate_array)
-    if len(plate_array) == 6:
-        plate_temp = re.search(get_license_plate_regex('plateNum'), plate_string)
-    elif len(plate_array) == 2:
-        plate_temp = re.match(get_license_plate_regex('plateCode'), plate_string)
-    else:
-        plate_temp = re.match(get_license_plate_regex('plateWhole'), plate_string)
-
-    if plate_temp is not None and plate_temp.group(0):
-        return plate_temp.group(0)
-    return ''
-
-
 def convert_numbers_to_standard(text):
     """
     Converts local format numbers to standard format in a string.

@@ -21,17 +21,15 @@ dbResidents = params.dbResidents
 
 
 def insertResident(resident, update=False, editingPlate=''):
-    """
-    Insert or update resident information in the database.
-
-    Args:
-        resident (Resident): Resident object containing data
-        update (bool): If True, updates existing record; if False, inserts new record
-        editingPlate (str): Original plate number for update operations
-    """
+    """Insert or update resident in database"""
     try:
         sqlConnect = sqlite3.connect(dbResidents)
         sqlCursor = sqlConnect.cursor()
+
+        # Debug prints
+        print(f"Inserting resident data: {vars(resident)}")
+        print(f"Update mode: {update}")
+        print(f"Editing plate: {editingPlate}")
 
         if update:
             pltNum = join_elements(convert_to_standard_format(resident.getPlateNumber()))
@@ -43,17 +41,24 @@ def insertResident(resident, update=False, editingPlate=''):
             dlist = vars(resident)
             dlist['editingPlate'] = editingPlate
             sqlCursor.execute(updateResidentSQL, dlist)
+            print(f"Updated resident with plate: {pltNum}")
         else:
-            sqlCursor.execute(
-                "INSERT OR IGNORE INTO residents VALUES (:fName, :lName, :building, :block, :num, :carModel, :plateNum, :status)",
-                vars(resident))
+            # Insert new resident
+            insert_sql = """INSERT INTO residents 
+                          (fName, lName, building, block, num, carModel, plateNum, status)
+                          VALUES (:fName, :lName, :building, :block, :num, :carModel, :plateNum, :status)"""
+            sqlCursor.execute(insert_sql, vars(resident))
+            print(f"Inserted new resident with plate: {resident.plateNum}")
 
-        sqlCursor.close()
+        sqlConnect.commit()
+        print("Database transaction committed successfully")
+        
     except sqlite3.Error as error:
-        print("Failed to update sqlite table", error)
+        print(f"SQLite error: {error}")
+        print(f"Failed query params: {vars(resident)}")
+        raise
     finally:
         if sqlConnect:
-            sqlConnect.commit()
             sqlConnect.close()
 
 

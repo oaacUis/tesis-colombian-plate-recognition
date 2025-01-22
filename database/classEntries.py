@@ -70,7 +70,8 @@ class Entries:
         Returns:
             str: Path to the plate image file
         """
-        return 'temp/{}_{}_{}.jpg'.format(self.plateNum, self.eTime, self.eDate)
+        formatted_time = self.eTime.replace(':', '-')
+        return f'temp/{self.plateNum}_{formatted_time}_{self.eDate}.jpg'
 
     def getCharPercent(self):
         """

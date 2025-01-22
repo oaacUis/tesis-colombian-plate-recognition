@@ -140,7 +140,7 @@ class residentsAddNewWindow(QDialog):
 
         
         if plate_number:
-            print(f"Si hay plate number: {plate_number}")
+            #print(f"Si hay plate number: {plate_number}")
             self.plateTextNum_1.setText(plate_number[:3])
             self.plateTextNum_4.setText(plate_number[-3:])
 
@@ -170,6 +170,7 @@ class residentsAddNewWindow(QDialog):
         else:
             self.handle_new_resident(resident)
 
+        print(f"Resident data: {resident_data}")   
         # Export to CSV
         self.export_to_csv(resident_data)
 
@@ -179,7 +180,7 @@ class residentsAddNewWindow(QDialog):
         #plate_alphabet = inv_map[self.plateAlphabetComboBox.currentText()]
         
         plate_number = f"{self.plateTextNum_1.getText()}{self.plateTextNum_4.getText()}"
-        print(f"plate_number en collect_form_data: {plate_number}")
+        #print(f"plate_number en collect_form_data: {plate_number}")
         
         return {
             'first_name': self.fNameTextBox.getText(),

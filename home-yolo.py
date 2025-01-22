@@ -37,7 +37,7 @@ from enteries_window import EnteriesWindow
 from helper.gui_maker import configure_main_table_widget, create_image_label, on_label_double_click, center_widget, \
     get_status_text, get_status_color, \
     create_styled_button
-from helper.text_decorators import convert_to_local_format, clean_license_plate_text, join_elements, \
+from helper.text_decorators import convert_to_local_format, join_elements, \
     convert_to_standard_format, split_string_language_specific
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
@@ -121,7 +121,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Configure plateTextView
         template_path = Path().absolute() / 'Templates' / 'template-base.png'
         if template_path.exists():
-            print("Template path exists")
+            #print("Template path exists")
             pixmap = QPixmap(str(template_path))
             self.plateTextView.setPixmap(pixmap)
             self.plateTextView.setScaledContents(True)
@@ -153,6 +153,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # Set the number of rows
         self.tableWidget.setRowCount(len(plateNum))
         # print(f"Tabla configurada con {len(plateNum)} filas")
+        
+        # Establecer altura para todas las filas
+        for row in range(self.tableWidget.rowCount()):
+            self.tableWidget.setRowHeight(row, 60)
+        
 
         # Iterate through entries
         for index, entry in enumerate(plateNum):
@@ -182,23 +187,19 @@ class MainWindow(QtWidgets.QMainWindow):
             self.tableWidget.setItem(index, 2, QTableWidgetItem(entry.getTime()))
             self.tableWidget.setItem(index, 3, QTableWidgetItem(entry.getDate()))
 
-            # Load plate picture
-            # print("\nCargando imagen de la placa...")
-            plate_pic_path = entry.getPlatePic()
-            # print(f"Ruta de la imagen: {plate_pic_path}")
             
-            Image = QImage()
-            image_loaded = Image.load(entry.getPlatePic())
-            # print(f"Estado de carga de imagen: {'Exitoso' if image_loaded else 'Fallido'}")
-            
-            QcroppedPlate = QPixmap.fromImage(Image)
-            # print(f"Dimensiones de la imagen: {QcroppedPlate.width()}x{QcroppedPlate.height()}")
+            # Load the plate picture
+            img_path = entry.getPlatePic()
+            #print(f"[DEBUG] Loading image from: {img_path}")
 
-            # Create and set image label
-            item = create_image_label(QcroppedPlate)
-            item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
-            self.tableWidget.setCellWidget(index, 4, item)
-            self.tableWidget.setRowHeight(index, 44)
+            Image = QImage()
+            if Image.load(img_path):
+                #print(f"[DEBUG] Image loaded successfully")
+                QcroppedPlate = QPixmap.fromImage(Image)
+                item = create_image_label(QcroppedPlate)
+                item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
+                self.tableWidget.setCellWidget(index, 4, item)
+            
 
             # Create buttons
             # print("\nCreando botones...")
@@ -268,6 +269,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # Check if the plate text is 8 characters long and the character confidence is above 70
         if len(plate_text) >= 6 and char_conf_avg >= 60:
             
+            #print(f"Placa detectada: {plate_text}")
+            
             # Set the plate view to display the cropped plate
             scaled_plate = cropped_plate.scaled(300, 66, 
                                           QtCore.Qt.KeepAspectRatio,
@@ -280,9 +283,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.plate_text_num.setText(plt_text_num)
 
             # Clean the plate text and get the status from the database
-            plate_text_clean = clean_license_plate_text(plate_text)
-            print("Plate text clean: ", plate_text_clean)
-            status = db_get_plate_status(plate_text_clean)
+            plate_text_clean = plt_text_num
+            status = db_get_plate_status(plt_text_num)
 
             # Update the plate owner and permission
             self.update_plate_owner(db_get_plate_owner_name(plate_text_clean))
@@ -293,8 +295,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 'plate_number': plt_text_num,
                 'image': cropped_plate
             }
+            
+            # print(f"[DEBUG] Enviando imagen con tamaño: {cropped_plate.width()}x{cropped_plate.height()}")
             # Add the plate text, character confidence, plate confidence, cropped plate, and status to the database
-            db_entries_time(plate_text_clean, char_conf_avg, plate_conf_avg, cropped_plate, status,
+            db_entries_time(plt_text_num, char_conf_avg, plate_conf_avg, cropped_plate, status,
                             external_service_data=external_service_data)
             self.Worker2.start()
 
@@ -382,6 +386,7 @@ class Worker1(QThread):
                 self.highlightPlate(resize, plate)
                 croppedPlate = self.cropPlate(resize, plate)
                 plateText, char_detected, charConfAvg = self.detectPlateChars(croppedPlate)
+                print("Plate detected: ", plateText)
                 self.emitPlateData(croppedPlate, plateText, char_detected, charConfAvg, plateConf)
 
         self.emitFrame(resize)

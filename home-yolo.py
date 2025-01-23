@@ -167,8 +167,7 @@ class MainWindow(QtWidgets.QMainWindow):
             original_plate = entry.getPlateNumber(display=True)
             #print(f"Número de placa original: {original_plate}")
             
-            plateNum2 = join_elements(
-                convert_to_standard_format(split_string_language_specific(original_plate)))
+            plateNum2 = original_plate
             # print(f"Número de placa convertido: {plateNum2}")
             
             # Get status
@@ -267,7 +266,7 @@ class MainWindow(QtWidgets.QMainWindow):
                              plate_conf_avg: float) -> None:
 
         # Check if the plate text is 8 characters long and the character confidence is above 70
-        if len(plate_text) >= 6 and char_conf_avg >= 60:
+        if len(plate_text) == 6 and char_conf_avg >= 70:
             
             #print(f"Placa detectada: {plate_text}")
             
@@ -378,7 +377,7 @@ class Worker1(QThread):
         platesResult_df = pd.DataFrame(xyxy, columns=['xmin', 'ymin', 'xmax', 'ymax'])
         platesResult_df['confidence'] = confidence
 
-        plate_th = 50
+        plate_th = 70
         for _, plate in platesResult_df.iterrows():
             plateConf = int(plate['confidence'] * 100)
             #print("Confidence in prediction: ", plateConf, "%")
@@ -386,7 +385,7 @@ class Worker1(QThread):
                 self.highlightPlate(resize, plate)
                 croppedPlate = self.cropPlate(resize, plate)
                 plateText, char_detected, charConfAvg = self.detectPlateChars(croppedPlate)
-                print("Plate detected: ", plateText)
+                #print("Plate detected: ", plateText)
                 self.emitPlateData(croppedPlate, plateText, char_detected, charConfAvg, plateConf)
 
         self.emitFrame(resize)

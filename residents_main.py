@@ -102,13 +102,12 @@ class residentsWindow(QDialog):
         
         for index in indexes:
             selected_plate = model.data(index, Qt.DisplayRole)
+            #print(f"Selected plate: {selected_plate}")
             
             if self.confirm_deletion(selected_plate):
-                formatted_plate = join_elements(
-                    convert_to_standard_format(
-                        split_string_language_specific(selected_plate)
-                    )
-                )
+                formatted_plate = selected_plate
+        
+                #print(f"Deleting formatted plate: {formatted_plate}")
                 dbRemoveResident(formatted_plate)
                 self.tableWidget.removeRow(index.row())
         
@@ -135,14 +134,23 @@ class residentsWindow(QDialog):
         search_text = self.searchTextBox.toPlainText()
         self.refresh_table(search_text)
 
+    # def refresh_table(self, last_name=''):
+    #     """Refresh the residents table with current data."""
+    #     residents = dbGetAllResidents(whereLike=f"{last_name}")
+    #     self.tableWidget.setRowCount(len(residents))
+        
+    #     for index, resident in enumerate(residents):
+    #         self.populate_table_row(index, resident)
+
     def refresh_table(self, last_name=''):
         """Refresh the residents table with current data."""
-        residents = dbGetAllResidents(whereLike=f"{last_name}")
+        self.tableWidget.setRowCount(0)  # Limpiar tabla primero
+        residents = dbGetAllResidents(whereLike=f"{last_name}" )
         self.tableWidget.setRowCount(len(residents))
         
         for index, resident in enumerate(residents):
             self.populate_table_row(index, resident)
-
+    
     def populate_table_row(self, row_index, resident):
         """Populate a single table row with resident data."""
         # Set resident information
@@ -189,22 +197,34 @@ class residentsWindow(QDialog):
         plate_cell = self.tableWidget.item(row, 6)
         self.residentAddEditWindow(isEditing=True, residnetPlate=plate_cell.text())
 
+    # def residentAddEditWindow(self, isEditing=False, residnetPlate=None):
+    #     """Open window for adding or editing resident information."""
+    #     resident_window = None
+    #     if resident_window is None:
+    #         resident_window = residentsAddNewWindow(
+    #             self,
+    #             isEditing,
+    #             isNew=False,
+    #             isInfo=False,
+    #             residnetPlate=residnetPlate
+    #         )
+    #         resident_window.exec_()
+    #     else:
+    #         resident_window.close()
+    #         resident_window = None
+    #     self.refresh_table()
+    
     def residentAddEditWindow(self, isEditing=False, residnetPlate=None):
         """Open window for adding or editing resident information."""
-        resident_window = None
-        if resident_window is None:
-            resident_window = residentsAddNewWindow(
-                self,
-                isEditing,
-                isNew=False,
-                isInfo=False,
-                residnetPlate=residnetPlate
-            )
-            resident_window.exec_()
-        else:
-            resident_window.close()
-            resident_window = None
-        self.refresh_table()
+        resident_window = residentsAddNewWindow(
+            self,
+            isEditing,
+            isNew=False,
+            isInfo=False,
+            residnetPlate=residnetPlate
+        )
+        resident_window.exec_()
+        self.refresh_table()  # Actualizar la tabla después de cerrar la ventana
 
 
 if __name__ == "__main__":

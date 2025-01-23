@@ -51,10 +51,12 @@ class EnteriesWindow(QDialog):
         configure_edit_table_widget(self)
 
         if isSearching:
-            self.residnetPlateEng = join_elements(
-                convert_to_standard_format(split_string_language_specific(residnetPlate))
-            )
-            self.refresh_table(self.residnetPlateEng)
+            # self.residnetPlateEng = join_elements(
+            #     convert_to_standard_format(split_string_language_specific(residnetPlate))
+            # )
+            # print(f"self.residnetPlateEng iffff: {self.residnetPlateEng}")
+            # print(f"residnetPlateeeee: {residnetPlate}")
+            self.refresh_table(residnetPlate)
         else:
             self.refresh_table()
 
@@ -70,9 +72,9 @@ class EnteriesWindow(QDialog):
 
         for index, entry in enumerate(entries):
             # Process plate number
-            formatted_plate = join_elements(
-                convert_to_standard_format(split_string_language_specific(entry.getPlateNumber()))
-            )
+            # print(f"entry.getPlateNumber() sadsadsad: {entry.getPlateNumber()}")
+            formatted_plate = entry.getPlateNumber()
+            # print(f"formatted_plateeee: {formatted_plate}")
             status_num = db_get_plate_status(formatted_plate)
 
             # Populate table row

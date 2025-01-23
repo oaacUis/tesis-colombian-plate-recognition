@@ -20,47 +20,84 @@ fieldsList = ['fName', 'lName', 'building', 'block', 'num', 'carModel', 'plateNu
 dbResidents = params.dbResidents
 
 
+# def insertResident(resident, update=False, editingPlate=''):
+#     """Insert or update resident in database"""
+#     try:
+#         sqlConnect = sqlite3.connect(dbResidents)
+#         sqlCursor = sqlConnect.cursor()
+
+#         # Debug prints
+#         print(f"Inserting resident data: {vars(resident)}")
+#         print(f"Update mode: {update}")
+#         print(f"Editing plate: {editingPlate}")
+
+#         if update:
+#             pltNum = resident.plateNum
+#             updateResidentSQL = """UPDATE residents 
+#                                SET fName=:fName, lName=:lName, building=:building,
+#                                block=:block, num=:num, carModel=:carModel,
+#                                plateNum=:plateNum, status=:status
+#                                WHERE plateNum=:editingPlate"""
+#             dlist = vars(resident)
+#             dlist['editingPlate'] = editingPlate
+#             sqlCursor.execute(updateResidentSQL, dlist)
+#             print(f"Updated resident with plate: {pltNum}")
+#         else:
+#             # Insert new resident
+#             insert_sql = """INSERT INTO residents 
+#                           (fName, lName, building, block, num, carModel, plateNum, status)
+#                           VALUES (:fName, :lName, :building, :block, :num, :carModel, :plateNum, :status)"""
+#             sqlCursor.execute(insert_sql, vars(resident))
+#             print(f"Inserted new resident with plate: {resident.plateNum}")
+
+#         sqlConnect.commit()
+#         print("Database transaction committed successfully")
+        
+#     except sqlite3.Error as error:
+#         print(f"SQLite error: {error}")
+#         print(f"Failed query params: {vars(resident)}")
+#         raise
+#     finally:
+#         if sqlConnect:
+#             sqlConnect.close()
+
 def insertResident(resident, update=False, editingPlate=''):
     """Insert or update resident in database"""
     try:
         sqlConnect = sqlite3.connect(dbResidents)
         sqlCursor = sqlConnect.cursor()
 
-        # Debug prints
-        print(f"Inserting resident data: {vars(resident)}")
-        print(f"Update mode: {update}")
-        print(f"Editing plate: {editingPlate}")
-
         if update:
-            pltNum = join_elements(convert_to_standard_format(resident.getPlateNumber()))
-            updateResidentSQL = """UPDATE residents 
-                               SET fName=:fName, lName=:lName, building=:building,
-                               block=:block, num=:num, carModel=:carModel,
-                               plateNum=:plateNum, status=:status
-                               WHERE plateNum=:editingPlate"""
-            dlist = vars(resident)
-            dlist['editingPlate'] = editingPlate
-            sqlCursor.execute(updateResidentSQL, dlist)
-            print(f"Updated resident with plate: {pltNum}")
+            updateResidentSQL = """
+                UPDATE residents 
+                SET fName=:fName, 
+                    lName=:lName, 
+                    building=:building,
+                    block=:block, 
+                    num=:num, 
+                    carModel=:carModel,
+                    plateNum=:plateNum, 
+                    status=:status
+                WHERE plateNum=:editingPlate
+            """
+            params = vars(resident)
+            params['editingPlate'] = editingPlate
+            sqlCursor.execute(updateResidentSQL, params)
         else:
             # Insert new resident
             insert_sql = """INSERT INTO residents 
                           (fName, lName, building, block, num, carModel, plateNum, status)
                           VALUES (:fName, :lName, :building, :block, :num, :carModel, :plateNum, :status)"""
             sqlCursor.execute(insert_sql, vars(resident))
-            print(f"Inserted new resident with plate: {resident.plateNum}")
-
+            #print(f"Inserted new resident with plate: {resident.plateNum}")    
+    
         sqlConnect.commit()
-        print("Database transaction committed successfully")
         
-    except sqlite3.Error as error:
-        print(f"SQLite error: {error}")
-        print(f"Failed query params: {vars(resident)}")
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
         raise
     finally:
-        if sqlConnect:
-            sqlConnect.close()
-
+        sqlConnect.close()
 
 def getResidentByName(conn, cur, lastname):
     """

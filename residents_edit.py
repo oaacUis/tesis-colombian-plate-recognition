@@ -170,7 +170,7 @@ class residentsAddNewWindow(QDialog):
         else:
             self.handle_new_resident(resident)
 
-        print(f"Resident data: {resident_data}")   
+        #print(f"Resident data: {resident_data}")   
         # Export to CSV
         self.export_to_csv(resident_data)
 
@@ -193,15 +193,27 @@ class residentsAddNewWindow(QDialog):
             'status_index': self.statusComboBox.currentIndex()
         }
 
+    # def handle_edit_resident(self, resident):
+    #     """Handle editing existing resident."""
+    #     insertResident(resident, True, self.residnetPlateEng)
+    #     self.show_status_message("Resident updated successfully", "success")
+    #     self.clear_form()
+    
     def handle_edit_resident(self, resident):
         """Handle editing existing resident."""
-        insertResident(resident, True, self.residnetPlateEng)
-        self.show_status_message("Resident updated successfully", "success")
-        self.clear_form()
+        try:
+            # Asegurar que tenemos la placa correcta para la actualización
+            old_plate = self.residnetPlate
+            insertResident(resident, True, old_plate)
+            self.show_status_message("Resident updated successfully", "success")
+            self.close()  # Cerrar la ventana después de actualizar
+        except Exception as e:
+            print(f"Error updating resident: {e}")
+            self.show_status_message("Error updating resident", "error")
 
     def handle_new_resident(self, resident):
         """Handle adding new resident."""
-        if not dbGetPlateExist(resident.plateNum):
+        if not dbGetPlateExist(self.residnetPlate):
             insertResident(resident)
             self.show_status_message("New resident added successfully", "success")
             self.clear_form()

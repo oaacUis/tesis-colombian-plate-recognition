@@ -42,8 +42,7 @@ class residentView(QDialog):
 
         # Get resident data using plate number
         resident_data = dbGetResidentDatasByPlate(
-            join_elements(convert_to_standard_format(split_string_language_specific(residnetPlate)))
-        )
+            residnetPlate)
 
         # Populate resident information
         self.populate_resident_info(resident_data)

@@ -130,8 +130,8 @@ class residentsWindow(QDialog):
         return message_box.clickedButton() == yes_button
 
     def searchLastName(self):
-        """Handle last name search functionality."""
-        search_text = self.searchTextBox.toPlainText()
+        """Search residents by last name, first name or plate number"""
+        search_text = self.searchTextBox.toPlainText().strip()
         self.refresh_table(search_text)
 
     # def refresh_table(self, last_name=''):
@@ -142,13 +142,26 @@ class residentsWindow(QDialog):
     #     for index, resident in enumerate(residents):
     #         self.populate_table_row(index, resident)
 
-    def refresh_table(self, last_name=''):
-        """Refresh the residents table with current data."""
-        self.tableWidget.setRowCount(0)  # Limpiar tabla primero
-        residents = dbGetAllResidents(whereLike=f"{last_name}" )
-        self.tableWidget.setRowCount(len(residents))
+    def refresh_table(self, search_text=''):
+        """Refresh table with filtered results"""
+        # Get all residents
+        residents = dbGetAllResidents()
+        filtered_residents = []
         
-        for index, resident in enumerate(residents):
+        # If search text exists, filter results
+        if search_text:
+            for resident in residents:
+                # Convert everything to lowercase for case-insensitive search
+                if (search_text.lower() in resident.getFirstName().lower() or
+                    search_text.lower() in resident.getLastName().lower() or
+                    search_text.lower() in resident.getPlateNumber(display=True).lower()):
+                    filtered_residents.append(resident)
+        else:
+            filtered_residents = residents
+    
+        # Update table
+        self.tableWidget.setRowCount(len(filtered_residents))
+        for index, resident in enumerate(filtered_residents):
             self.populate_table_row(index, resident)
     
     def populate_table_row(self, row_index, resident):

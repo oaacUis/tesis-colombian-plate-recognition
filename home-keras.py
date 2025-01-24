@@ -20,7 +20,7 @@ from helper.gui_maker import *
 warnings.filterwarnings("ignore", category=UserWarning)
 
 params = Parameters()
-videoSource = r"./proy1.mp4"  # input video path
+videoSource = r"./20250115_104129.mp4"  # input video path
 
 
 def device():

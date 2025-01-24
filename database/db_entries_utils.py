@@ -103,14 +103,7 @@ def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, ext
                         f"{number}_{datetime.now().strftime('%H-%M-%S_%Y-%m-%d')}.jpg"
                     )
                     saved = croppedPlate.save(plateImgName, "JPEG")
-                    if saved:
-                        print(f"[DEBUG] Imagen guardada correctamente en {plateImgName}")
-                        if os.path.exists(plateImgName):
-                            print(f"[DEBUG] El archivo existe: {plateImgName}")
-                        else:
-                            print(f"[DEBUG] El archivo no se encuentra en la ruta esperada: {plateImgName}")
-                    else:
-                        print(f"[ERROR] No se pudo guardar la imagen en {plateImgName}")
+                    
 
                     entries = Entries(plateConfAvg, charConfAvg, display_date, display_time, number, status)
 
@@ -130,14 +123,7 @@ def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, ext
                     )
 
                     saved = croppedPlate.save(plateImgName, "JPEG")
-                    if saved:
-                        print(f"[DEBUG] Imagen guardada correctamente en {plateImgName}")
-                        if os.path.exists(plateImgName):
-                            print(f"[DEBUG] El archivo existe: {plateImgName}")
-                        else:
-                            print(f"[DEBUG] El archivo no se encuentra en la ruta esperada: {plateImgName}")
-                    else:
-                        print(f"[ERROR] No se pudo guardar la imagen en {plateImgName}")
+                    
 
                     entries = Entries(plateConfAvg, charConfAvg, display_date, display_time, number, status)
 

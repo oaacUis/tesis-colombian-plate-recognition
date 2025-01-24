@@ -377,7 +377,7 @@ class Worker1(QThread):
         platesResult_df = pd.DataFrame(xyxy, columns=['xmin', 'ymin', 'xmax', 'ymax'])
         platesResult_df['confidence'] = confidence
 
-        plate_th = 70
+        plate_th = 60
         for _, plate in platesResult_df.iterrows():
             plateConf = int(plate['confidence'] * 100)
             #print("Confidence in prediction: ", plateConf, "%")

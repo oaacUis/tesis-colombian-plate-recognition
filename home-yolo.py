@@ -56,15 +56,20 @@ def get_device():
     Returns a torch.device object representing the device (CUDA, MPS, or CPU).
     """
     if torch.cuda.is_available():
+        print("cuda is available")
         return torch.device("cuda")
     elif torch.backends.mps.is_available():
+        print("mps is available")
         return torch.device("mps")
     else:
+        print("cpu is available")
         return torch.device("cpu")
+
+device = get_device()
 
 try:
     # modelPlate = torch.hub.load('model', 'custom', params.modelPlate_path, source='local', force_reload=True)
-    modelPlate = YOLO(params.modelPlate_path, verbose=False)
+    modelPlate = YOLO(params.modelPlate_path, verbose=False).to(device)
     # modelPlate = modelPlate.to(device())
 
     # modelCharX = torch.hub.load('model', 'custom', params.modelCharX_path, source='local', force_reload=True)
@@ -385,10 +390,27 @@ class Worker1(QThread):
                 self.highlightPlate(resize, plate)
                 croppedPlate = self.cropPlate(resize, plate)
                 plateText, char_detected, charConfAvg = self.detectPlateChars(croppedPlate)
+                plateText = self.correctPlateText(plateText)
                 #print("Plate detected: ", plateText)
                 self.emitPlateData(croppedPlate, plateText, char_detected, charConfAvg, plateConf)
 
         self.emitFrame(resize)
+
+    def correctPlateText(self, plateText: str):
+
+        text = plateText[:3]
+        wrongText = ['0', '1', '6', '8']
+        for char in text:
+            if char in wrongText:
+                text = text.replace(char, params.rectification_text_dict[char])
+        nums = plateText[3:]
+        wrongNums = ['O', 'I', 'G', 'B']
+        for num in nums:
+            if num in wrongNums:
+                nums = nums.replace(num, params.rectification_nums_dict[num])
+
+        correctedPlateText = ''.join([text, nums])
+        return correctedPlateText
 
     def prepareImage(self, frame):
         resize = cv2.resize(frame, (960, 540))

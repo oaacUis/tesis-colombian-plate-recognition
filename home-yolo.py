@@ -37,8 +37,7 @@ from enteries_window import EnteriesWindow
 from helper.gui_maker import configure_main_table_widget, create_image_label, on_label_double_click, center_widget, \
     get_status_text, get_status_color, \
     create_styled_button
-from helper.text_decorators import convert_to_local_format, join_elements, \
-    convert_to_standard_format, split_string_language_specific
+from helper.text_decorators import convert_to_local_format
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
@@ -279,6 +278,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
             plt_text_num = convert_to_local_format(plate_text[:], display=True)
+            #print(f"Placa detectada: {plt_text_num}")
             self.plate_text_num.setText(plt_text_num)
 
             # Clean the plate text and get the status from the database

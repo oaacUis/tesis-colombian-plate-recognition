@@ -24,11 +24,7 @@ from helper.gui_maker import (
     create_styled_button,
     center_widget
 )
-from helper.text_decorators import (
-    convert_to_standard_format,
-    split_string_language_specific,
-    join_elements
-)
+
 from residents_edit import residentsAddNewWindow
 
 params = Parameters()
@@ -243,7 +239,7 @@ class residentsWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentsWindow()
-    window.setWindowTitle('Community Residents List')  # Changed from Persian to English
+    window.setWindowTitle('Community Residents List')  
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

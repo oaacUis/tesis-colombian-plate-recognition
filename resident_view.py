@@ -11,11 +11,7 @@ from qtpy.uic import loadUi
 from configParams import Parameters
 from database.db_resident_utils import dbGetResidentDatasByPlate
 from helper.gui_maker import get_status_text
-from helper.text_decorators import (
-    convert_to_standard_format,
-    split_string_language_specific,
-    join_elements
-)
+
 
 params = Parameters()
 
@@ -74,6 +70,6 @@ class residentView(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentView()
-    window.setWindowTitle('New Resident Registration')  # Changed from Persian to English
+    window.setWindowTitle('New Resident Registration')  
     window.show()
     sys.exit(app.exec_())

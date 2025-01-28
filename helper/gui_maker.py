@@ -149,7 +149,7 @@ def populate_main_table_with_data(self, dfReadEnteries):
                                    (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
         self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
         self.tableWidget.setItem(each_row, 3,
-                               QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3]).persian_string()))
+                               QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3])))
 
         Image = QImage()
         Image.load(dfReadEnteries.iloc[each_row][4])
@@ -181,7 +181,7 @@ def on_label_double_click(event, source_object=None):
     """
     w = QDialog()
     w.setFixedSize(600, 132)
-    w.setWindowTitle("License Plate View")  # Changed from Persian
+    w.setWindowTitle("License Plate View")  # Changed from RegValidator
 
     imageLabel = QLabel(w)
     imageLabel.setText("")

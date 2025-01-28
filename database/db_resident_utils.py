@@ -12,7 +12,7 @@ from pathlib import Path
 
 from configParams import Parameters
 from database.classResidents import Resident
-from helper.text_decorators import convert_to_standard_format, join_elements, check_similarity_threshold
+from helper.text_decorators import check_similarity_threshold
 
 params = Parameters()
 

@@ -20,11 +20,7 @@ from helper.gui_maker import (
     center_widget,
     configure_edit_table_widget
 )
-from helper.text_decorators import (
-    convert_to_standard_format, 
-    split_string_language_specific, 
-    join_elements
-)
+
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 
@@ -51,11 +47,7 @@ class EnteriesWindow(QDialog):
         configure_edit_table_widget(self)
 
         if isSearching:
-            # self.residnetPlateEng = join_elements(
-            #     convert_to_standard_format(split_string_language_specific(residnetPlate))
-            # )
-            # print(f"self.residnetPlateEng iffff: {self.residnetPlateEng}")
-            # print(f"residnetPlateeeee: {residnetPlate}")
+            
             self.refresh_table(residnetPlate)
         else:
             self.refresh_table()
@@ -156,7 +148,7 @@ class EnteriesWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = EnteriesWindow()
-    window.setWindowTitle('Community Entry Records')  # Changed from Persian to English
+    window.setWindowTitle('Community Entry Records')  # Set window title
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

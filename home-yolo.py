@@ -282,7 +282,6 @@ class MainWindow(QtWidgets.QMainWindow):
             # Set the plate view
             self.plate_view.setPixmap(QPixmap.fromImage(scaled_plate))
 
-            # Convert the plate text to Persian and set the text for the plate number and plate text in Persian
             plt_text_num = convert_to_local_format(plate_text[:], display=True)
             self.plate_text_num.setText(plt_text_num)
 

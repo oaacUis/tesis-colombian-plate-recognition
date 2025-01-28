@@ -156,7 +156,7 @@ class EnteriesWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = EnteriesWindow()
-    window.setWindowTitle('Community Entry Records')  # Changed from Persian to English
+    window.setWindowTitle('Community Entry Records')  # Changed to English
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

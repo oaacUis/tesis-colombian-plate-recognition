@@ -104,7 +104,7 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 - ai: OK
 - business: OK
 - database: In process to remove somethings 
-    - classEntries: To modify
+    - classEntries: OK
     - classResidents: To modify
     - db_entries_utils: OK
     - db_resident_utils: To modify

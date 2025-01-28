@@ -63,6 +63,9 @@ class Parameters:
                          'V': '40', 'Y': '41', 'PwD': '42'}
 
         self.char_id_dict = {v: k for k, v in self.char_dict.items()}
+        
+        self.rectification_text_dict = {'0': 'O', '1': 'I', '6': 'G', '8': 'B'} # [0, 1, 6, 8]
+        self.rectification_nums_dict = {'O': '0', 'I': '1', 'G': '6', 'B': '8'} # [O, I, G, B]
 
         # English representation of numbers and letters
         self.alphabetP = {

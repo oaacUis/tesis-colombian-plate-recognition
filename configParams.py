@@ -48,7 +48,7 @@ class Parameters:
         external_service_config = config_object["EXTERNAL-SERVICE"]
         self.external_service_url = external_service_config["url"]
 
-        self.video_path = r"./proy1.mp4"
+        self.video_path = r"./20250125_101943.mp4"
         
         self.cpu_or_cuda = "cpu"  # choose device; "cpu" or "cuda"(if cuda is available)
 

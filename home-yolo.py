@@ -104,6 +104,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.enteriesListButton.clicked.connect(self.show_entries_list)
         
 
+        self.last_detection_time = 0
+        self.detection_cooldown = 7  # 500ms cooldown
+        #print(f"Detection cooldown: {self.detection_cooldown}")
+        
         exitAct = QAction("Exit", self)
         exitAct.setShortcut("Ctrl+Q")
 
@@ -269,42 +273,51 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_plate_data_update(self, cropped_plate: QImage, plate_text: str, char_conf_avg: float,
                              plate_conf_avg: float) -> None:
 
+        current_time = time.time()
+        plate_text = convert_to_local_format(plate_text[:], display=True)
+
         # Check if the plate text is 8 characters long and the character confidence is above 70
-        if len(plate_text) == 6 and char_conf_avg >= 70:
+        if len(plate_text) == 6 and char_conf_avg >= 70 and plate_text[-3:].isdigit():
+            if current_time - self.last_detection_time >= self.detection_cooldown:
+                self.last_detection_time = current_time
+                #print(f"Placa detectada adentro del if: {plate_text}")
+                
+                # Set the plate view to display the cropped plate
+                scaled_plate = cropped_plate.scaled(300, 66, 
+                                            QtCore.Qt.KeepAspectRatio,
+                                            QtCore.Qt.SmoothTransformation)
+                # Set the plate view
+                self.plate_view.setPixmap(QPixmap.fromImage(scaled_plate))
+
+                # Set the plate text
+                plt_text_num = plate_text
+                #print(f"Placa detectada con convert to local: {plt_text_num}")
+                self.plate_text_num.setText(plt_text_num)
+
+                # Clean the plate text and get the status from the database
+                plate_text_clean = plt_text_num
+                status = db_get_plate_status(plt_text_num)
+
+                # Update the plate owner and permission
+                self.update_plate_owner(db_get_plate_owner_name(plate_text_clean))
+                self.update_plate_permission(status)
+
+                # Create data for send into services
+                external_service_data = {
+                    'plate_number': plt_text_num,
+                    'image': cropped_plate
+                }
+                
+                # print(f"[DEBUG] Enviando imagen con tamaño: {cropped_plate.width()}x{cropped_plate.height()}")
+                # Add the plate text, character confidence, plate confidence, cropped plate, and status to the database
+                #print(f"Placa detectada: {plt_text_num}")
+                if len(plt_text_num) == 6:
+                    db_entries_time(plt_text_num, char_conf_avg, plate_conf_avg, cropped_plate, status,
+                                    external_service_data=external_service_data)
+                self.Worker2.start()
             
-            #print(f"Placa detectada: {plate_text}")
             
-            # Set the plate view to display the cropped plate
-            scaled_plate = cropped_plate.scaled(300, 66, 
-                                          QtCore.Qt.KeepAspectRatio,
-                                          QtCore.Qt.SmoothTransformation)
-            # Set the plate view
-            self.plate_view.setPixmap(QPixmap.fromImage(scaled_plate))
-
-            # Set the plate text
-            plt_text_num = convert_to_local_format(plate_text[:], display=True)
-            #print(f"Placa detectada: {plt_text_num}")
-            self.plate_text_num.setText(plt_text_num)
-
-            # Clean the plate text and get the status from the database
-            plate_text_clean = plt_text_num
-            status = db_get_plate_status(plt_text_num)
-
-            # Update the plate owner and permission
-            self.update_plate_owner(db_get_plate_owner_name(plate_text_clean))
-            self.update_plate_permission(status)
-
-            # Create data for send into services
-            external_service_data = {
-                'plate_number': plt_text_num,
-                'image': cropped_plate
-            }
             
-            # print(f"[DEBUG] Enviando imagen con tamaño: {cropped_plate.width()}x{cropped_plate.height()}")
-            # Add the plate text, character confidence, plate confidence, cropped plate, and status to the database
-            db_entries_time(plt_text_num, char_conf_avg, plate_conf_avg, cropped_plate, status,
-                            external_service_data=external_service_data)
-            self.Worker2.start()
 
     def update_plate_owner(self, name):
         if name:

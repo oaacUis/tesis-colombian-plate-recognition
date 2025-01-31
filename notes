@@ -160,5 +160,6 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 
 - fgsg/gsg/sdgdg
     -Helper is without persians features
+    - Ahora solo se muestra en la pantalla si los últimos 3 datos de la placa son un número y se colocó un enfriamento para la captura de los datos. 
 
 

@@ -41,10 +41,22 @@ from helper.text_decorators import convert_to_local_format
 from resident_view import residentView
 from residents_edit import residentsAddNewWindow
 from residents_main import residentsWindow
+from settings_window import SettingsWindow
 
 warnings.filterwarnings("ignore", category=UserWarning)
 params = Parameters()
 import sys
+from torch.nn import Conv2d, Upsample, BatchNorm2d
+from ultralytics.nn.tasks import DetectionModel
+from ultralytics.nn.modules.conv import Conv, Concat, DWConv
+from ultralytics.nn.modules.block import C2f, SPPF, Bottleneck, DFL
+from ultralytics.nn.modules.head import Detect
+import torch.serialization
+from torch.nn.modules.activation import SiLU
+from torch.nn.modules.container import ModuleList
+from torch.nn.modules.pooling import MaxPool2d
+from torch import nn
+
 
 sys.path.append('model')
 
@@ -68,11 +80,28 @@ device = get_device()
 
 try:
     # modelPlate = torch.hub.load('model', 'custom', params.modelPlate_path, source='local', force_reload=True)
+    torch.serialization.add_safe_globals([
+        nn.Sequential,
+        DetectionModel,
+        Conv,
+        Conv2d,
+        C2f,
+        SPPF,
+        Upsample,
+        Concat,
+        Detect,
+        BatchNorm2d,
+        Bottleneck,
+        MaxPool2d,
+        DWConv,
+        DFL
+    ])
+    torch.serialization.add_safe_globals([SiLU,ModuleList])
     modelPlate = YOLO(params.modelPlate_path, verbose=False).to(device)
     # modelPlate = modelPlate.to(device())
 
     # modelCharX = torch.hub.load('model', 'custom', params.modelCharX_path, source='local', force_reload=True)
-    modelCharX = YOLO(params.modelCharX_path, verbose=False)
+    modelCharX = YOLO(params.modelCharX_path, verbose=False).to(device)
     print("Models loaded successfully")
 
 except Exception as e:
@@ -98,14 +127,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.plateImage = None
         self.residentsWindow = None
         self.enterieswindow = None
+        self.settingsWindow = None # Crear una variable para almacenar la ventana de configuración
+        self.settings = {}  # Diccionario para almacenar la configuración de pico y placa
         self.startButton.clicked.connect(self.start_webcam)
         self.stopButton.clicked.connect(self.stop_webcam)
         self.usersListButton.clicked.connect(self.show_residents_list)
         self.enteriesListButton.clicked.connect(self.show_entries_list)
+        self.settingsButton.clicked.connect(self.open_settings_window)  # Conectar el botón settingsButton
         
 
         self.last_detection_time = 0
-        self.detection_cooldown = 7  # 500ms cooldown
+        self.detection_cooldown = 0.05  # 500ms cooldown
         #print(f"Detection cooldown: {self.detection_cooldown}")
         
         exitAct = QAction("Exit", self)
@@ -275,9 +307,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         current_time = time.time()
         plate_text = convert_to_local_format(plate_text[:], display=True)
+        
 
         # Check if the plate text is 8 characters long and the character confidence is above 70
-        if len(plate_text) == 6 and char_conf_avg >= 70 and plate_text[-3:].isdigit():
+        if len(plate_text) == 6 and char_conf_avg >= 70 and plate_text[-3:].isdigit() :
             if current_time - self.last_detection_time >= self.detection_cooldown:
                 self.last_detection_time = current_time
                 #print(f"Placa detectada adentro del if: {plate_text}")
@@ -291,7 +324,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 # Set the plate text
                 plt_text_num = plate_text
-                #print(f"Placa detectada con convert to local: {plt_text_num}")
+                
                 self.plate_text_num.setText(plt_text_num)
 
                 # Clean the plate text and get the status from the database
@@ -340,6 +373,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def stop_webcam(self):
         self.Worker1.stop()
+        
+    def open_settings_window(self):
+        if self.settingsWindow is None:
+            self.settingsWindow = SettingsWindow(self)
+        if self.settingsWindow.exec() == QtWidgets.QDialog.Accepted:
+            self.settings = self.settingsWindow.get_settings()
+            print("Configuración guardada:", self.settings)    
 
 
 class Worker1(QThread):
@@ -450,25 +490,58 @@ class Worker1(QThread):
         self.prev_frame_time = new_frame_time
         self.currentFPS = fps  # Save the current FPS for later drawing on the frame
 
+    # def emitFrame(self, resize):
+    #     if hasattr(self, 'currentFPS'):  # Check if currentFPS has been calculated
+    #         imgModel.draw_fps(resize, self.currentFPS)  # Draw FPS on the frame
+    #     mainFrame = QImage(resize.data, resize.shape[1], resize.shape[0], QImage.Format_RGB888)
+    #     self.mainViewUpdate.emit(mainFrame)
     def emitFrame(self, resize):
+        if not self.ThreadActive:
+            return  # No emitir si el hilo no está activo
         if hasattr(self, 'currentFPS'):  # Check if currentFPS has been calculated
             imgModel.draw_fps(resize, self.currentFPS)  # Draw FPS on the frame
         mainFrame = QImage(resize.data, resize.shape[1], resize.shape[0], QImage.Format_RGB888)
         self.mainViewUpdate.emit(mainFrame)
 
+    # def detectPlateChars(self, croppedPlate):
+    #     chars, confidences, char_detected = [], [], []
+    #     results = modelCharX(croppedPlate, verbose=False, show=False, save=False)[0]
+    #     char_id_dict1 = results.names
+
+    #     boxes = results.boxes.xyxy.numpy()  # Convertir a NumPy
+    #     predictions = results.boxes.cls.numpy()  # Clases predichas
+    #     confidence = results.boxes.conf.numpy()  # Confianza de las predicciones
+
+    #     detections = [(box, pred, conf) for box, pred, conf in zip(boxes, predictions, confidence)]
+    #     detections_sorted = sorted(detections, key=lambda x: x[0][0])
+    #     chars_th = 0.5
+
+    #     for det in detections_sorted:
+    #         conf = det[2]
+    #         if conf > chars_th:
+    #             cls = det[1]
+    #             char = char_id_dict1.get(int(cls))
+    #             chars.append(char)
+    #             confidences.append(conf)
+    #             char_detected.append(list(det)) # Char position
+    #     #print("Plate detected: ", ''.join(chars))
+    #     charConfAvg = round(statistics.mean(confidences) * 100) if confidences else 0
+    #     return ''.join(chars), char_detected, charConfAvg
+    
     def detectPlateChars(self, croppedPlate):
         chars, confidences, char_detected = [], [], []
         results = modelCharX(croppedPlate, verbose=False, show=False, save=False)[0]
         char_id_dict1 = results.names
-
-        boxes = results.boxes.xyxy.numpy()  # Convertir a NumPy
-        predictions = results.boxes.cls.numpy()  # Clases predichas
-        confidence = results.boxes.conf.numpy()  # Confianza de las predicciones
-
+        
+        # Mover los tensores al CPU antes de convertirlos a NumPy
+        boxes = results.boxes.xyxy.cpu().numpy()  # Convertir a NumPy
+        predictions = results.boxes.cls.cpu().numpy()  # Clases predichas
+        confidence = results.boxes.conf.cpu().numpy()  # Confianza de las predicciones
+        
         detections = [(box, pred, conf) for box, pred, conf in zip(boxes, predictions, confidence)]
         detections_sorted = sorted(detections, key=lambda x: x[0][0])
         chars_th = 0.5
-
+        
         for det in detections_sorted:
             conf = det[2]
             if conf > chars_th:
@@ -476,8 +549,9 @@ class Worker1(QThread):
                 char = char_id_dict1.get(int(cls))
                 chars.append(char)
                 confidences.append(conf)
-                char_detected.append(list(det)) # Char position
-        #print("Plate detected: ", ''.join(chars))
+                char_detected.append(list(det))  # Char position
+        
+        # print("Plate detected: ", ''.join(chars))
         charConfAvg = round(statistics.mean(confidences) * 100) if confidences else 0
         return ''.join(chars), char_detected, charConfAvg
 

@@ -161,5 +161,8 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 - fgsg/gsg/sdgdg
     -Helper is without persians features
     - Ahora solo se muestra en la pantalla si los últimos 3 datos de la placa son un número y se colocó un enfriamento para la captura de los datos. 
+    - Se configura para que el código funcone correctamente con una GPU utilizando Cuda
+    - Se Agrega el arvhico llamado settings_window,py para que al hacer clic en el botón de settings se habra una ventana poder guardar el pico y placa de la semana. 
+    
 
 

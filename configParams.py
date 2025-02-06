@@ -48,9 +48,9 @@ class Parameters:
         external_service_config = config_object["EXTERNAL-SERVICE"]
         self.external_service_url = external_service_config["url"]
 
-        self.video_path = r"./20250125_101943.mp4"
+        self.video_path = r"./proy1.mp4"
         
-        self.cpu_or_cuda = "cpu"  # choose device; "cpu" or "cuda"(if cuda is available)
+        self.cpu_or_cuda = "cuda"  # choose device; "cpu" or "cuda"(if cuda is available)
 
         self.label_map = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'D', 'Gh', 'H', 'J', 'L', 'M',
                          'N', 'P', 'PuV', 'PwD', 'Sad', 'Sin', 'T', 'Taxi', 'V', 'Y']

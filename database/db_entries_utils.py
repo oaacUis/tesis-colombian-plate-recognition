@@ -108,7 +108,7 @@ def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, ext
                     entries = Entries(plateConfAvg, charConfAvg, display_date, display_time, number, status)
 
                     insertEntries(entries)
-                    send_data_to_external_service(external_service_data)
+                    # send_data_to_external_service(external_service_data)
                 else:
                     pass
             else:
@@ -128,7 +128,7 @@ def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, ext
                     entries = Entries(plateConfAvg, charConfAvg, display_date, display_time, number, status)
 
                     insertEntries(entries)
-                    send_data_to_external_service(external_service_data)
+                    # send_data_to_external_service(external_service_data)
 
 
 def getFieldNames(fieldsList):

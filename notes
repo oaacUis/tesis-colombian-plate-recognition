@@ -109,7 +109,7 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
     - db_entries_utils: OK
     - db_resident_utils: To modify
 - gui: Ok. plateQLineEdit.py script should be erased in the end.
-- helper: In process. jalali, persian_typer, text_decorator are deprecated files that perform persian translation.
+- helper: Ok. maybe update functions and their performance
 - hdf5: Ok. Dummy model ready
 - icons: OK. Maybe can be update.
 - yolov8: OK. Updated
@@ -123,7 +123,7 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 
 # main files (in main folder)
 - config.ini: OK. Maybe check some parameters.
-- configParams: In process. Have some persian related func that needs to be change and tested.
+- configParams: OK. 
 - enteries_window: In process. Have things to be translate and rebuild from persian functions.
 - home-keras: In process. Needs to be consider how useful is using a keras model for main application.
 - home-yolo: In process. MAIN FILE. Needs to be rebuild considering all the proyect folder.
@@ -146,7 +146,7 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
     - Files in gui dir were translated and readapted.
     - resident_view.py, residents_edit.py and residents_main.py were translated.
 
-- 23/01/24:
+- 23/01/25:
     -The top left part of the GUI has been fixed to correctly display the data.
     -The GUI table now updates correctly.
     -The "show information" button now works correctly and displays the information correctly.
@@ -156,5 +156,15 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
     -In the list of residents the buttons: edit, delete and entries now work correctly
     -The list of entries is displayed correctly
     -Some commented code needs to be deleted, some functions that are not being used and also the program needs to be optimized.    
+
+
+- 08/02/2025
+    -Helper is without persians features
+    - Now it only shows on the screen if the last 3 data on the plate are a number and a cooling was set for data capture. 
+    - It is configured so that the code works correctly with a GPU using Cuda
+    - The file called settings_window,py is added so that when you click on the settings button, a window will open to save the peak and plate of the week. 
+    -configParams it's ok 
+    - The requirements.txt file is updated with the necessary libraries.
+    
 
 

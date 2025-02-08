@@ -48,7 +48,7 @@ class plateQLineEdit(QLineEdit):
         """
         super().__init__(arg__1, parent, *args, **kwargs)
 
-    def persianRegValidator(self, regExType):
+    def RegValidator(self, regExType):
         """
         Get the appropriate regular expression validator based on field type.
 
@@ -86,7 +86,7 @@ class plateQLineEdit(QLineEdit):
         Args:
             event: Key press event
         """
-        regExField = self.persianRegValidator(self.objectName())
+        regExField = self.RegValidator(self.objectName())
         validator = QRegularExpressionValidator(regExField)
         state = validator.validate(event.text(), 0)
         

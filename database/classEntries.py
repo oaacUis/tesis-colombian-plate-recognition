@@ -52,14 +52,12 @@ class Entries:
         """
         return self.eTime
 
-    def getDate(self, persian=False):
-        # Debug prints
-        # print(f"eDate value: {self.eDate}")
-        # print(f"eDate type: {type(self.eDate)}")
-        if persian:
-            print(f"Está entrando como persa")
-            mesaje = "Está entrando como persa"
-            return mesaje
+    def getDate(self):
+        """ Get the entry date.
+        
+        Returns:
+            str: The entry date
+        """
 
         return self.eDate
 

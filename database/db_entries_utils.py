@@ -81,7 +81,7 @@ similarityTemp = ''
 
 def db_entries_time(number, charConfAvg, plateConfAvg, croppedPlate, status, external_service_data: dict = None):
     global similarityTemp
-    # print(f"[DEBUG] Recibida imagen para la placa: {number}")
+    #print(f"[DEBUG] External Service Data: {external_service_data}")
     # print(f"[DEBUG] Tipo de objeto: {type(croppedPlate)}")
     isSimilar = check_similarity_threshold(similarityTemp, number)
     if not isSimilar:

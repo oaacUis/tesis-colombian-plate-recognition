@@ -18,12 +18,7 @@ from configParams import getFieldNames, Parameters
 from database.classResidents import Resident
 from database.db_resident_utils import insertResident, dbGetPlateExist, dbGetResidentDatasByPlate
 from gui import plateQLineEdit
-from helper.text_decorators import (
-    convert_to_standard_format,
-    split_string_language_specific,
-    join_elements,
-    reshape_text
-)
+
 
 params = Parameters()
 
@@ -50,9 +45,7 @@ class residentsAddNewWindow(QDialog):
         self.isNew = isNew
         self.isInfo = isInfo
         self.residnetPlate = residnetPlate
-        self.residnetPlateEng = join_elements(
-            convert_to_standard_format(split_string_language_specific(residnetPlate))
-        )
+       
 
         # Setup UI
         loadUi('./gui/residentNew.ui', self)
@@ -78,7 +71,6 @@ class residentsAddNewWindow(QDialog):
         # Setup comboboxes
         fieldsList = ['fName', 'lName', 'building', 'block', 'num', 'carModel', 'plateNum', 'status']
         fieldsList = getFieldNames(fieldsList)
-        #self.plateAlphabetComboBox.addItems(params.plateAlphabet.values())
         # Configurar el statusComboBox
         
         self.statusComboBox.setFrame(True)
@@ -102,7 +94,7 @@ class residentsAddNewWindow(QDialog):
     def configure_new_mode(self):
         """Configure window for adding new resident."""
         self.setWindowTitle('Add New Resident')
-        self.newResident = reshape_text(self.residnetPlateEng)
+        self.newResident = self.residnetPlate
         self.populate_plate_data()
 
     def populate_resident_data(self):
@@ -176,8 +168,7 @@ class residentsAddNewWindow(QDialog):
 
     def collect_form_data(self):
         """Collect and return form field data."""
-        #inv_map = {v: k for k, v in params.plateAlphabet.items()}
-        #plate_alphabet = inv_map[self.plateAlphabetComboBox.currentText()]
+        
         
         plate_number = f"{self.plateTextNum_1.getText()}{self.plateTextNum_4.getText()}"
         #print(f"plate_number en collect_form_data: {plate_number}")
@@ -193,11 +184,6 @@ class residentsAddNewWindow(QDialog):
             'status_index': self.statusComboBox.currentIndex()
         }
 
-    # def handle_edit_resident(self, resident):
-    #     """Handle editing existing resident."""
-    #     insertResident(resident, True, self.residnetPlateEng)
-    #     self.show_status_message("Resident updated successfully", "success")
-    #     self.clear_form()
     
     def handle_edit_resident(self, resident):
         """Handle editing existing resident."""
@@ -263,6 +249,6 @@ class residentsAddNewWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = residentsAddNewWindow()
-    window.setWindowTitle('Add New Resident')  # Changed from Persian to English
+    window.setWindowTitle('Add New Resident')  
     window.show()
     sys.exit(app.exec_())

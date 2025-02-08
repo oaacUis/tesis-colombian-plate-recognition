@@ -50,19 +50,7 @@ class Parameters:
 
         self.video_path = r"./proy1.mp4"
         
-        self.cpu_or_cuda = "cpu"  # choose device; "cpu" or "cuda"(if cuda is available)
-
-        self.label_map = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'D', 'Gh', 'H', 'J', 'L', 'M',
-                         'N', 'P', 'PuV', 'PwD', 'Sad', 'Sin', 'T', 'Taxi', 'V', 'Y']
-
-        self.char_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8',
-                         '9': '9', 'A': '10', 'B': '11', 'P': '12', 'Taxi': '13', 'A': '14', 'J': '15', 'Ch': '16',
-                         'H': '17', 'Kh': '18', 'D': '19', 'Th': '20', 'R': '21', 'Z': '22', 'Zh': '23', 'Sin': '24',
-                         'Sh': '25', 'Sad': '26', 'Dh': '27', 'T': '28', 'Tz': '29', 'PuV': '30', 'Gh': '31',
-                         'F': '32', 'Gh': '33', 'K': '34', 'G': '35', 'L': '36', 'M': '37', 'N': '38', 'H': '39',
-                         'V': '40', 'Y': '41', 'PwD': '42'}
-
-        self.char_id_dict = {v: k for k, v in self.char_dict.items()}
+        self.cpu_or_cuda = "cuda"  # choose device; "cpu" or "cuda"(if cuda is available)
         
         self.rectification_text_dict = {'0': 'O', '1': 'I', '6': 'G', '8': 'B'} # [0, 1, 6, 8]
         self.rectification_nums_dict = {'O': '0', 'I': '1', 'G': '6', 'B': '8'} # [O, I, G, B]
@@ -99,59 +87,6 @@ class Parameters:
             "Y": "Y",
         }
 
-        self.alphabetP2 = self.alphabetP.copy()
-
-        self.alphabetE = {
-            "ZERO": "0",
-            "ONE": "1",
-            "TWO": "2",
-            "THREE": "3",
-            "FOUR": "4",
-            "FIVE": "5",
-            "SIX": "6",
-            "SEVEN": "7",
-            "EIGHT": "8",
-            "NINE": "9",
-            'ALEF': 'A',
-            'BEH': 'B',
-            'DAL': 'D',
-            'QAF': 'Gh',
-            'HEH': 'H',
-            'JEEM': 'J',
-            'LAM': 'L',
-            'MEEM': 'M',
-            'NOON': 'N',
-            'PEH': 'P',
-            'AIN': 'PuV',
-            'JEH': 'PwD',
-            'SAD': 'Sad',
-            'SEEN': 'Sin',
-            'TAH': 'T',
-            'TEH': 'Taxi',
-            'WAW': 'V',
-            'YEH': 'Y',
-        }
-
-        self.plateAlphabet = {
-            "A": "A",
-            "B": "B",
-            "D": "D",
-            "Gh": "Gh",
-            "H": "H",
-            "J": "J",
-            "L": "L",
-            "M": "M",
-            "N": "N",
-            "P": "P",
-            "PuV": "PuV",
-            "PwD": "PwD",
-            "Sad": "Sad",
-            "Sin": "Sin",
-            "T": "T",
-            "Taxi": "Taxi",
-            "V": "V",
-            "Y": "Y",
-        }
 
         self.fieldNames = {
             'fName': 'First Name',

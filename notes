@@ -164,6 +164,7 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
     - It is configured so that the code works correctly with a GPU using Cuda
     - The file called settings_window,py is added so that when you click on the settings button, a window will open to save the peak and plate of the week. 
     -configParams it's ok 
+    - The requirements.txt file is updated with the necessary libraries.
     
 
 

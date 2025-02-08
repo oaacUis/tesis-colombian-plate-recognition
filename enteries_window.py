@@ -148,11 +148,7 @@ class EnteriesWindow(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = EnteriesWindow()
-<<<<<<< HEAD
-    window.setWindowTitle('Community Entry Records')  # Changed to English
-=======
     window.setWindowTitle('Community Entry Records')  # Set window title
->>>>>>> cd7490031a1ba9d60909dcd307c05ed28e7354a2
     center_widget(window)
     window.show()
     sys.exit(app.exec_())

@@ -350,32 +350,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.Worker2.start()
             
             
-<<<<<<< HEAD
-            # Set the plate view to display the cropped plate
-            scaled_plate = cropped_plate.scaled(300, 66, 
-                                          QtCore.Qt.KeepAspectRatio,
-                                          QtCore.Qt.SmoothTransformation)
-            # Set the plate view
-            self.plate_view.setPixmap(QPixmap.fromImage(scaled_plate))
-
-            plt_text_num = convert_to_local_format(plate_text[:], display=True)
-            self.plate_text_num.setText(plt_text_num)
-
-            # Clean the plate text and get the status from the database
-            plate_text_clean = plt_text_num
-            status = db_get_plate_status(plt_text_num)
-
-            # Update the plate owner and permission
-            self.update_plate_owner(db_get_plate_owner_name(plate_text_clean))
-            self.update_plate_permission(status)
-
-            # Create data for send into services
-            external_service_data = {
-                'plate_number': plt_text_num,
-                'image': cropped_plate
-            }
-=======
->>>>>>> cd7490031a1ba9d60909dcd307c05ed28e7354a2
             
 
     def update_plate_owner(self, name):

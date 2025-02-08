@@ -1,16 +1,24 @@
+#settings_window.py
+
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
 class SettingsWindow(QDialog):
     def __init__(self, parent=None):
         super(SettingsWindow, self).__init__(parent)
-        self.setWindowTitle("Configuración de Pico y Placa")
+        self.setWindowTitle("Settings")
         self.setFixedSize(400, 300)
         
         self.days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
         self.day_inputs = {}
         
         layout = QVBoxLayout()
+        
+        # Agregar un título al inicio
+        title_label = QLabel("Configuración de Pico y Placa")
+        title_label.setAlignment(QtCore.Qt.AlignCenter)
+        title_label.setStyleSheet("font-weight: bold; font-size: 16px;")
+        layout.addWidget(title_label)
         
         for day in self.days:
             day_layout = QtWidgets.QHBoxLayout()
@@ -25,7 +33,7 @@ class SettingsWindow(QDialog):
             layout.addLayout(day_layout)
             self.day_inputs[day] = (input1, input2)
         
-        self.save_button = QPushButton("Guardar")
+        self.save_button = QPushButton("Save")
         self.save_button.clicked.connect(self.save_settings)
         layout.addWidget(self.save_button, alignment=QtCore.Qt.AlignCenter)
         

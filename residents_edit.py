@@ -71,7 +71,6 @@ class residentsAddNewWindow(QDialog):
         # Setup comboboxes
         fieldsList = ['fName', 'lName', 'building', 'block', 'num', 'carModel', 'plateNum', 'status']
         fieldsList = getFieldNames(fieldsList)
-        #self.plateAlphabetComboBox.addItems(params.plateAlphabet.values())
         # Configurar el statusComboBox
         
         self.statusComboBox.setFrame(True)
@@ -169,8 +168,7 @@ class residentsAddNewWindow(QDialog):
 
     def collect_form_data(self):
         """Collect and return form field data."""
-        #inv_map = {v: k for k, v in params.plateAlphabet.items()}
-        #plate_alphabet = inv_map[self.plateAlphabetComboBox.currentText()]
+        
         
         plate_number = f"{self.plateTextNum_1.getText()}{self.plateTextNum_4.getText()}"
         #print(f"plate_number en collect_form_data: {plate_number}")

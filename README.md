@@ -237,12 +237,12 @@ GPL-3.0. See the [LICENSE](LICENSE) file for details. It means you can:
 If you have questions, suggestions or want to report issues, you can contact the developers:
 
 - Brayan Fonseca: 
-   ✉️ BrayamFonck: [GitHub](https://github.com/BrayamFonck)
-   💼 Brayan Fonseca: [LinkedIn](https://www.linkedin.com/in/brayan-steven-fonseca-gonzalez/)
+   - ✉️ BrayamFonck: [GitHub](https://github.com/BrayamFonck)
+   - 💼 Brayan Fonseca: [LinkedIn](https://www.linkedin.com/in/brayan-steven-fonseca-gonzalez/)
 
 - Otto Andrade: 
-   ✉️ oaacUis: [GitHub](https://github.com/oaacUis)
-   💼 Otto Andrade: [LinkedIn](https://www.linkedin.com/in/otto-andrade/)
+   - ✉️ oaacUis: [GitHub](https://github.com/oaacUis)
+   - 💼 Otto Andrade: [LinkedIn](https://www.linkedin.com/in/otto-andrade/)
 
 
 

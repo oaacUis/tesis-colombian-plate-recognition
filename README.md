@@ -14,21 +14,22 @@ This system aims to tackle the unique challenges associated with Colombian licen
 - **User-Friendly GUI**: Intuitive graphical user interface simplifies interactions with the system.
 
 ## 🛠 Project Structure
-The project is organized into clear and well-defined directories for easy understanding and use:
 
+```text
 ├── LICENSE                     # Project License (GPLv3)
 ├── config.ini                  # Main system configuration
-├── requirements.txt             # Project Dependencies
-├── ai/                         # AI Models and Scripts
-├── base/                       # Base data(CSVs)
-├── database/                   # Scripts and utilities for the database
-├── gui/                        # .ui files for the graphical interface
-├── helper/                     # Auxiliary functions
-├── icons/                      # Icons used in the GUI
-├── model/                      # Trained models (.pt)
-├── services/                   # External services and utilities
-├── streamlit_app.py            # Streamlit app for demos
-└── yolov8/                     # YOLOv8 Implementation
+├── requirements.txt            # Project Dependencies
+├── ai/                        # AI Models and Scripts
+├── base/                      # Base data (CSV files)
+├── database/                  # Scripts and utilities for the database
+├── gui/                       # .ui files for the graphical interface
+├── helper/                    # Auxiliary functions
+├── icons/                     # Icons used in the GUI
+├── model/                     # Trained models (.pt)
+├── services/                  # External services and utilities
+├── streamlit_app.py           # Streamlit app for demos
+└── yolov8/                    # YOLOv8 Implementation
+```
 
 
 ---

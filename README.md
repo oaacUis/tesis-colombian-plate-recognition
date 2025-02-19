@@ -12,17 +12,39 @@ This system aims to tackle the unique challenges associated with Colombian licen
 - **Colombian Character Recognition**: Custom-trained models ensure precise recognition of Colombian characters.
 - **Real-Time Processing**: Capable of processing live video feeds in real-time.
 - **User-Friendly GUI**: Intuitive graphical user interface simplifies interactions with the system.
+
+## 🛠 Project Structure
+The project is organized into clear and well-defined directories for easy understanding and use:
+
+├── LICENSE                     # Project License (GPLv3)
+├── config.ini                  # Main system configuration
+├── requirements.txt             # Project Dependencies
+├── ai/                         # AI Models and Scripts
+├── base/                       # Base data(CSVs)
+├── database/                   # Scripts and utilities for the database
+├── gui/                        # .ui files for the graphical interface
+├── helper/                     # Auxiliary functions
+├── icons/                      # Icons used in the GUI
+├── model/                      # Trained models (.pt)
+├── services/                   # External services and utilities
+├── streamlit_app.py            # Streamlit app for demos
+└── yolov8/                     # YOLOv8 Implementation
+
+
 ---
-## Tabla de Contenido
-- [Main GUI Explanation](#Main-GUI-Explanation)
-- [Características Principales](#características-principales)
-- [Requerimientos](#requerimientos)
-- [Instalación](#instalación)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Uso](#uso)
-- [Contribuciones](#contribuciones)
-- [Soporte](#soporte)
-- [Licencia](#licencia)
+## table of Contents
+- [Main GUI Explanation](#main-gui-explanation)
+- [System Hardware Requirements](#-system-hardware-requirements)
+- [Installation](#-installation)
+- [Use](#use)
+- [Video Source Configuration](#-video-source-configuration)
+- [Usage](#️-usage)
+- [Additional Academic Resources](#-additional-academic-resources)
+- [Special Thanks](#-special-thanks)
+- [Repositories Used](#-repositories-used)
+- [Use Cases](#-use-cases)
+- [License](#-license)
+- [Contact](#-contact)
 
 <table>
 <tr>
@@ -110,25 +132,46 @@ Handles the regulation of vehicles entering and exiting the premises, ensuring o
 
 ### 💻 System Hardware Requirements
 
-To ensure optimal performance of the Colombian License Plate Recognition System (CLPR), the following hardware specifications are recommended:
+- **Python 3.7+**  
+- Key Libraries:  
+  - [OpenCV](https://opencv.org/) for image manipulation.  
+  - [NumPy](https://numpy.org/) for numerical calculation.  
+  - [TensorFlow](https://www.tensorflow.org/) or [PyTorch](https://pytorch.org/) (depending on your choice of framework) for the recognition model.  
 
-- **Processor**: Intel Core i5 (8th Gen) or equivalent/higher.
-- **Memory**: 8 GB RAM or more.
-- **Graphics**: Dedicated GPU (NVIDIA GTX 1060 or equivalent) with at least 4 GB VRAM for efficient real-time processing and deep learning model computations.
-- **Storage**: SSD with at least 20 GB of free space for software, models, and datasets.
-- **Operating System**: Compatible with Windows 10/11, Linux (Ubuntu 18.04 or later), and macOS (10.14 Mojave or later).
-
-These specifications are designed to handle the computational demands of advanced deep learning models, real-time video processing, and high-volume data management integral to the PLPR system. Adjustments may be necessary based on specific deployment scenarios and performance expectations.
+Please check the `requirements.txt` (or equivalent) file for more details.
 
 ## 🚀 Getting Started
 
 ### 🔧 Installation
 
-1. Install the required Python packages:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/oaacUis/tesis-colombian-plate-recognition.git
+   ```
+2. **Enter the project folder**:
+   ```bash
+   cd tesis-colombian-plate-recognition
+   ```
+3. **Virtual environment (recommended)**:
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate  # Windows
+   ```
+3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
+
+## Use
+1. **To start the main application with the graphical interface**:
+   ```bash
+   python home-yolo.py
+   ```
+2. **To test the interactive Streamlit application**:
+   ```bash
+   streamlit run streamlit_app.py
+   ```
 
 ### 🔄 Video Source Configuration
 
@@ -141,12 +184,6 @@ For streaming video sources, update the `config.ini` file with the stream addres
 
 This flexibility in video source selection enables seamless integration and testing across various input methods, ensuring adaptability to different operational requirements.
 
-### ▶️ Running the Application
-
-Launch the application with the following command:
-```bash
-python home-yolo.py
-```
 
 ## 🛠️ Usage
 
@@ -160,21 +197,32 @@ Explore the `pdf-research` directory for research papers and articles on LPR tec
 
 Heartfelt thanks to the open-source projects and communities that have made this project possible. Special mentions include:
 
+- **Matthew Truth (truthofmatthew)** who was the person who made the base of this project and served as inspiration for it.
 - **YOLOv8** and **PyTorch** for the core detection and recognition models.
 - **PySide6** and **OpenCV** for the application interface and image processing capabilities.
 - **Pillow** for enhanced image manipulation.
 
 ## 📦 Repositories Used
 
+- persian-license-plate-recognition: [GitHub](https://github.com/truthofmatthew/persian-license-plate-recognition)
 - YOLOv8: [GitHub](https://github.com/ultralytics/yolov8)
 - PyTorch: [GitHub](https://github.com/pytorch/pytorch)
 - PySide6: [GitHub](https://github.com/PySide/PySide6)
 - OpenCV: [GitHub](https://github.com/opencv/opencv)
 - Pillow: [GitHub](https://github.com/python-pillow/Pillow)
 
-## 🙏 Acknowledgments
+## 📊 Use Cases
 
-This project stands on the shoulders of giants within the AI and open-source communities. Their dedication to sharing knowledge and tools has been invaluable.
+1. Parking Management
+Automate the registration of vehicles entering and leaving a parking lot, improving efficiency and reducing operating costs.
+
+2. Security and Surveillance
+Integrate the system into security cameras to monitor and record suspicious vehicles in real time.
+
+3. Intelligent Transport
+Implement the system in public transport applications to improve fleet management and road safety.
+
+
 
 ## 📄 License
 
@@ -185,19 +233,21 @@ GPL-3.0. See the [LICENSE](LICENSE) file for details. It means you can:
   
 ---
 
-### 📝 Clarification on Contributions and Usage
+## 📧 Contact
+If you have questions, suggestions or want to report issues, you can contact the developers:
 
-The Colombian License Plate Recognition (CLPR) system is a testament to the collaborative spirit of the open-source community. While the assembly and development of this system were carried out independently, the project is enriched through the insights and resources offered by various exceptional contributors and datasets within the community. This section is dedicated to acknowledging those invaluable learnings and resources.
+- Brayan Fonseca: 
+   ✉️ BrayamFonck: [GitHub](https://github.com/BrayamFonck)
+   💼 Brayan Fonseca: [LinkedIn](https://www.linkedin.com/in/brayan-steven-fonseca-gonzalez/)
 
-🧱 **Acknowledging Vital Datasets**:
-- The datasets that played a pivotal role in the development of the CLPR system deserve special mention. I am deeply thankful for access to:
-  - [IR-LPR](https://github.com/mut-deep/IR-LPR)
-  - [Iranis-dataset](https://github.com/alitourani/Iranis-dataset)
-  - [ILPR](https://github.com/amirmgh1375/iranian-license-plate-recognition)
-  
-  These resources were crucial for training and refining the recognition capabilities of the system. My heartfelt thanks go out to the creators and contributors of these datasets for their openness and dedication to advancing the field.
+- Otto Andrade: 
+   ✉️ oaacUis: [GitHub](https://github.com/oaacUis)
+   💼 Otto Andrade: [LinkedIn](https://www.linkedin.com/in/otto-andrade/)
 
-**Open for Dialogue**:
-- Acting in the spirit of the open-source community means valuing transparency and open communication. Should there be any questions about how I utilized these contributions, or if there are specific concerns to be addressed, I am more than willing to engage in discussions. This project is a reflection of what can be accomplished through shared knowledge and cooperation, and I am committed to learning from and contributing back to the community.
 
----
+
+¡Thank you for visiting this repository! 🚀
+We hope that this project is useful for you and that you can get the most out of it. Don't forget to give it a try! ⭐ if you liked it! 😊
+
+¡Con ❤️ desde Colombia para el mundo! 🇨🇴🚀
+

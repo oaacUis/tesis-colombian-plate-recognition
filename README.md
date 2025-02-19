@@ -13,12 +13,24 @@ This system aims to tackle the unique challenges associated with Colombian licen
 - **Real-Time Processing**: Capable of processing live video feeds in real-time.
 - **User-Friendly GUI**: Intuitive graphical user interface simplifies interactions with the system.
 ---
+## Tabla de Contenido
+- [Main GUI Explanation](#Main-GUI-Explanation)
+- [Características Principales](#características-principales)
+- [Requerimientos](#requerimientos)
+- [Instalación](#instalación)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Uso](#uso)
+- [Contribuciones](#contribuciones)
+- [Soporte](#soporte)
+- [Licencia](#licencia)
+
 <table>
 <tr>
 <td valign="top" width="50%">
 
 
    <img src="/repo_images/parts.jpg" alt="explain main gui" style="max-width:300px;">
+   
 
 
 </td>
@@ -55,7 +67,7 @@ Focuses on maintaining and updating resident vehicle information, managing permi
 
    ## Entrance Management
 
-   <img src="/repo_images/ent.png" alt="explain main entrance management" style="max-width:300px;">
+   <img src="/repo_images/ent.jpg" alt="explain main entrance management" style="max-width:300px;">
 
 Handles the regulation of vehicles entering and exiting the premises, ensuring only authorized vehicles gain access, and maintaining a log of all vehicle movements for security and administrative purposes.
 

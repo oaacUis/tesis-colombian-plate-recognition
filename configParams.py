@@ -1,4 +1,4 @@
-
+#configParams.py is a file that contains the parameters used in the system, such as the database paths, the model paths, the source of the video, the services, the rectification dictionaries, the field names, the field status, the field record type, and the alphabet representation of numbers and letters.
 
 from configparser import ConfigParser
 

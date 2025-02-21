@@ -98,6 +98,7 @@ try:
     ])
     torch.serialization.add_safe_globals([SiLU,ModuleList])
     modelPlate = YOLO(params.modelPlate_path, verbose=False).to(device)
+    print(f"Model used: {params.modelPlate_path}")
     # modelPlate = modelPlate.to(device())
 
     # modelCharX = torch.hub.load('model', 'custom', params.modelCharX_path, source='local', force_reload=True)
@@ -378,8 +379,30 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.settingsWindow is None:
             self.settingsWindow = SettingsWindow(self)
         if self.settingsWindow.exec() == QtWidgets.QDialog.Accepted:
-            self.settings = self.settingsWindow.get_settings()
-            print("Configuración guardada:", self.settings)    
+            pico_settings, model_option = self.settingsWindow.get_settings()
+            self.settings = pico_settings
+
+            print("Configuración de Pico y Placa guardada:", pico_settings)
+            print("Modelo seleccionado:", model_option)
+
+            if model_option == "Normal":
+                new_model = "./model/best_plates_try1.pt"
+            elif model_option == "Mejor":
+                new_model = "./model/best_plates_try2.pt"
+            elif model_option == "Excelente":
+                new_model = "./model/best_plates_try3.pt"
+            else:
+                new_model = "./model/best_plates_try1.pt"
+
+            print("El modelo de placas actual es:", new_model)
+            params.modelPlate_path = new_model
+
+            try:
+                global modelPlate   # Se actualiza la variable global del modelo
+                modelPlate = YOLO(params.modelPlate_path, verbose=False).to(device)
+                print(f"Model used in open settings: {params.modelPlate_path}")
+            except Exception as e:
+                print("Error al recargar el modelo YOLO:", e)  
 
 
 class Worker1(QThread):

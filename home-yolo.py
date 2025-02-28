@@ -30,8 +30,7 @@ from PySide6.QtGui import QImage, QIcon, QAction, QPainter, QPixmap
 from PySide6.QtWidgets import QTableWidgetItem, QGraphicsScene
 from qtpy.uic import loadUi
 
-import ai.img_model as imgModel
-from ai.img_model import *  # noqa
+from ai.img_model import calculate_homography_and_warp, draw_fps, to_img_opencv, to_img_pil  # noqa
 from configParams import Parameters
 from database.db_entries_utils import db_entries_time, dbGetAllEntries
 from database.db_resident_utils import (
@@ -533,8 +532,8 @@ class Worker1(QThread):
 
     def prepareImage(self, frame):
         resize = cv2.resize(frame, (960, 540))
-        effect = ImageOps.autocontrast(imgModel.to_img_pil(resize), cutoff=1)
-        return cv2.cvtColor(imgModel.to_img_opencv(effect), cv2.COLOR_BGR2RGB)
+        effect = ImageOps.autocontrast(to_img_pil(resize), cutoff=1)
+        return cv2.cvtColor(to_img_opencv(effect), cv2.COLOR_BGR2RGB)
 
     def highlightPlate(self, resize, plate):
         moreSpace = 3
@@ -588,7 +587,7 @@ class Worker1(QThread):
             return  # Emit only if the thread is active
         # Check if currentFPS has been calculated  # noqa
         if hasattr(self, "currentFPS"):
-            imgModel.draw_fps(resize, self.currentFPS)  # Draw FPS on the frame
+            draw_fps(resize, self.currentFPS)  # Draw FPS on the frame
         mainFrame = QImage(
             resize.data, resize.shape[1], resize.shape[0], QImage.Format_RGB888
         )
@@ -596,6 +595,9 @@ class Worker1(QThread):
 
     def detectPlateChars(self, croppedPlate):
         chars, confidences, char_detected = [], [], []
+        apply_homography = calculate_homography_and_warp(croppedPlate)
+        if apply_homography is not None:
+            croppedPlate = apply_homography
         results = modelCharX(croppedPlate, verbose=False, show=False, save=False)[0]  # noqa
         char_id_dict1 = results.names
 

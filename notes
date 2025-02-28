@@ -43,8 +43,6 @@ hdf5/: Likely contains HDF5 files for storing large datasets.
 
 helper/: Contains helper functions and utilities.
 
-home-keras.py: Another main script, possibly using Keras for model inference.
-
 home-yolo.py: The main script for running the LPR application using YOLO models.
 
 how_many_possibilities.py: Likely a script for calculating possibilities or permutations.
@@ -125,7 +123,6 @@ db_entries_time, dbGetAllEntries in database/db_entries_utils.py: Database funct
 - config.ini: OK. Maybe check some parameters.
 - configParams: OK. 
 - enteries_window: In process. Have things to be translate and rebuild from persian functions.
-- home-keras: In process. Needs to be consider how useful is using a keras model for main application.
 - home-yolo: In process. MAIN FILE. Needs to be rebuild considering all the proyect folder.
 - how_many_possibilities: In process. Needs to be readapt to colombian plates patterns.
 - residents_view: In process. Needs a review and readapt.

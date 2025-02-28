@@ -23,7 +23,7 @@ def sharpen_new(img):
     Z = np.float32(Z)
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
     K = 2
-    ret, label, center = cv2.kmeans(Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+    ret, label, center = cv2.kmeans(Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)  # noqa
     center = np.uint8(center)
     res = center[label.flatten()]
     res2 = res.reshape((img.shape))
@@ -74,7 +74,8 @@ def rotate_image(image, angle):
     """
     image_center = tuple(np.array(image.shape[1::-1]) / 2)
     rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
-    result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
+    result = cv2.warpAffine(image, rot_mat, image.shape[1::-1],
+                            flags=cv2.INTER_LINEAR)
     return result
 
 
@@ -97,8 +98,14 @@ def compute_skew(src_img):
 
     img = cv2.medianBlur(src_img, 3)
 
-    edges = cv2.Canny(img, threshold1=30, threshold2=100, apertureSize=3, L2gradient=True)
-    lines = cv2.HoughLinesP(edges, 1, math.pi / 180, 30, minLineLength=w / 4.0, maxLineGap=h / 4.0)
+    edges = cv2.Canny(img,
+                      threshold1=30,
+                      threshold2=100,
+                      apertureSize=3,
+                      L2gradient=True
+                      )
+    lines = cv2.HoughLinesP(edges, 1, math.pi / 180, 30,
+                            minLineLength=w / 4.0, maxLineGap=h / 4.0)
     angle = 0.0
     cnt = 0
     if lines is not None and lines.any():
@@ -128,7 +135,8 @@ def deskew(src_img):
 
 def grayscale(image):
     """
-        Convert an image to grayscale and apply noise removal and thickening of fonts.
+        Convert an image to grayscale and apply noise removal
+        and thickening of fonts.
 
         Parameters:
         - image (np.ndarray): The input color image.
@@ -302,7 +310,7 @@ def to_img_pil(imgOpenCV):
       Returns:
       - Image.Image: The PIL image.
       """
-    return Image.fromarray(cv2.cvtColor(imgOpenCV, cv2.COLOR_BGR2RGB));
+    return Image.fromarray(cv2.cvtColor(imgOpenCV, cv2.COLOR_BGR2RGB))
 
 
 def convert_cv_image_to_qt_image(self, cv_img):
@@ -383,12 +391,20 @@ def draw_fps(videoFrame, fps):
     rectangle_bgr = (0, 0, 0)
     text_offset_x = 50
     text_offset_y = 75
-    (text_width, text_height) = cv2.getTextSize(text, text_font, text_font_scale, thickness=5)[0]
+    (text_width, text_height) = cv2.getTextSize(text,
+                                                text_font,
+                                                text_font_scale,
+                                                thickness=5)[0]
     box_coords = (
-        (text_offset_x + 20, text_offset_y), (text_offset_x + text_width + 20, text_offset_y - text_height - 20))
+        (text_offset_x + 20, text_offset_y), (text_offset_x + text_width + 20, text_offset_y - text_height - 20))  # noqa
 
-    cv2.rectangle(videoFrame, box_coords[0], box_coords[1], rectangle_bgr, cv2.FILLED)
-    cv2.putText(videoFrame, text, box_coords[0], text_font, text_font_scale, color=(255, 0, 0), thickness=5)
+    cv2.rectangle(videoFrame,
+                  box_coords[0], box_coords[1],
+                  rectangle_bgr, cv2.FILLED)
+    cv2.putText(videoFrame, text,
+                box_coords[0],
+                text_font, text_font_scale,
+                color=(255, 0, 0), thickness=5)
 
 
 def resize_image(image_matrix, nh, nw):
@@ -408,7 +424,7 @@ def resize_image(image_matrix, nh, nw):
     ow = image_size[1]
 
     re_image_matrix = np.array([
-        np.array([image_matrix[(oh * h // nh)][(ow * w // nw)] for w in range(nw)])
+        np.array([image_matrix[(oh * h // nh)][(ow * w // nw)] for w in range(nw)])  # noqa
         for h in range(nh)
     ])
 
@@ -421,7 +437,7 @@ def concat_images(image_set, how):
 
        Parameters:
        - image_set (list): The list of images to concatenate.
-       - how (str): The direction of concatenation ('vertical' or 'horizontal').
+       - how (str): The direction of concatenation ('vertical' or 'horizontal')
 
        Returns:
        - np.ndarray: The concatenated image.
@@ -433,7 +449,9 @@ def concat_images(image_set, how):
     if channel_flag:
         ideal_shape = max(shape_vals)
         images_resized = [
-            resize_image(image_matrix=imat, nh=ideal_shape[0], nw=ideal_shape[1])
+            resize_image(image_matrix=imat,
+                         nh=ideal_shape[0], nw=ideal_shape[1]
+                         )
             if imat.shape != ideal_shape else imat for imat in image_set
         ]
     else:

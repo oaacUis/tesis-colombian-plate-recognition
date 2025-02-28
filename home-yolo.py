@@ -498,7 +498,6 @@ class Worker1(QThread):
             plateConf = int(plate["confidence"] * 100)
             # print("Confidence in prediction: ", plateConf, "%")
             if plateConf >= plate_th:
-                self.highlightPlate(resize, plate)
                 croppedPlate = self.cropPlate(resize, plate)
                 plateText, char_detected, charConfAvg = self.detectPlateChars(
                     croppedPlate
@@ -512,6 +511,7 @@ class Worker1(QThread):
                     charConfAvg,
                     plateConf,  # noqa
                 )
+                self.highlightPlate(resize, plate)
 
         self.emitFrame(resize)
 
@@ -537,19 +537,32 @@ class Worker1(QThread):
         return cv2.cvtColor(imgModel.to_img_opencv(effect), cv2.COLOR_BGR2RGB)
 
     def highlightPlate(self, resize, plate):
+        moreSpace = 3
         cv2.rectangle(
             resize,
-            (int(plate["xmin"]) - 3, int(plate["ymin"]) - 3),
-            (int(plate["xmax"]) + 3, int(plate["ymax"]) + 3),
+            (int(plate["xmin"]) - moreSpace, int(plate["ymin"]) - moreSpace),
+            (int(plate["xmax"]) + moreSpace, int(plate["ymax"]) + moreSpace),
             color=(0, 0, 255),
             thickness=3,
         )
 
     def cropPlate(self, resize, plate):
-        return resize[
-            int(plate["ymin"]): int(plate["ymax"]),
-            int(plate["xmin"]): int(plate["xmax"]),
-        ]
+        y1 = plate["ymin"]
+        y2 = plate["ymax"]
+        x1 = plate["xmin"]
+        x2 = plate["xmax"]
+        factor = 0.25
+        more_width = int((x2-x1)*factor)
+        more_height = int((y2-y1)*factor*2)
+        if x1-more_width < 0 or x2+more_width > resize.shape[1]:
+            more_width = 0
+        if y1-more_height < 0 or y2+more_height > resize.shape[0]:
+            more_height = 0
+
+        # print("Added width: ", more_width*2)
+        # print("Added height: ", more_height*2)
+        return resize[int(y1-more_height): int(y2+more_height),
+                      int(x1-more_width): int(x2+more_width)]
 
     def emitPlateData(
         self, croppedPlate, plateText, char_detected, charConfAvg, plateConf
@@ -570,14 +583,9 @@ class Worker1(QThread):
         # Save the current FPS for later drawing on the frame
         self.currentFPS = fps
 
-    # def emitFrame(self, resize):
-    #     if hasattr(self, 'currentFPS'):  # Check if currentFPS has been calculated  # noqa
-    #         imgModel.draw_fps(resize, self.currentFPS)  # Draw FPS on the frame  # noqa
-    #     mainFrame = QImage(resize.data, resize.shape[1], resize.shape[0], QImage.Format_RGB888)  # noqa
-    #     self.mainViewUpdate.emit(mainFrame)
     def emitFrame(self, resize):
         if not self.ThreadActive:
-            return  # No emitir si el hilo no está activo
+            return  # Emit only if the thread is active
         # Check if currentFPS has been calculated  # noqa
         if hasattr(self, "currentFPS"):
             imgModel.draw_fps(resize, self.currentFPS)  # Draw FPS on the frame
@@ -585,31 +593,6 @@ class Worker1(QThread):
             resize.data, resize.shape[1], resize.shape[0], QImage.Format_RGB888
         )
         self.mainViewUpdate.emit(mainFrame)
-
-    # def detectPlateChars(self, croppedPlate):
-    #     chars, confidences, char_detected = [], [], []
-    #     results = modelCharX(croppedPlate, verbose=False, show=False, save=False)[0]  # noqa
-    #     char_id_dict1 = results.names
-
-    #     boxes = results.boxes.xyxy.numpy()  # Convertir a NumPy
-    #     predictions = results.boxes.cls.numpy()  # Clases predichas
-    #     confidence = results.boxes.conf.numpy()  # Confianza de las predicciones  # noqa
-
-    #     detections = [(box, pred, conf) for box, pred, conf in zip(boxes, predictions, confidence)]  # noqa
-    #     detections_sorted = sorted(detections, key=lambda x: x[0][0])
-    #     chars_th = 0.5
-
-    #     for det in detections_sorted:
-    #         conf = det[2]
-    #         if conf > chars_th:
-    #             cls = det[1]
-    #             char = char_id_dict1.get(int(cls))
-    #             chars.append(char)
-    #             confidences.append(conf)
-    #             char_detected.append(list(det)) # Char position
-    #     #print("Plate detected: ", ''.join(chars))
-    #     charConfAvg = round(statistics.mean(confidences) * 100) if confidences else 0  # noqa
-    #     return ''.join(chars), char_detected, charConfAvg
 
     def detectPlateChars(self, croppedPlate):
         chars, confidences, char_detected = [], [], []

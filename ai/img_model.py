@@ -337,10 +337,13 @@ def calculate_homography_and_warp(image, src_points=None):
     Returns:
         numpy.ndarray: The perspective-corrected (rectified) image of the plate.  # noqa
     """
-    src_points = find_plate_corners(image)
+    if src_points is not None:
+        src_points = np.array(src_points)
+    else:
+        src_points = find_plate_corners(image)
 
     if src_points is None:
-        return image
+        return None
 
     # Assume a standard rectangular size for the license plate 200x100 pixels
     width, height = image.shape[1], image.shape[0]

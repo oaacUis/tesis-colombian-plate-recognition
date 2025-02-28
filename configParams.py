@@ -51,6 +51,11 @@ class Parameters:
         # choose device; "cpu" or "cuda"(if cuda is available)
         self.cpu_or_cuda = "cuda"
 
+        # Homography setup
+        self.set_homography = True
+        self.set_homography_manual = False
+        self.src_points_manual = [[0, 0], [640, 0], [640, 480], [0, 480]]
+
         self.rectification_text_dict = {
             "0": "O",
             "1": "I",

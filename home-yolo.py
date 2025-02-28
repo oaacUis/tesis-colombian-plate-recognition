@@ -595,9 +595,14 @@ class Worker1(QThread):
 
     def detectPlateChars(self, croppedPlate):
         chars, confidences, char_detected = [], [], []
-        apply_homography = calculate_homography_and_warp(croppedPlate)
-        if apply_homography is not None:
-            croppedPlate = apply_homography
+        if params.set_homography:
+            if params.set_homography_manual:
+                apply_homography = calculate_homography_and_warp(
+                    croppedPlate, params.src_points_manual
+                )
+            apply_homography = calculate_homography_and_warp(croppedPlate)
+            if apply_homography is not None:
+                croppedPlate = apply_homography
         results = modelCharX(croppedPlate, verbose=False, show=False, save=False)[0]  # noqa
         char_id_dict1 = results.names
 

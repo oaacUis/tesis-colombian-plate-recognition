@@ -122,6 +122,7 @@ def apply_sharpening(image):
 
 
 def apply_image_filters(image, bilateral=True, clahe=True, sharpening=True):
+    
     if bilateral:
         image = apply_bilateral_filter(image)
     if clahe:
@@ -233,6 +234,8 @@ def detect_plate_corners_hough(edges, image_shape, rho=1, theta=np.pi/180, thres
 
     corners_grouped = cluster_and_select_corners(valid_corners, num_clusters=4,
                                                  image_shape=image_shape)
+    if corners_grouped is None:
+        return None
     final_corners = order_points_clockwise(corners_grouped)
 
     return final_corners
@@ -317,6 +320,8 @@ def cluster_and_select_corners(points, num_clusters=4, image_shape=None):
 
 def find_plate_corners(image, bilateral=True, clahe=True, sharpening=True, enhance_edges=False):  # noqa
 
+    if len(image.shape) == 3:
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     edges = detect_edges(apply_image_filters(image, bilateral, clahe, sharpening))  # noqa
     if enhance_edges:
         edges = enhance_edges(edges)

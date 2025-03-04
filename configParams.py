@@ -49,11 +49,27 @@ class Parameters:
         self.external_service_url = external_service_config["url"]
 
         self.video_path = r"./prueba.mp4"
-        
-        self.cpu_or_cuda = "cuda"  # choose device; "cpu" or "cuda"(if cuda is available)
-        
-        self.rectification_text_dict = {'0': 'O', '1': 'I', '6': 'G', '8': 'B'} # [0, 1, 6, 8]
-        self.rectification_nums_dict = {'O': '0', 'I': '1', 'G': '6', 'B': '8'} # [O, I, G, B]
+
+        # choose device; "cpu" or "cuda"(if cuda is available)
+        self.cpu_or_cuda = "cuda"
+
+        # Homography setup
+        self.set_homography = False
+        self.set_homography_manual = False
+        self.src_points_manual = [[0, 0], [640, 0], [640, 480], [0, 480]]
+
+        self.rectification_text_dict = {
+            "0": "O",
+            "1": "I",
+            "6": "G",
+            "8": "B",
+        }  # [0, 1, 6, 8]
+        self.rectification_nums_dict = {
+            "O": "0",
+            "I": "1",
+            "G": "6",
+            "B": "8",
+        }  # [O, I, G, B]
 
         # English representation of numbers and letters
         self.alphabetP = {
@@ -87,40 +103,33 @@ class Parameters:
             "Y": "Y",
         }
 
-
         self.fieldNames = {
-            'fName': 'First Name',
-            'lName': 'Last Name',
-            'building': 'Building',
-            'block': 'Block',
-            'num': 'Number',
-            'carModel': 'Car Model',
-            'plateNum': 'License Plate',
-            'status': 'Permission',
-            'time': 'Time',
-            'date': 'Date',
-            'platePic': 'Plate Picture',
-            'charPercent': 'Character Percentage',
-            'platePercent': 'Plate Percentage',
-            'editBtn': 'Edit',
-            'deleteBtn': 'Delete',
-            'searchBtn': 'Search',
-            'findEntriesBtn': 'Entries',
-            'moreInfo': 'Show Information',
-            'addNew': 'Register Plate',
+            "fName": "First Name",
+            "lName": "Last Name",
+            "building": "Building",
+            "block": "Block",
+            "num": "Number",
+            "carModel": "Car Model",
+            "plateNum": "License Plate",
+            "status": "Permission",
+            "time": "Time",
+            "date": "Date",
+            "platePic": "Plate Picture",
+            "charPercent": "Character Percentage",
+            "platePercent": "Plate Percentage",
+            "editBtn": "Edit",
+            "deleteBtn": "Delete",
+            "searchBtn": "Search",
+            "findEntriesBtn": "Entries",
+            "moreInfo": "Show Information",
+            "addNew": "Register Plate",
         }
 
-        self.fieldStatus = {
-            '0': 'Unauthorized',
-            '1': 'Authorized',
-            '2': 'Unregistered'
-        }
+        self.fieldStatus = {"0": "Unauthorized",
+                            "1": "Authorized",
+                            "2": "Unregistered"}
 
-        self.fieldRecordType = {
-            '0': 'System',
-            '1': 'Manual',
-            '2': 'Edited'
-        }
+        self.fieldRecordType = {"0": "System", "1": "Manual", "2": "Edited"}
 
 
 def getFieldNames(fieldsList):

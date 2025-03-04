@@ -5,18 +5,29 @@ import functools
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QColor, QImage, QPixmap, Qt, QScreen
-from PySide6.QtWidgets import QLabel, QTableWidgetItem, QAbstractItemView, QVBoxLayout, QDialog, QApplication, \
-    QTableWidget
+from PySide6.QtWidgets import (
+    QLabel,
+    QTableWidgetItem,
+    QAbstractItemView,
+    QVBoxLayout,
+    QDialog,
+    QApplication,
+    QTableWidget,
+)
 
 from configParams import getFieldNames
 from helper import jalali
-from helper.text_decorators import *
+from helper.text_decorators import (
+    convert_to_local_format,
+    split_string_language_specific,
+)  # type: ignore
 
 
 class CenterAlignDelegate(QtWidgets.QStyledItemDelegate):
     """
     Custom delegate for aligning table items to the center.
     """
+
     def initStyleOption(self, option, index):
         super(CenterAlignDelegate, self).initStyleOption(option, index)
         option.displayAlignment = QtCore.Qt.AlignCenter
@@ -26,6 +37,7 @@ class ReadOnlyDelegate(QtWidgets.QStyledItemDelegate):
     """
     Custom delegate to make table cells read-only.
     """
+
     def createEditor(self, *args, **kwargs):
         return
 
@@ -48,16 +60,18 @@ def create_styled_button(type):
     """
     button = QtWidgets.QPushButton()
     button.setFlat(True)
-    button.setStyleSheet("QPushButton { background-color: transparent; border: 0px }")
-    if type == 'edit':
+    button.setStyleSheet(
+        "QPushButton { background-color: transparent; border: 0px }"
+    )
+    if type == "edit":
         button.setIcon(QPixmap("./icons/icons8-edit-80.png"))
-    elif type == 'delete':
+    elif type == "delete":
         button.setIcon(QPixmap("./icons/icons8-trash-can-80.png"))
-    elif type == 'info':
+    elif type == "info":
         button.setIcon(QPixmap("./icons/icons8-info-80.png"))
-    elif type == 'add':
+    elif type == "add":
         button.setIcon(QPixmap("./icons/icons8-add-80.png"))
-    elif type == 'search':
+    elif type == "search":
         button.setIcon(QPixmap("./icons/icons8-find-user-male-80.png"))
     button.setIconSize(QSize(24, 24))
     return button
@@ -80,25 +94,38 @@ def get_status_text(number):
     Converts a status number to its corresponding text.
     """
     if int(number) == 0:
-        return 'Unauthorized'
+        return "Unauthorized"
     elif int(number) == 1:
-        return 'Authorized'
+        return "Authorized"
     elif int(number) == 2:
-        return 'Unregistered'
+        return "Unregistered"
 
 
 def configure_edit_table_widget(self):
     """
     Configures table widget for editing mode.
     """
-    fieldsList = ['status', 'plateNum', 'time', 'date', 'platePic', 'charPercent', 'platePercent', 'moreInfo', 'addNew']
+    fieldsList = [
+        "status",
+        "plateNum",
+        "time",
+        "date",
+        "platePic",
+        "charPercent",
+        "platePercent",
+        "moreInfo",
+        "addNew",
+    ]
     fieldsList = getFieldNames(fieldsList)
 
     self.tableWidget.setColumnCount(len(fieldsList))
     self.tableWidget.setRowCount(20)
     self.tableWidget.setHorizontalHeaderLabels(fieldsList)
-    self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-    self.tableWidget.setLayoutDirection(Qt.LeftToRight)  # Changed from RightToLeft
+    self.tableWidget.horizontalHeader().setSectionResizeMode(
+        QtWidgets.QHeaderView.ResizeToContents
+    )
+    # Changed from RightToLeft
+    self.tableWidget.setLayoutDirection(Qt.LeftToRight)
     self.tableWidget.setSortingEnabled(True)
 
     delegate = CenterAlignDelegate(self.tableWidget)
@@ -112,14 +139,25 @@ def configure_main_table_widget(self):
     """
     Configures the main table widget.
     """
-    fieldsList = ['status', 'plateNum', 'time', 'date', 'platePic', 'moreInfo', 'addNew']
+    fieldsList = [
+        "status",
+        "plateNum",
+        "time",
+        "date",
+        "platePic",
+        "moreInfo",
+        "addNew",
+    ]
     fieldsList = getFieldNames(fieldsList)
 
     self.tableWidget.setColumnCount(len(fieldsList))
     self.tableWidget.setRowCount(20)
     self.tableWidget.setHorizontalHeaderLabels(fieldsList)
-    self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-    self.tableWidget.setLayoutDirection(Qt.LeftToRight)  # Changed from RightToLeft
+    self.tableWidget.horizontalHeader().setSectionResizeMode(
+        QtWidgets.QHeaderView.ResizeToContents
+    )
+    # Changed from RightToLeft
+    self.tableWidget.setLayoutDirection(Qt.LeftToRight)
     self.tableWidget.setSortingEnabled(True)
 
     delegate = CenterAlignDelegate(self.tableWidget)
@@ -144,19 +182,36 @@ def populate_main_table_with_data(self, dfReadEnteries):
         self.tableWidget.setItem(each_row, 0, QTableWidgetItem(statusText))
         self.tableWidget.item(each_row, 0).setBackground(QColor(r, g, b))
 
-        self.tableWidget.setItem(each_row, 1,
-                               QTableWidgetItem(convert_to_local_format(
-                                   (split_string_language_specific(dfReadEnteries.iloc[each_row][1])))))
-        self.tableWidget.setItem(each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2])))
-        self.tableWidget.setItem(each_row, 3,
-                               QTableWidgetItem(jalali.Gregorian(dfReadEnteries.iloc[each_row][3])))
+        self.tableWidget.setItem(
+            each_row,
+            1,
+            QTableWidgetItem(
+                convert_to_local_format(
+                    split_string_language_specific(
+                        dfReadEnteries.iloc[each_row][1]
+                    )
+                )
+            ),
+        )
+        self.tableWidget.setItem(
+            each_row, 2, QTableWidgetItem((dfReadEnteries.iloc[each_row][2]))
+        )
+        self.tableWidget.setItem(
+            each_row,
+            3,
+            QTableWidgetItem(
+                jalali.Gregorian(dfReadEnteries.iloc[each_row][3])
+            ),
+        )
 
         Image = QImage()
         Image.load(dfReadEnteries.iloc[each_row][4])
         QcroppedPlate = QPixmap.fromImage(Image)
 
         item = create_image_label(QcroppedPlate)
-        item.mousePressEvent = functools.partial(on_label_double_click, source_object=item)
+        item.mousePressEvent = functools.partial(
+            on_label_double_click, source_object=item
+        )
 
         self.tableWidget.setCellWidget(each_row, 4, item)
         self.tableWidget.setRowHeight(each_row, 44)
@@ -200,13 +255,14 @@ def on_item_double_click(tableWidget, item):
     """
     row = item.row()
     column = item.column()
-    text = tableWidget.item(row, column).text()
+    text = tableWidget.item(row, column).text()  # noqa: F841
 
 
 class ProxyStyle(QtWidgets.QProxyStyle):
     """
     Custom drawing of control elements, especially buttons with icons.
     """
+
     def drawControl(self, element, option, painter, widget=None):
         if element == QtWidgets.QStyle.CE_PushButtonLabel:
             icon = QtGui.QIcon(option.icon)
@@ -221,14 +277,17 @@ class ProxyStyle(QtWidgets.QProxyStyle):
                     else QtGui.QIcon.Disabled
                 )
                 if (
-                        mode == QtGui.QIcon.Normal
-                        and option.state & QtWidgets.QStyle.State_HasFocus
+                    mode == QtGui.QIcon.Normal
+                    and option.state & QtWidgets.QStyle.State_HasFocus
                 ):
                     mode = QtGui.QIcon.Active
                 state = QtGui.QIcon.Off
                 if option.state & QtWidgets.QStyle.State_On:
                     state = QtGui.QIcon.On
-                window = widget.window().windowHandle() if widget is not None else None
+                window = (
+                    widget.window().windowHandle()
+                    if widget is not None else None
+                )
                 pixmap = icon.pixmap(window, option.iconSize, mode, state)
                 pixmapWidth = pixmap.width() / pixmap.devicePixelRatio()
                 pixmapHeight = pixmap.height() / pixmap.devicePixelRatio()
@@ -237,10 +296,12 @@ class ProxyStyle(QtWidgets.QProxyStyle):
                 )
                 iconRect.moveCenter(option.rect.center())
                 iconRect.moveLeft(option.rect.left() + iconSpacing)
-                iconRect = self.visualRect(option.direction, option.rect, iconRect)
+                iconRect = self.visualRect(
+                    option.direction, option.rect, iconRect
+                    )
                 iconRect.translate(
                     self.proxy().pixelMetric(
-                        QtWidgets.QStyle.PM_ButtonShiftHorizontal, option, widget
+                        QtWidgets.QStyle.PM_ButtonShiftHorizontal, option, widget  # noqa: E501
                     ),
                     self.proxy().pixelMetric(
                         QtWidgets.QStyle.PM_ButtonShiftVertical, option, widget

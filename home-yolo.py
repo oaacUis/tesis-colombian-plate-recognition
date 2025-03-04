@@ -48,13 +48,14 @@ params = Parameters()
 import sys
 from torch.nn import Conv2d, Upsample, BatchNorm2d
 from ultralytics.nn.tasks import DetectionModel
-from ultralytics.nn.modules.conv import Conv, Concat, DWConv
-from ultralytics.nn.modules.block import C2f, SPPF, Bottleneck, DFL
+from ultralytics.nn.modules.conv import Conv, Concat, DWConv, RepConv
+from ultralytics.nn.modules.block import C2f, SPPF, Bottleneck, DFL, RepNCSPELAN4, RepCSP, RepBottleneck, ADown, SPPELAN, C3k2
 from ultralytics.nn.modules.head import Detect
 import torch.serialization
 from torch.nn.modules.activation import SiLU
 from torch.nn.modules.container import ModuleList
 from torch.nn.modules.pooling import MaxPool2d
+from torch.nn.modules.linear import Identity
 from torch import nn
 
 
@@ -94,7 +95,15 @@ try:
         Bottleneck,
         MaxPool2d,
         DWConv,
-        DFL
+        DFL,
+        RepNCSPELAN4,
+        RepCSP,
+        RepBottleneck,
+        RepConv,
+        Identity,
+        ADown,
+        SPPELAN,
+        C3k2
     ])
     torch.serialization.add_safe_globals([SiLU,ModuleList])
     modelPlate = YOLO(params.modelPlate_path, verbose=False).to(device)
@@ -386,21 +395,32 @@ class MainWindow(QtWidgets.QMainWindow):
             print("Modelo seleccionado:", model_option)
 
             if model_option == "Normal":
-                new_model = "./model/best_plates_try1.pt"
+                new_model_Plate = "./model/best_plates_try1.pt"
+                new_model_Char = "./model/best_chars_try1.pt"
             elif model_option == "Mejor":
-                new_model = "./model/best_plates_try2.pt"
+                new_model_Plate = "./model/best_plates_try2.pt"
+                new_model_Char = "./model/best_chars_try2.pt"
             elif model_option == "Excelente":
-                new_model = "./model/best_plates_try3.pt"
+                new_model_Plate = "./model/best_plates_try3.pt"
+                new_model_Char = "./model/best_chars_try3.pt"
             else:
-                new_model = "./model/best_plates_try1.pt"
+                new_model_Plate = "./model/best_plates_try1.pt"
+                new_model_Char = "./model/best_chars_try1.pt"
 
-            print("El modelo de placas actual es:", new_model)
-            params.modelPlate_path = new_model
+            print("El modelo de placas actual es:", new_model_Plate)
+            params.modelPlate_path = new_model_Plate
+            
+            print("El modelo de caracteres actual es:", new_model_Char)
+            params.modelCharX_path = new_model_Char
 
             try:
                 global modelPlate   # Se actualiza la variable global del modelo
                 modelPlate = YOLO(params.modelPlate_path, verbose=False).to(device)
-                print(f"Model used in open settings: {params.modelPlate_path}")
+                print(f"Model Plate used in open settings: {params.modelPlate_path}")
+                
+                global modelCharX
+                modelCharX = YOLO(params.modelCharX_path, verbose=False).to(device) # Se actualiza el modelo de caracteres
+                print("Model Char used in open settings:", params.modelCharX_path)
             except Exception as e:
                 print("Error al recargar el modelo YOLO:", e)  
 

@@ -1,6 +1,6 @@
 # 🚗 Colombian License Plate Recognition System (CLPR)
 
-The Colombian License Plate Recognition (PLPR) system is a state-of-the-art solution designed for detecting and recognizing Colombian license plates in images and video streams. Leveraging advanced deep learning models and a user-friendly interface, it ensures reliable performance across different scenarios.
+The Colombian License Plate Recognition (CLPR) system is a state-of-the-art solution designed for detecting and recognizing Colombian license plates in images and video streams. Leveraging advanced deep learning models and a user-friendly interface, it ensures reliable performance across different scenarios.
 
 ## 🔍 Overview
 
@@ -122,18 +122,11 @@ Handles the regulation of vehicles entering and exiting the premises, ensuring o
 
 </td>
 </tr>
-<tr>
-<td colspan="2" valign="top">
-
-**[Read the detailed flow in wiki](https://github.com/mtkarimi/smart-resident-guard/wiki/Main-Flow)**
-
-</td>
-</tr>
 </table>
 
 ### 💻 System Hardware Requirements
 
-- **Python 3.7+**  
+- **Python 3.11+**  
 - Key Libraries:  
   - [OpenCV](https://opencv.org/) for image manipulation.  
   - [NumPy](https://numpy.org/) for numerical calculation.  
